@@ -1,17 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
-using UnityEngine.Splines;
-using Unity.Mathematics;
 using System;
 
 public class carController : MonoBehaviour
 {
     [Header("Spline Inputs")]
-    [SerializeField] private Transform _carSplineTarget;
+    [Header("rotation:")]
+    [SerializeField] private CarSplineTarget _carSplineTarget;
     [SerializeField] private float _maxDistanceToTarget;
     [SerializeField] private float _maxAcceleration;
+    [SerializeField] private float _straightSteerAngleThreshold;
+    [SerializeField] private float _thresholdDistanceToTarget;
+    [Header("accelration")]
+    [SerializeField] private float _maxDistance;
+    [SerializeField] private float _minDistanceToTarget;
+    [SerializeField] private float _timeToAccelerateToTargetChase;
+
+    [Header("additional")]
+    [SerializeField] private float _maxTierRotationSpeed;
+
+
+
 
     [Header("Suspension")]
     [Range(0,5)]
@@ -67,6 +76,7 @@ public class carController : MonoBehaviour
     public float skidWidth = 0.12f;
     private float frictionAngle;
 
+
     private void Awake()
     {
         carControls = new CarInputs();
@@ -97,8 +107,7 @@ public class carController : MonoBehaviour
         float turnInput = turn * SteerTowardsTarget() * Time.fixedDeltaTime * 1000;
 
         // carControls.carAction.moveV.ReadValue<float>()
-        float speedInput = speed * AccelerateTowardsTarget() * Time.fixedDeltaTime * 1000;
-        Debug.Log(AccelerateTowardsTarget());
+        float speedInput = speed * carControls.carAction.moveV.ReadValue<float>() * Time.fixedDeltaTime * 1000;
         
         brakeInput = brake * carControls.carAction.brake.ReadValue<float>() * Time.fixedDeltaTime * 1000;
 
@@ -204,45 +213,50 @@ public class carController : MonoBehaviour
         }
 
         //TireTurn
+        //foreach (Transform FM in TurnTires)
+        //{
+        //    FM.localRotation = Quaternion.Slerp(FM.localRotation, Quaternion.Euler(FM.localRotation.eulerAngles.x,
+        //                       TurnAngle * SteerTowardsTarget(), FM.localRotation.eulerAngles.z), slerpTime);
+        //}
         foreach (Transform FM in TurnTires)
         {
-            FM.localRotation = Quaternion.Slerp(FM.localRotation, Quaternion.Euler(FM.localRotation.eulerAngles.x,
-                               TurnAngle * carControls.carAction.moveH.ReadValue<float>(), FM.localRotation.eulerAngles.z), slerpTime);
+            Vector3 currentRotation = FM.localRotation.eulerAngles;
+            float targetAngle = TurnAngle * SteerTowardsTarget();
+
+            Quaternion targetRotation = Quaternion.Euler(currentRotation.x, targetAngle, currentRotation.z);
+            FM.localRotation = Quaternion.RotateTowards(FM.localRotation, targetRotation, _maxTierRotationSpeed * Time.deltaTime);
         }
     }
 
     public void accelarationLogic()
     {
         //speed control old
-        //if (carControls.carAction.moveV.ReadValue<float>() > 0.1f)
-        //{
-        //    rb.AddForceAtPosition(transform.forward * speedValue, groundCheck.position);
-        //}
-        //if (carControls.carAction.moveV.ReadValue<float>() < -0.1f)
-        //{
-        //    rb.AddForceAtPosition(transform.forward * speedValue / 2, groundCheck.position);
-        //}
-
-        rb.AddForceAtPosition(transform.forward * speedValue * AccelerateTowardsTarget(), groundCheck.position);
-
+        if (carControls.carAction.moveV.ReadValue<float>() > 0.1f)
+        {
+            rb.AddForceAtPosition(transform.forward * speedValue, groundCheck.position);
+        }
+        if (carControls.carAction.moveV.ReadValue<float>() < -0.1f)
+        {
+            rb.AddForceAtPosition(transform.forward * speedValue / 2, groundCheck.position);
+        }
     }
 
     public void turningLogic()
     {
         //turning
-        //if (carVelocity.z > 0.1f)
-        //{
-        //    rb.AddTorque(transform.up * turnValue);
-        //}
-        //else if (carControls.carAction.moveV.ReadValue<float>() > 0.1f)
-        //{
-        //    rb.AddTorque(transform.up * turnValue);
-        //}
-        //if (carVelocity.z < -0.1f && carControls.carAction.moveV.ReadValue<float>() < -0.1f)
-        //{
-        //    rb.AddTorque(transform.up * -turnValue);
-        //}
-        rb.AddTorque(transform.up * turnValue * SteerTowardsTarget()); 
+        if (carVelocity.z > 0.1f)
+        {
+            rb.AddTorque(transform.up * turnValue);
+        }
+        else if (SteerTowardsTarget() > 0.1f)
+        {
+            rb.AddTorque(transform.up * turnValue);
+        }
+        if (carVelocity.z < -0.1f && SteerTowardsTarget() < -0.1f)
+        {
+            rb.AddTorque(transform.up * -turnValue);
+        }
+        //rb.AddTorque(transform.up * turnValue * SteerTowardsTarget()); 
     }
 
     public void frictionLogic()
@@ -341,33 +355,27 @@ public class carController : MonoBehaviour
     {
         if (_carSplineTarget != null)
         {
-            Vector3 targetDirection = _carSplineTarget.position - transform.position;
+            Vector3 targetDirection = _carSplineTarget.transform.position - transform.position;
             float angle = Vector3.SignedAngle(transform.forward, targetDirection, Vector3.up);
             angle = Mathf.Repeat(angle + 180f, 360f) - 180f;
-            float steering = angle / 180f;
-            Debug.Log($"steering: {steering}");
-            return steering;
+
+            if (angle > _straightSteerAngleThreshold)
+            {
+                return 1f;
+            }
+            else if (angle < -_straightSteerAngleThreshold)
+            {
+                return -1f;
+            }
+            else
+            {
+                return 0f;
+            }
         }
         else
         {
             Debug.LogWarning("_carSplineTarget not set");
             return 0f;
-        }
-    }
-
-    float AccelerateTowardsTarget()
-    {
-        if (_carSplineTarget != null)
-        {
-            float distanceToTarget = Vector3.Distance(transform.position, _carSplineTarget.position);
-            float acceleration = Mathf.Clamp(distanceToTarget / _maxDistanceToTarget, 0, _maxAcceleration);
-            Debug.Log($"acceleration: {acceleration}");
-            return acceleration; 
-        }
-        else
-        {
-            Debug.LogWarning("_carSplineTarget not set");
-            return 0f; 
         }
     }
 

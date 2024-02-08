@@ -1,36 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
 public class CarSplineTarget : MonoBehaviour
 {
-    public SplineContainer spline;
-    public float speed = 1f;
-    public float distancePrecentage = 0f;
+    [SerializeField] private carController _carController;
+    [SerializeField] private SplineContainer _splineContainer;
 
-    [SerializeField] float splineLength;
+    [SerializeField] private Transform _nearestMarker;
+
+    [SerializeField] private float _splineTOffset;
+    [SerializeField] private float _distanceOffset;
+
+    [SerializeField] private int _resolution,_iteratons;
+    float _splineLength;
+    private float _splineMarkerOffset;
 
     private void Start()
     {
-        splineLength = spline.CalculateLength();
-
+        _splineLength = _splineContainer.CalculateLength();
+        _carController = GameObject.FindGameObjectWithTag("car").GetComponent<carController>();
     }
-
     private void Update()
     {
-        distancePrecentage += speed * Time.deltaTime / splineLength;
-
-        Vector3 currentPosition = spline.EvaluatePosition(distancePrecentage);
-        transform.position = currentPosition;
-
-        if(distancePrecentage > 1f)
+        if (_carController == null || _splineContainer == null || _nearestMarker == null)
         {
-            distancePrecentage = 0f;
+            Debug.LogWarning("Missing references. Make sure to assign all required objects.");
+            return;
         }
 
-        Vector3 nextPosition = spline.EvaluatePosition(distancePrecentage + 0.05f);
-        Vector3 direction = nextPosition - currentPosition;
-        transform.rotation = Quaternion.LookRotation(direction,transform.up);
+        // Get the nearest point on the spline to the car's position
+        float3 nearestPointOnSpline;
+        float tNearest;
+        float distanceToSpline = SplineUtility.GetNearestPoint(
+            _splineContainer.Spline,
+            new Ray(_carController.transform.position, Vector3.down),
+            out nearestPointOnSpline,
+            out tNearest,
+            _resolution,
+            _iteratons
+        );
+
+        // Calculate the new position of _nearestMarker based on the provided offset
+        _nearestMarker.position = SplineUtility.GetPointAtLinearDistance(_splineContainer.Spline, tNearest + _splineTOffset, _distanceOffset, out float resultPointT);
     }
 }
+
