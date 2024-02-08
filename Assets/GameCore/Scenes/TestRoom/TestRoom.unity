@@ -3795,15 +3795,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798897, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 702.0152
+      value: 721.3
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798897, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.000001
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798897, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -965.99646
+      value: -974.9
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798897, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3844,7 +3844,7 @@ PrefabInstance:
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _carSplineTarget
       value: 
-      objectReference: {fileID: 615517132}
+      objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _carToRoadOffset
       value: 1
@@ -3854,8 +3854,16 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: _carSplinePointer
+      value: 
+      objectReference: {fileID: 615517136}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _distanceThreshold
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: _distanceToPointer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _maxDistanceToTager
@@ -5295,7 +5303,7 @@ Transform:
   m_GameObject: {fileID: 210027470}
   serializedVersion: 2
   m_LocalRotation: {x: 0.151503, y: -0.4915776, z: 0.087299965, w: 0.8530985}
-  m_LocalPosition: {x: 723.193, y: 18.271873, z: -978.2827}
+  m_LocalPosition: {x: 742.4778, y: 18.271873, z: -987.1863}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13885,7 +13893,7 @@ GameObject:
   - component: {fileID: 615517135}
   - component: {fileID: 615517134}
   - component: {fileID: 615517133}
-  - component: {fileID: 615517132}
+  - component: {fileID: 615517136}
   m_Layer: 0
   m_Name: CarSplineTarget
   m_TagString: Untagged
@@ -13893,25 +13901,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &615517132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 615517131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99420aacc37521b43a3e2b46470d37cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _carController: {fileID: 1203644485}
-  _splineContainer: {fileID: 1804046142}
-  _nearestMarker: {fileID: 615517135}
-  _splineTOffset: 0.03
-  _distanceOffset: 5
-  _resolution: 10
-  _iteratons: 10
 --- !u!23 &615517133
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13977,6 +13966,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &615517136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615517131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdfc6995c68c5af4ab24c07ee6b30b92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _splineContainer: {fileID: 1804046142}
+  _distancePercentage: 0
+  _maxDistance: 25
+  _pointerSpeedLerp: 1
 --- !u!1 &619405139
 GameObject:
   m_ObjectHideFlags: 0
@@ -27434,17 +27439,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 404288, guid: b902c7d22d14fa843846ba35e963190b, type: 3}
   m_PrefabInstance: {fileID: 1200629321}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1203644485 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-  m_PrefabInstance: {fileID: 169738929}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ebc9ab3c7c5a0b46a1b4b56ad86ebcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1204204506
 GameObject:
   m_ObjectHideFlags: 0

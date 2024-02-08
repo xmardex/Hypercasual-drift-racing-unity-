@@ -2,11 +2,12 @@
 using UnityEditor;
 using System;
 
-public class carController : MonoBehaviour
+public class СarController : MonoBehaviour
 {
     [Header("Spline Inputs")]
     [Header("rotation:")]
-    [SerializeField] private CarSplineTarget _carSplineTarget;
+    [SerializeField] private CarSplinePointer _carSplinePointer;
+    [SerializeField] private float _distanceToPointer;
     [SerializeField] private float _maxDistanceToTarget;
     [SerializeField] private float _maxAcceleration;
     [SerializeField] private float _straightSteerAngleThreshold;
@@ -76,6 +77,8 @@ public class carController : MonoBehaviour
     public float skidWidth = 0.12f;
     private float frictionAngle;
 
+    private float currentDistanceToPointer;
+    private float targetDistanceToPointer;
 
     private void Awake()
     {
@@ -152,7 +155,8 @@ public class carController : MonoBehaviour
 
     void Update()
 	{
-		
+        _carSplinePointer.UpdatePointerPosition(carVelocity.magnitude, _distanceToPointer, transform);
+
         tireVisuals();
         //ShakeCamera(1.2f, 10f);
 		audioControl();
@@ -353,9 +357,9 @@ public class carController : MonoBehaviour
 
     private float SteerTowardsTarget()
     {
-        if (_carSplineTarget != null)
+        if (_carSplinePointer != null)
         {
-            Vector3 targetDirection = _carSplineTarget.transform.position - transform.position;
+            Vector3 targetDirection = _carSplinePointer.transform.position - transform.position;
             float angle = Vector3.SignedAngle(transform.forward, targetDirection, Vector3.up);
             angle = Mathf.Repeat(angle + 180f, 360f) - 180f;
 
