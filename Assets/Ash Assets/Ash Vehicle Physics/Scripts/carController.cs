@@ -14,7 +14,8 @@ public class СarController : MonoBehaviour
     [SerializeField] private float _steerDumpingSpeed;
 
     [Header("accelaration:")]
-    [SerializeField] private float _stopingDrag;
+    [SerializeField] private float _autoSpeed;
+    [SerializeField] private float _breakToThisVelocityMagnitudeOnAutoMove;
 
     [Header("additional:")]
     [SerializeField] private float _maxTierRotationSpeed;
@@ -41,8 +42,8 @@ public class СarController : MonoBehaviour
     public float friction = 70f;
     public float dragAmount = 4f;
     public float TurnAngle = 30f;
-    
-    public float maxRayLength = 0.8f, slerpTime = 0.2f;
+
+    public float maxRayLength = 0.8f;
     [HideInInspector]
     public bool grounded;
 
@@ -57,7 +58,7 @@ public class СarController : MonoBehaviour
     public AnimationCurve driftCurve;
     public AnimationCurve engineCurve;
 
-    private float speedValue, fricValue, turnValue, curveVelocity, brakeInput;
+    private float speedValue, autoSpeedValue, fricValue, turnValue, curveVelocity, brakeInput;
     [HideInInspector]
     public Vector3 carVelocity;
     [HideInInspector]
@@ -94,17 +95,17 @@ public class СarController : MonoBehaviour
     void FixedUpdate()
     {
         carVelocity = transform.InverseTransformDirection(rb.velocity); //local velocity of car
-        
         curveVelocity = Mathf.Abs(carVelocity.magnitude) / 100;
 
         float turnInput = turn * GetSteerPointerValue() * Time.fixedDeltaTime * 1000;
 
         float speedInput = speed * carControls.carAction.moveV.ReadValue<float>() * Time.fixedDeltaTime * 1000;
-
+        float autoSpeedInut = _autoSpeed * Time.fixedDeltaTime * 1000;
         //brakeInput = brake * carControls.carAction.brake.ReadValue<float>() * Time.fixedDeltaTime * 1000;
         brakeInput = brake * Time.fixedDeltaTime * 1000;
 
         //helping veriables
+        autoSpeedValue = autoSpeedInut * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
         speedValue = speedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
         fricValue = friction * frictionCurve.Evaluate(carVelocity.magnitude / 100);
         turnValue = turnInput * turnCurve.Evaluate(carVelocity.magnitude / 100);
@@ -115,7 +116,7 @@ public class СarController : MonoBehaviour
             accelarationLogic();
             turningLogic();
             frictionLogic();
-            brakeLogic();
+            //brakeLogic();
             //for drift behaviour
             rb.angularDrag = dragAmount * driftCurve.Evaluate(Mathf.Abs(carVelocity.x) / 70);
 
@@ -223,9 +224,12 @@ public class СarController : MonoBehaviour
         {
             rb.AddForceAtPosition(transform.forward * speedValue, groundCheck.position);
         }
-        if (carControls.carAction.moveV.ReadValue<float>() < -0.1f)
+        if (carControls.carAction.moveV.ReadValue<float>() <= 0.1f)
         {
-            rb.AddForceAtPosition(transform.forward * speedValue / 2, groundCheck.position);
+            if (carVelocity.magnitude > _breakToThisVelocityMagnitudeOnAutoMove)
+                rb.AddForceAtPosition(transform.forward * -brakeInput, groundCheck.position);
+            else
+                rb.AddForceAtPosition(transform.forward * autoSpeedValue, groundCheck.position);
         }
     }
 
@@ -257,13 +261,13 @@ public class СarController : MonoBehaviour
         }
     }
 
-    public void brakeLogic()
-    {
-        if (carControls.carAction.moveV.ReadValue<float>() < 0.1f)
-        {
-            if (carVelocity.z > 1f)
-                rb.AddForceAtPosition(transform.forward * -brakeInput, groundCheck.position);
-        }
+    //public void brakeLogic()
+    //{
+        //if (carControls.carAction.moveV.ReadValue<float>() < 0.1f)
+        //{
+        //    if (carVelocity.z > 1f)
+        //        rb.AddForceAtPosition(transform.forward * -brakeInput, groundCheck.position);
+        //}
         //brake
 	    //if (carVelocity.z > 1f)
          //   {
@@ -281,7 +285,7 @@ public class СarController : MonoBehaviour
 	    //{
 	    //	rb.drag = 0.1f;
 	    //}
-    }
+    //}
 
     public void AirController()
     {

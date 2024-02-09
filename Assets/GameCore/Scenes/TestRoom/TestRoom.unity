@@ -3789,65 +3789,229 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7844896539009022798, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-      propertyPath: m_Constraints
+    - target: {fileID: 7844896539009022784, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_Center.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7844896539009022785, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539009022785, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539009022785, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-      propertyPath: m_YMotion
+      propertyPath: m_AngularYMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LinearLimit.limit
+      value: 0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_RotationDriveMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_EnablePreprocessing
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_YDrive.positionDamper
-      value: 0
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_YDrive.positionSpring
+      value: 430000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_YDrive.useAcceleration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_SlerpDrive.maximumForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LinearLimitSpring.damper
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LinearLimitSpring.spring
+      value: 600000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularXDrive.maximumForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularYZDrive.maximumForce
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LinearLimit.contactDistance
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7844896539176753811, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-      propertyPath: m_Constraints
+    - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularYZDrive.positionDamper
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539009022799, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-      propertyPath: m_YMotion
+      propertyPath: m_AngularYMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LinearLimit.limit
+      value: 0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_RotationDriveMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_EnablePreprocessing
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_YDrive.positionDamper
-      value: 0
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_YDrive.positionSpring
+      value: 430000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_YDrive.useAcceleration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_SlerpDrive.maximumForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LinearLimitSpring.damper
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LinearLimitSpring.spring
+      value: 600000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularXDrive.maximumForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularYZDrive.maximumForce
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LinearLimit.contactDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularYZDrive.positionDamper
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753812, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753814, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753814, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539176753814, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-      propertyPath: m_YMotion
+      propertyPath: m_AngularYMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LinearLimit.limit
+      value: 0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_RotationDriveMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_EnablePreprocessing
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_YDrive.positionDamper
-      value: 0
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_YDrive.positionSpring
+      value: 430000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_YDrive.useAcceleration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_SlerpDrive.maximumForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LinearLimitSpring.damper
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LinearLimitSpring.spring
+      value: 600000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularXDrive.maximumForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularYZDrive.maximumForce
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LinearLimit.contactDistance
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7844896539571594658, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-      propertyPath: m_Constraints
+    - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularYZDrive.positionDamper
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594656, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594657, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594659, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594659, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539571594659, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798897, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_RootOrder
@@ -3855,15 +4019,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798897, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 729.7
+      value: 724.8
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798897, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798897, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -969.7
+      value: -969.4
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798897, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3898,6 +4062,10 @@ PrefabInstance:
       value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: airDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: friction
       value: 1800
       objectReference: {fileID: 0}
@@ -3907,7 +4075,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: slerpTime
-      value: 5
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: AirVehicle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: _autoSpeed
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _dragValue
@@ -3916,6 +4092,10 @@ PrefabInstance:
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: dragAmount
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: smoothTime
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _roadSpline
@@ -3928,6 +4108,10 @@ PrefabInstance:
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _stopingDrag
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: _autoMoveSpeed
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: suspensionForce
@@ -3954,6 +4138,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 615517136}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: SuspensionDistance
+      value: 0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _distanceThreshold
       value: 25
       objectReference: {fileID: 0}
@@ -3963,19 +4151,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _steerDumpingSpeed
-      value: 20
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: _toAutoMoveDumping
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _maxDistanceToTager
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: _autoSpeedDragAmount
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _maxDistanceToTarget
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: _minAutoMoveVelocity
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _minDistanceToTarget
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: _autoMoveSpeedDivider
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _maxTearRotationSpeed
@@ -3984,6 +4188,14 @@ PrefabInstance:
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _maxTierRotationSpeed
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: _autoSpeedDumpingSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: _maxAutoMoveCarVelocity
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _straightSteerAngleDumping
@@ -3999,23 +4211,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _straightSteerAngleThreshold
-      value: 1
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: _breakThisToVelocityOnAutoMove
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: _breakToThisVelocityOnAutoMove
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: _timeToAccelerateToTargetChase
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7844896539872798899, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: _breakToThisVelocityMagnitudeOnAutoMove
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798900, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: gravity
-      value: -30
+      value: -35
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798901, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-      propertyPath: m_Constraints
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7844896539872798901, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
+      propertyPath: m_Mass
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7844896539872798902, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_Name
@@ -4030,68 +4250,116 @@ PrefabInstance:
       value: car
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-      propertyPath: m_YMotion
+      propertyPath: m_AngularYMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -1.4034537
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LinearLimit.limit
+      value: 0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_RotationDriveMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_EnablePreprocessing
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_YDrive.positionDamper
-      value: 0
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_YDrive.positionSpring
+      value: 430000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_YDrive.useAcceleration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_SlerpDrive.maximumForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LinearLimitSpring.damper
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LinearLimitSpring.spring
+      value: 600000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularXDrive.maximumForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularYZDrive.maximumForce
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LinearLimit.contactDistance
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7844896540176089862, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-      propertyPath: m_Constraints
+    - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularYZDrive.positionDamper
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7844896540350378867, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-      propertyPath: m_Offset.x
-      value: 1.2
+    - target: {fileID: 7844896540176089860, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089861, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089863, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089863, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540176089863, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378867, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_Offset.y
-      value: -0.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 7844896540350378867, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-      propertyPath: m_Offset.z
-      value: -18.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7844896540350378867, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
-      propertyPath: m_ApplyAfter
-      value: 1
+      value: -3.1
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.79999495
+      value: -6.466389
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.9994764
+      value: 8.001417
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.00041
+      value: 13.533775
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9416891
+      value: 0.21441568
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.32701996
+      value: 0.053591996
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.07485602
+      value: 0.94613963
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.026003987
+      value: -0.23658755
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4117,10 +4385,14 @@ PrefabInstance:
       propertyPath: m_FollowOffset.z
       value: -5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7844896540789327141, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7844896540789327160, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1055845862}
   m_SourcePrefab: {fileID: 100100000, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
 --- !u!1 &170449346
 GameObject:
@@ -5446,8 +5718,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210027470}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.27040765, y: -0.5350055, z: 0.1858225, w: 0.7785363}
-  m_LocalPosition: {x: 748.85114, y: 19.707344, z: -975.7686}
+  m_LocalRotation: {x: 0.16454, y: 0.7127426, z: -0.17818569, w: 0.65815985}
+  m_LocalPosition: {x: 704.83105, y: 9.470589, z: -967.8074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24369,6 +24641,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1078370756}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1055845857 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7844896540789327160, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+  m_PrefabInstance: {fileID: 169738929}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1055845862
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055845857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BindingMode: 5
+  m_FollowOffset: {x: 0, y: 8, z: -15}
+  m_XDamping: 1
+  m_YDamping: 0.4
+  m_ZDamping: 0.4
+  m_AngularDampingMode: 0
+  m_PitchDamping: 0
+  m_YawDamping: 0
+  m_RollDamping: 0
+  m_AngularDamping: 0
 --- !u!1001 &1056551780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41304,29 +41603,29 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -10.653202
+        z: -10.653
       TangentOut:
         x: 0
         y: 0
-        z: 11.427668
+        z: 11.427007
       Rotation:
         value:
-          x: -0.00016196584
-          y: -0.628782
-          z: 0.00044860836
-          w: 0.77758145
+          x: -0.0013229804
+          y: -0.62876755
+          z: -0.0004901541
+          w: 0.777592
     - Position:
-        x: 199.60646
-        y: 29.477829
-        z: -579.382
+        x: 199.61
+        y: 29.69
+        z: -579.38
       TangentIn:
-        x: -0
-        y: -0
-        z: -19.355162
+        x: 0
+        y: 0
+        z: 0
       TangentOut:
         x: 0
         y: 0
-        z: 85.41314
+        z: 0
       Rotation:
         value:
           x: -0.000009441197
@@ -41338,13 +41637,13 @@ MonoBehaviour:
         y: 29.195526
         z: -576.9198
       TangentIn:
-        x: -0
-        y: -0
-        z: -81.674835
+        x: 0
+        y: 0
+        z: 0
       TangentOut:
         x: 0
         y: 0
-        z: 17.599016
+        z: 0
       Rotation:
         value:
           x: 0.035794243
@@ -41914,13 +42213,13 @@ MonoBehaviour:
         y: -0.4999962
         z: -1503.4338
       TangentIn:
-        x: -0
-        y: -0
-        z: -12.13553
+        x: 0
+        y: 0
+        z: 0
       TangentOut:
         x: 0
         y: 0
-        z: 102.40138
+        z: 0
       Rotation:
         value:
           x: 0.016977368
@@ -43756,7 +44055,9 @@ MonoBehaviour:
       Tension: 0.5
     - Mode: 0
       Tension: 0.5
-    - Mode: 0
+    - Mode: 1
+      Tension: 0.5
+    - Mode: 1
       Tension: 0.5
     - Mode: 0
       Tension: 0.5
@@ -43820,9 +44121,7 @@ MonoBehaviour:
       Tension: 0.5
     - Mode: 0
       Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
+    - Mode: 1
       Tension: 0.5
     - Mode: 0
       Tension: 0.5
