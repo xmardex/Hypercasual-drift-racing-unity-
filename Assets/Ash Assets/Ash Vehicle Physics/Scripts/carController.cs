@@ -4,30 +4,28 @@ using System;
 
 public class СarController : MonoBehaviour
 {
-    [Header("Spline Inputs")]
-    [Header("rotation:")]
+    [Header("Spline inputs")]
+    [Header("pointer:")]
     [SerializeField] private CarSplinePointer _carSplinePointer;
     [SerializeField] private float _distanceToPointer;
-    [SerializeField] private float _maxDistanceToTarget;
-    [SerializeField] private float _maxAcceleration;
-    [SerializeField] private float _straightSteerAngleThreshold;
-    [SerializeField] private float _thresholdDistanceToTarget;
-    [Header("accelration")]
-    [SerializeField] private float _maxDistance;
-    [SerializeField] private float _minDistanceToTarget;
-    [SerializeField] private float _timeToAccelerateToTargetChase;
 
-    [Header("additional")]
+    [Header("rotation:")]
+    [SerializeField] private float _straightSteerAngleThreshold;
+    [SerializeField] private float _steerDumpingSpeed;
+
+    [Header("accelaration:")]
+    [SerializeField] private float _stopingDrag;
+
+    [Header("additional:")]
     [SerializeField] private float _maxTierRotationSpeed;
 
 
-
-
+    [Space(20)] [Header("Original")]
     [Header("Suspension")]
     [Range(0,5)]
     public float SuspensionDistance = 0.2f;
-    public float suspensionForce = 30000f;
-    public float suspensionDamper = 200f;
+    //public float suspensionForce = 30000f;
+    //public float suspensionDamper = 200f;
     public Transform groundCheck;
     public Transform fricAt;
     public Transform CentreOfMass;
@@ -48,8 +46,6 @@ public class СarController : MonoBehaviour
     [HideInInspector]
     public bool grounded;
 
-    
-
     [Header("Visuals")]
     public Transform[] TireMeshes;
     public Transform[] TurnTires;
@@ -66,7 +62,6 @@ public class СarController : MonoBehaviour
     public Vector3 carVelocity;
     [HideInInspector]
     public RaycastHit hit;
-    //public bool drftSndMachVel;
 
     [Header("Other Settings")]
     public AudioSource[] engineSounds;
@@ -76,9 +71,6 @@ public class СarController : MonoBehaviour
     public float SkidEnable = 20f;
     public float skidWidth = 0.12f;
     private float frictionAngle;
-
-    private float currentDistanceToPointer;
-    private float targetDistanceToPointer;
 
     private void Awake()
     {
@@ -105,14 +97,12 @@ public class СarController : MonoBehaviour
         
         curveVelocity = Mathf.Abs(carVelocity.magnitude) / 100;
 
-        //old inputs
-        //carControls.carAction.moveH.ReadValue<float>()
-        float turnInput = turn * SteerTowardsTarget() * Time.fixedDeltaTime * 1000;
+        float turnInput = turn * GetSteerPointerValue() * Time.fixedDeltaTime * 1000;
 
-        // carControls.carAction.moveV.ReadValue<float>()
         float speedInput = speed * carControls.carAction.moveV.ReadValue<float>() * Time.fixedDeltaTime * 1000;
-        
-        brakeInput = brake * carControls.carAction.brake.ReadValue<float>() * Time.fixedDeltaTime * 1000;
+
+        //brakeInput = brake * carControls.carAction.brake.ReadValue<float>() * Time.fixedDeltaTime * 1000;
+        brakeInput = brake * Time.fixedDeltaTime * 1000;
 
         //helping veriables
         speedValue = speedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
@@ -216,16 +206,10 @@ public class СarController : MonoBehaviour
             mesh.transform.localPosition = Vector3.zero;
         }
 
-        //TireTurn
-        //foreach (Transform FM in TurnTires)
-        //{
-        //    FM.localRotation = Quaternion.Slerp(FM.localRotation, Quaternion.Euler(FM.localRotation.eulerAngles.x,
-        //                       TurnAngle * SteerTowardsTarget(), FM.localRotation.eulerAngles.z), slerpTime);
-        //}
         foreach (Transform FM in TurnTires)
         {
             Vector3 currentRotation = FM.localRotation.eulerAngles;
-            float targetAngle = TurnAngle * SteerTowardsTarget();
+            float targetAngle = TurnAngle * GetSteerPointerValue();
 
             Quaternion targetRotation = Quaternion.Euler(currentRotation.x, targetAngle, currentRotation.z);
             FM.localRotation = Quaternion.RotateTowards(FM.localRotation, targetRotation, _maxTierRotationSpeed * Time.deltaTime);
@@ -252,11 +236,11 @@ public class СarController : MonoBehaviour
         {
             rb.AddTorque(transform.up * turnValue);
         }
-        else if (SteerTowardsTarget() > 0.1f)
+        else if (GetSteerPointerValue() > 0.1f)
         {
             rb.AddTorque(transform.up * turnValue);
         }
-        if (carVelocity.z < -0.1f && SteerTowardsTarget() < -0.1f)
+        if (carVelocity.z < -0.1f && GetSteerPointerValue() < -0.1f)
         {
             rb.AddTorque(transform.up * -turnValue);
         }
@@ -275,23 +259,28 @@ public class СarController : MonoBehaviour
 
     public void brakeLogic()
     {
+        if (carControls.carAction.moveV.ReadValue<float>() < 0.1f)
+        {
+            if (carVelocity.z > 1f)
+                rb.AddForceAtPosition(transform.forward * -brakeInput, groundCheck.position);
+        }
         //brake
-	    if (carVelocity.z > 1f)
-        {
-            rb.AddForceAtPosition(transform.forward * -brakeInput, groundCheck.position);
-        }
-	    if (carVelocity.z < -1f)
-        {
-            rb.AddForceAtPosition(transform.forward * brakeInput, groundCheck.position);
-        }
-	    if(carVelocity.magnitude < 1)
-	    {
-	    	rb.drag = 5f;
-	    }
-	    else
-	    {
-	    	rb.drag = 0.1f;
-	    }
+	    //if (carVelocity.z > 1f)
+         //   {
+         //       rb.AddForceAtPosition(transform.forward * -brakeInput, groundCheck.position);
+         //   }
+	        //if (carVelocity.z < -1f)
+         //   {
+         //       rb.AddForceAtPosition(transform.forward * brakeInput, groundCheck.position);
+         //   }
+	    //if(carVelocity.magnitude < 1)
+	    //{
+	    //	rb.drag = _stopingDrag;
+	    //}
+	    //else
+	    //{
+	    //	rb.drag = 0.1f;
+	    //}
     }
 
     public void AirController()
@@ -355,7 +344,7 @@ public class СarController : MonoBehaviour
 
     }
 
-    private float SteerTowardsTarget()
+    private float GetSteerPointerValue()
     {
         if (_carSplinePointer != null)
         {
@@ -365,11 +354,11 @@ public class СarController : MonoBehaviour
 
             if (angle > _straightSteerAngleThreshold)
             {
-                return 1f;
+                return Mathf.Lerp(0f, 1f, Mathf.InverseLerp(_straightSteerAngleThreshold, 180f, angle) * _steerDumpingSpeed);
             }
             else if (angle < -_straightSteerAngleThreshold)
             {
-                return -1f;
+                return Mathf.Lerp(0f, -1f, Mathf.InverseLerp(-_straightSteerAngleThreshold, -180f, angle) * _steerDumpingSpeed);
             }
             else
             {
@@ -378,14 +367,13 @@ public class СarController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("_carSplineTarget not set");
+            Debug.LogError("CarSplineTarget not set");
             return 0f;
         }
     }
 
     private void OnDrawGizmos()
     {
-        
         if (!Application.isPlaying)
         {
             Gizmos.color = Color.yellow;
@@ -401,17 +389,14 @@ public class СarController : MonoBehaviour
                 Gizmos.DrawWireCube(transform.position, GetComponent<CapsuleCollider>().bounds.size);
             }
             
-
-            
             Gizmos.color = Color.red;
             foreach (Transform mesh in TireMeshes)
             {
-                var ydrive = mesh.parent.parent.GetComponent<ConfigurableJoint>().yDrive;
-                ydrive.positionDamper = suspensionDamper;
-                ydrive.positionSpring = suspensionForce;
-
-
-                mesh.parent.parent.GetComponent<ConfigurableJoint>().yDrive = ydrive;
+                // bouncines logic
+                //var ydrive = mesh.parent.parent.GetComponent<ConfigurableJoint>().yDrive;
+                //ydrive.positionDamper = suspensionDamper;
+                //ydrive.positionSpring = suspensionForce;
+                //mesh.parent.parent.GetComponent<ConfigurableJoint>().yDrive = ydrive;
 
                 var jointLimit = mesh.parent.parent.GetComponent<ConfigurableJoint>().linearLimit;
                 jointLimit.limit = SuspensionDistance;
@@ -423,13 +408,10 @@ public class СarController : MonoBehaviour
                 Handles.ArrowHandleCap(0, mesh.position, mesh.rotation * Quaternion.LookRotation(Vector3.down), jointLimit.limit, EventType.Repaint);
 
             }
+
             float wheelRadius = TurnTires[0].parent.GetComponent<SphereCollider>().radius;
             float wheelYPosition = TurnTires[0].parent.parent.localPosition.y + TurnTires[0].parent.localPosition.y;
             maxRayLength = (groundCheck.localPosition.y - wheelYPosition + (0.05f + wheelRadius));
-
         }
-        
     }
-
-
 }
