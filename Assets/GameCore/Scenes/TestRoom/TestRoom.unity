@@ -4331,35 +4331,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378867, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_Offset.y
-      value: -3.1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844896540350378867, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      propertyPath: m_Offset.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.466389
+      value: -31.999996
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.001417
+      value: 32.002617
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.533775
+      value: 24.996643
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.21441568
+      value: 0.4142065
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.053591996
+      value: 0.14356536
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.94613963
+      value: 0.8491944
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.23658755
+      value: -0.29443318
       objectReference: {fileID: 0}
     - target: {fileID: 7844896540350378868, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4387,9 +4391,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7844896540789327141, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+    - {fileID: 7844896540789327142, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7844896540789327160, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1055845859}
     - targetCorrespondingSourceObject: {fileID: 7844896540789327160, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1055845862}
@@ -5718,8 +5726,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210027470}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16454, y: 0.7127426, z: -0.17818569, w: 0.65815985}
-  m_LocalPosition: {x: 704.83105, y: 9.470589, z: -967.8074}
+  m_LocalRotation: {x: 0.27138925, y: 0.52900064, z: -0.18338442, w: 0.7828642}
+  m_LocalPosition: {x: 687.12366, y: 34.3, z: -984.5491}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24646,7 +24654,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7844896540789327160, guid: 789c2d2cba0255746903918da42cfd20, type: 3}
   m_PrefabInstance: {fileID: 169738929}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1055845862
+--- !u!114 &1055845859
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24658,16 +24666,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 8, z: -15}
-  m_XDamping: 1
-  m_YDamping: 0.4
-  m_ZDamping: 0.4
+  m_BindingMode: 1
+  m_FollowOffset: {x: -32, y: 32, z: 25}
+  m_XDamping: 0
+  m_YDamping: 0
+  m_ZDamping: 0
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
   m_RollDamping: 0
   m_AngularDamping: 0
+--- !u!114 &1055845862
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055845857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1056551780
 PrefabInstance:
   m_ObjectHideFlags: 0
