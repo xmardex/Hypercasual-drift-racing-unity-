@@ -3,21 +3,29 @@ using UnityEngine.Splines;
 
 public class CarSplinePointer : MonoBehaviour
 {
-    [SerializeField] private SplineContainer _splineContainer;
+    //distance to car
     [SerializeField] private float _maxDistance;
+
+    //lerp speed to handle same distance with car by speed changing;
     [SerializeField] private float _pointerSpeedLerp;
+
+    private Transform _carTransform;
+    private SplineContainer _splineContainer;
 
     private float _splineLength;
     private float _distancePercentage = 0f;
+    public float DistancePercentage => _distancePercentage;
 
-    private void Start()
+    public void Initialize(Transform carTransform, SplineContainer roadSpline)
     {
+        _splineContainer = roadSpline;
+        _carTransform = carTransform;
         _splineLength = _splineContainer.Spline.GetLength();
     }
 
-    public void UpdatePointerPosition(float carSpeed, float distanceToPointer, Transform carTransform)
+    public void UpdatePointerPosition(float carSpeed)
     {
-        float distanceToTarget = Vector3.Distance(transform.position, carTransform.position);
+        float distanceToTarget = Vector3.Distance(transform.position, _carTransform.position);
 
         if (distanceToTarget > _maxDistance)
         {
@@ -31,8 +39,14 @@ public class CarSplinePointer : MonoBehaviour
         Vector3 currentPosition = _splineContainer.EvaluatePosition(_distancePercentage);
 
         transform.position = currentPosition;
+    }
 
-        if (_distancePercentage > 1f)
-            _distancePercentage = 0;
+    /// <summary>
+    /// From 0 to 1 - new distance of pointer on spline
+    /// </summary>
+    /// <param name="newDistance"></param>
+    public void ChangePointerOnSplineDistance(float newDistance)
+    {
+        _distancePercentage = newDistance;
     }
 }

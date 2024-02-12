@@ -1,40 +1,40 @@
 ﻿using UnityEngine;
-using UnityEditor;
-using System;
+using UnityEngine.Splines;
 
 public class СarController : MonoBehaviour
 {
     [Header("Spline inputs")]
-    [Header("pointer:")]
-    [SerializeField] private CarSplinePointer _carSplinePointer;
-    [SerializeField] private float _distanceToPointer;
+    [Header("Pointer:")]
+    [SerializeField] private CarSplinePointer _carSplinePointerPrefab;
+    [SerializeField] private Transform _chaseSpot;
+    private SplineContainer _roadSplineContainer;
+    private CarSplinePointer _carSplinePointer;
+    private Transform _carTarget;
 
-    [Header("rotation:")]
+    [Header("Rotation:")]
     [SerializeField] private float _straightSteerAngleThreshold;
     [SerializeField] private float _steerDumpingSpeed;
 
-    [Header("accelaration:")]
+    [Header("Accelaration:")]
     [SerializeField] private float _autoSpeed;
     [SerializeField] private float _breakToThisVelocityMagnitudeOnAutoMove;
 
-    [Header("additional:")]
+    [Header("Additional:")]
     [SerializeField] private float _maxTierRotationSpeed;
+
+    [Header("AI:")]
+    [SerializeField] private bool _isAI;
+    [SerializeField] private bool _useDefaultSpeed;
+
 
 
     [Space(20)] [Header("Original")]
-    [Header("Suspension")]
-    [Range(0,5)]
-    public float SuspensionDistance = 0.2f;
-    //public float suspensionForce = 30000f;
-    //public float suspensionDamper = 200f;
     public Transform groundCheck;
     public Transform fricAt;
     public Transform CentreOfMass;
 
-    private CarInputs carControls;
     private Rigidbody rb;
 
-    //private CinemachineVirtualCamera cinemachineVirtualCamera;
     [Header("Car Stats")]
     public float speed = 200f;
     public float turn = 100f;
@@ -44,7 +44,7 @@ public class СarController : MonoBehaviour
     public float TurnAngle = 30f;
 
     public float maxRayLength = 0.8f;
-    [HideInInspector]
+
     public bool grounded;
 
     [Header("Visuals")]
@@ -58,7 +58,7 @@ public class СarController : MonoBehaviour
     public AnimationCurve driftCurve;
     public AnimationCurve engineCurve;
 
-    private float speedValue, autoSpeedValue, fricValue, turnValue, curveVelocity, brakeInput;
+    private float speedValue, autoSpeedValue, fricValue, turnValue, curveVelocity, brakeValue;
     [HideInInspector]
     public Vector3 carVelocity;
     [HideInInspector]
@@ -67,103 +67,91 @@ public class СarController : MonoBehaviour
     [Header("Other Settings")]
     public AudioSource[] engineSounds;
     public bool airDrag;
-    public bool AirVehicle = false;
     public float UpForce;
     public float SkidEnable = 20f;
     public float skidWidth = 0.12f;
     private float frictionAngle;
 
-    private void Awake()
+    private int _gasValue;
+
+    public CarSplinePointer CarSplinePointer => _carSplinePointer;
+    public Transform ChaseSpot => _chaseSpot;
+
+    public void Initialize()
     {
-        carControls = new CarInputs();
-        //cinemachineVirtualCamera = transform.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+        _roadSplineContainer = GameObject.FindGameObjectWithTag(Constants.ROAD_SPLINE_CONTAINER_TAG).GetComponent<SplineContainer>();
+        _carSplinePointer = Instantiate(_carSplinePointerPrefab).GetComponent<CarSplinePointer>();
+        _carSplinePointer.Initialize(transform,_roadSplineContainer);
+        _carTarget = _carSplinePointer.transform;
 
         rb = GetComponent<Rigidbody>();
         grounded = false;
         engineSounds[1].mute = true;
         rb.centerOfMass = CentreOfMass.localPosition;
     }
-    private void OnEnable()
-    {
-	    carControls.Enable();
-    }
-    private void OnDisable()
-    {
-	    carControls.Disable();
-    }
 
     void FixedUpdate()
     {
-        carVelocity = transform.InverseTransformDirection(rb.velocity); //local velocity of car
-        curveVelocity = Mathf.Abs(carVelocity.magnitude) / 100;
-
-        float turnInput = turn * GetSteerPointerValue() * Time.fixedDeltaTime * 1000;
-
-        float speedInput = speed * carControls.carAction.moveV.ReadValue<float>() * Time.fixedDeltaTime * 1000;
-        float autoSpeedInut = _autoSpeed * Time.fixedDeltaTime * 1000;
-        //brakeInput = brake * carControls.carAction.brake.ReadValue<float>() * Time.fixedDeltaTime * 1000;
-        brakeInput = brake * Time.fixedDeltaTime * 1000;
-
-        //helping veriables
-        autoSpeedValue = autoSpeedInut * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
-        speedValue = speedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
-        fricValue = friction * frictionCurve.Evaluate(carVelocity.magnitude / 100);
-        turnValue = turnInput * turnCurve.Evaluate(carVelocity.magnitude / 100);
-	    
-        //grounded check
-        if (Physics.Raycast(groundCheck.position, -transform.up, out hit, maxRayLength) && AirVehicle == false)
+        if (_carTarget != null)
         {
-            accelarationLogic();
-            turningLogic();
-            frictionLogic();
-            //brakeLogic();
-            //for drift behaviour
-            rb.angularDrag = dragAmount * driftCurve.Evaluate(Mathf.Abs(carVelocity.x) / 70);
+            carVelocity = transform.InverseTransformDirection(rb.velocity); //local velocity of car
+            curveVelocity = Mathf.Abs(carVelocity.magnitude) / 100;
 
-            //draws green ground checking ray ....ingnore
-            Debug.DrawLine(groundCheck.position, hit.point, Color.green);
-            grounded = true;
+            float turnInput = turn * GetSteerPointerValue() * Time.fixedDeltaTime * 1000;
 
-	        rb.centerOfMass = Vector3.zero;
-        }
-        else if (!Physics.Raycast(groundCheck.position, -transform.up, out hit, maxRayLength) && AirVehicle == false)
-        {
-            grounded = false;
-            rb.drag = 0.1f;
-            rb.centerOfMass = CentreOfMass.localPosition;
-            if (!airDrag)
+            float speedInput = speed * _gasValue * Time.fixedDeltaTime * 1000;
+            float autoSpeedInput = _autoSpeed * Time.fixedDeltaTime * 1000;
+            brakeValue = brake * Time.fixedDeltaTime * 1000;
+
+            //helping veriables
+            autoSpeedValue = autoSpeedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
+            if(!_isAI || _isAI && _useDefaultSpeed)
+                speedValue = speedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
+
+            fricValue = friction * frictionCurve.Evaluate(carVelocity.magnitude / 100);
+            turnValue = turnInput * turnCurve.Evaluate(carVelocity.magnitude / 100);
+
+            //grounded check
+            if (Physics.Raycast(groundCheck.position, -transform.up, out hit, maxRayLength))
             {
-                rb.angularDrag = 0.1f;
+                AccelarationLogic();
+                TurningLogic();
+                FrictionLogic();
+                //for drift behaviour
+                rb.angularDrag = dragAmount * driftCurve.Evaluate(Mathf.Abs(carVelocity.x) / 70);
+
+                //draws green ground checking ray ....ingnore
+                Debug.DrawLine(groundCheck.position, hit.point, Color.green);
+                grounded = true;
+
+                rb.centerOfMass = Vector3.zero;
+            }
+            else
+            {
+                grounded = false;
+                rb.drag = 0.1f;
+                rb.centerOfMass = CentreOfMass.localPosition;
+                if (!airDrag)
+                {
+                    rb.angularDrag = 0.1f;
+                }
             }
         }
-
-        if(AirVehicle == true)
-        {
-            AirController();
-        }
-        
     }
 
     void Update()
-	{
-        _carSplinePointer.UpdatePointerPosition(carVelocity.magnitude, _distanceToPointer, transform);
-
-        tireVisuals();
-        //ShakeCamera(1.2f, 10f);
-		audioControl();
-	    
-    }
-
-    public void ShakeCamera(float amplitude, float frequency)
     {
-       // CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
-            //cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        if (_carTarget != null) 
+        {
+            _gasValue = _isAI || !_isAI && Input.GetKey(KeyCode.W) ? 1 : 0;
+            _carSplinePointer.UpdatePointerPosition(carVelocity.magnitude);
 
-        //cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = curveVelocity * amplitude;
-        //cinemachineBasicMultiChannelPerlin.m_FrequencyGain = curveVelocity * frequency;
+            TireVisuals();
+            AudioControl();
+        }
     }
 
-    public void audioControl()
+    public void AudioControl()
     {
         //audios
         if (grounded)
@@ -179,12 +167,6 @@ public class СarController : MonoBehaviour
             engineSounds[1].mute = true;
         }
 
-        /*if (drftSndMachVel) 
-        { 
-            engineSounds[1].pitch = (0.7f * (Mathf.Abs(carVelocity.x) + 10f) / 40);
-        }
-        else { engineSounds[1].pitch = 1f; }*/
-
         engineSounds[1].pitch = 1f;
 
         engineSounds[0].pitch = 2 * engineCurve.Evaluate(curveVelocity);
@@ -192,13 +174,13 @@ public class СarController : MonoBehaviour
         {
             return;
         }
-        else { engineSounds[2].pitch = 2 * engineCurve.Evaluate(curveVelocity); }
-
-        
-
+        else 
+        {
+            engineSounds[2].pitch = 2 * engineCurve.Evaluate(curveVelocity); 
+        }
     }
 
-    public void tireVisuals()
+    public void TireVisuals()
     {
         //Tire mesh rotate
         foreach (Transform mesh in TireMeshes)
@@ -217,23 +199,22 @@ public class СarController : MonoBehaviour
         }
     }
 
-    public void accelarationLogic()
+    public void AccelarationLogic()
     {
-        //speed control old
-        if (carControls.carAction.moveV.ReadValue<float>() > 0.1f)
+        if (_gasValue == 1)
         {
             rb.AddForceAtPosition(transform.forward * speedValue, groundCheck.position);
         }
-        if (carControls.carAction.moveV.ReadValue<float>() <= 0.1f)
+        else
         {
             if (carVelocity.magnitude > _breakToThisVelocityMagnitudeOnAutoMove)
-                rb.AddForceAtPosition(transform.forward * -brakeInput, groundCheck.position);
+                rb.AddForceAtPosition(transform.forward * -brakeValue, groundCheck.position);
             else
                 rb.AddForceAtPosition(transform.forward * autoSpeedValue, groundCheck.position);
         }
     }
 
-    public void turningLogic()
+    public void TurningLogic()
     {
         //turning
         if (carVelocity.z > 0.1f)
@@ -248,10 +229,9 @@ public class СarController : MonoBehaviour
         {
             rb.AddTorque(transform.up * -turnValue);
         }
-        //rb.AddTorque(transform.up * turnValue * SteerTowardsTarget()); 
     }
 
-    public void frictionLogic()
+    public void FrictionLogic()
     {
         //Friction
         if (carVelocity.magnitude > 1)
@@ -261,98 +241,31 @@ public class СarController : MonoBehaviour
         }
     }
 
-    //public void brakeLogic()
-    //{
-        //if (carControls.carAction.moveV.ReadValue<float>() < 0.1f)
-        //{
-        //    if (carVelocity.z > 1f)
-        //        rb.AddForceAtPosition(transform.forward * -brakeInput, groundCheck.position);
-        //}
-        //brake
-	    //if (carVelocity.z > 1f)
-         //   {
-         //       rb.AddForceAtPosition(transform.forward * -brakeInput, groundCheck.position);
-         //   }
-	        //if (carVelocity.z < -1f)
-         //   {
-         //       rb.AddForceAtPosition(transform.forward * brakeInput, groundCheck.position);
-         //   }
-	    //if(carVelocity.magnitude < 1)
-	    //{
-	    //	rb.drag = _stopingDrag;
-	    //}
-	    //else
-	    //{
-	    //	rb.drag = 0.1f;
-	    //}
-    //}
-
-    public void AirController()
+    // AI SECTION ---------------
+    public void ChangeTarget(Transform newTarget)
     {
-        rb.useGravity = false;
-        var forwardDir = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
-        
-
-        float upForceValue = (-Physics.gravity.y/Time.deltaTime) + UpForce;
-        rb.AddForce(transform.up * upForceValue * carControls.carAction.up_down.ReadValue<float>() * Time.deltaTime);
-       
-        //speed control
-        if (carControls.carAction.moveV.ReadValue<float>() > 0.1f)
-        {
-            rb.AddForceAtPosition(forwardDir * speedValue, groundCheck.position);
-        }
-        if (carControls.carAction.moveV.ReadValue<float>() < -0.1f)
-        {
-            rb.AddForceAtPosition(forwardDir * speedValue / 2, groundCheck.position);
-        }
-
-        //turning
-        //if (carVelocity.z > 0.1f)
-        //{
-            rb.AddTorque(Vector3.up * turnValue);
-        //}
-        //else if (carControls.carAction.moveV.ReadValue<float>() > 0.1f)
-        //{
-        //    rb.AddTorque(Vector3.up * turnValue);
-        //}
-        //if (carVelocity.z < -0.1f && carControls.carAction.moveV.ReadValue<float>() < -0.1f)
-        //{
-        //    rb.AddTorque(Vector3.up * -turnValue);
-        //}
-
-        //friction(drag) 
-        if (carVelocity.magnitude > 1)
-        {
-            float frictionAngle = (-Vector3.Angle(transform.up, Vector3.up) / 90f) + 1;
-            rb.AddForceAtPosition(Vector3.ProjectOnPlane( transform.right,Vector3.up) * fricValue * frictionAngle * 100 * -carVelocity.normalized.x, fricAt.position);
-        }
-
-        //brake
-        if (carVelocity.z > 1f)
-        {
-            rb.AddForceAtPosition(Vector3.ProjectOnPlane(transform.forward, Vector3.up) * -brakeInput, groundCheck.position);
-        }
-        if (carVelocity.z < -1f)
-        {
-            rb.AddForceAtPosition(Vector3.ProjectOnPlane(transform.forward, Vector3.up) * brakeInput, groundCheck.position);
-        }
-        if (carVelocity.magnitude < 1)
-        {
-            rb.drag = 5f;
-        }
-        else
-        {
-            rb.drag = 1f;
-        }
-
-
+        _carTarget = newTarget;
     }
+    public void ChangeSpeedValue(float newSpeedValue)
+    {
+        speedValue = newSpeedValue;
+    }
+    public float GetCurrentSpeedValue()
+    {
+        return _gasValue == 1 ? speedValue : autoSpeedValue;
+    }
+    public void UseDefalutSpeed(bool use)
+    {
+        _useDefaultSpeed = use;
+    }
+    // --------------
+
 
     private float GetSteerPointerValue()
     {
-        if (_carSplinePointer != null)
+        if (_carTarget != null)
         {
-            Vector3 targetDirection = _carSplinePointer.transform.position - transform.position;
+            Vector3 targetDirection = _carTarget.position - transform.position;
             float angle = Vector3.SignedAngle(transform.forward, targetDirection, Vector3.up);
             angle = Mathf.Repeat(angle + 180f, 360f) - 180f;
 
@@ -371,51 +284,30 @@ public class СarController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("CarSplineTarget not set");
+            Debug.LogError("car target not set");
             return 0f;
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        if (!Application.isPlaying)
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(groundCheck.position, groundCheck.position - maxRayLength * groundCheck.up);
-            Gizmos.DrawWireCube(groundCheck.position - maxRayLength * (groundCheck.up.normalized), new Vector3(5, 0.02f, 10));
-            Gizmos.color = Color.magenta;
-            if (GetComponent<BoxCollider>())
-            {
-                Gizmos.DrawWireCube(transform.position, GetComponent<BoxCollider>().size);
-            }
-            if (GetComponent<CapsuleCollider>())
-            {
-                Gizmos.DrawWireCube(transform.position, GetComponent<CapsuleCollider>().bounds.size);
-            }
-            
-            Gizmos.color = Color.red;
-            foreach (Transform mesh in TireMeshes)
-            {
-                // bouncines logic
-                //var ydrive = mesh.parent.parent.GetComponent<ConfigurableJoint>().yDrive;
-                //ydrive.positionDamper = suspensionDamper;
-                //ydrive.positionSpring = suspensionForce;
-                //mesh.parent.parent.GetComponent<ConfigurableJoint>().yDrive = ydrive;
-
-                var jointLimit = mesh.parent.parent.GetComponent<ConfigurableJoint>().linearLimit;
-                jointLimit.limit = SuspensionDistance;
-                mesh.parent.parent.GetComponent<ConfigurableJoint>().linearLimit = jointLimit;
-
-                Handles.color = Color.red;
-                //Handles.DrawWireCube(mesh.position, new Vector3(0.02f, 2 * jointLimit.limit, 0.02f));
-                Handles.ArrowHandleCap(0, mesh.position, mesh.rotation * Quaternion.LookRotation(Vector3.up), jointLimit.limit, EventType.Repaint);
-                Handles.ArrowHandleCap(0, mesh.position, mesh.rotation * Quaternion.LookRotation(Vector3.down), jointLimit.limit, EventType.Repaint);
-
-            }
-
-            float wheelRadius = TurnTires[0].parent.GetComponent<SphereCollider>().radius;
-            float wheelYPosition = TurnTires[0].parent.parent.localPosition.y + TurnTires[0].parent.localPosition.y;
-            maxRayLength = (groundCheck.localPosition.y - wheelYPosition + (0.05f + wheelRadius));
-        }
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    if (!Application.isPlaying)
+    //    {
+    //        Gizmos.color = Color.yellow;
+    //        Gizmos.DrawLine(groundCheck.position, groundCheck.position - maxRayLength * groundCheck.up);
+    //        Gizmos.DrawWireCube(groundCheck.position - maxRayLength * (groundCheck.up.normalized), new Vector3(5, 0.02f, 10));
+    //        Gizmos.color = Color.magenta;
+    //        if (GetComponent<BoxCollider>())
+    //        {
+    //            Gizmos.DrawWireCube(transform.position, GetComponent<BoxCollider>().size);
+    //        }
+    //        if (GetComponent<CapsuleCollider>())
+    //        {
+    //            Gizmos.DrawWireCube(transform.position, GetComponent<CapsuleCollider>().bounds.size);
+    //        }
+    //        float wheelRadius = TurnTires[0].parent.GetComponent<SphereCollider>().radius;
+    //        float wheelYPosition = TurnTires[0].parent.parent.localPosition.y + TurnTires[0].parent.localPosition.y;
+    //        maxRayLength = (groundCheck.localPosition.y - wheelYPosition + (0.05f + wheelRadius))+ _groundCheckRayLengtAddition;
+    //    }
+    //}
 }
