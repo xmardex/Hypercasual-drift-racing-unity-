@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carSplinePointerPrefab: {fileID: 327957079147428300, guid: fd7a8d3229d23644b82551d53d7652b3, type: 3}
   _chaseSpot: {fileID: 6727255069207191869}
-  _straightSteerAngleThreshold: 1
+  _straightSteerAngleThreshold: 3
   _steerDumpingSpeed: 30
   _autoSpeed: 750
   _breakToThisVelocityMagnitudeOnAutoMove: 35
@@ -112,8 +112,8 @@ MonoBehaviour:
   speed: 2200
   turn: 2300
   brake: 2000
-  friction: 4500
-  dragAmount: 4
+  friction: 7500
+  dragAmount: 3
   TurnAngle: 31
   maxRayLength: 2
   grounded: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
       outWeight: 0.060768392
     - serializedVersion: 3
       time: 1
-      value: 0.2646323
+      value: 0.35
       inSlope: 0.004572676
       outSlope: 0.004572676
       tangentMode: 0
@@ -387,6 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69b5f1a127ff184888e3aa3fdb29763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _carPhycicsSO: {fileID: 11400000, guid: 0fa7b4c38a4ad194c9b68e16e0a98dee, type: 2}
 --- !u!1 &505443618032541409
 GameObject:
   m_ObjectHideFlags: 0
@@ -21716,6 +21717,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7234547474914795547}
+  - component: {fileID: 4466249943834702187}
   m_Layer: 8
   m_Name: wheels
   m_TagString: Untagged
@@ -21742,6 +21744,24 @@ Transform:
   - {fileID: 5986377694463495224}
   m_Father: {fileID: 2693624534534884813}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4466249943834702187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548400541434041610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd54c4288803470498751eb3cfabad87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _carWheelsJointsSO: {fileID: 11400000, guid: 0b408221c9938f846b0d20f5ae700bfe, type: 2}
+  _configurableJoint:
+  - {fileID: 4768086505450926449}
+  - {fileID: 3848315297088824675}
+  - {fileID: 8031396777548680243}
+  - {fileID: 5359763439837008203}
 --- !u!1 &7746338460897963166
 GameObject:
   m_ObjectHideFlags: 0

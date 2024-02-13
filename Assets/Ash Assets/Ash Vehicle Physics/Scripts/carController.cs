@@ -241,7 +241,7 @@ public class СarController : MonoBehaviour
         }
     }
 
-    // AI SECTION ---------------
+    #region CAR AI
     public void ChangeTarget(Transform newTarget)
     {
         _carTarget = newTarget;
@@ -258,7 +258,14 @@ public class СarController : MonoBehaviour
     {
         _useDefaultSpeed = use;
     }
-    // --------------
+    public void ChangeMovementParameters(CarMovementParameters parameters)
+    {
+        turn = parameters.turn;
+        speed = parameters.speed;
+        friction = parameters.friction;
+        rb.mass = parameters.mass;
+    }
+    #endregion
 
 
     private float GetSteerPointerValue()

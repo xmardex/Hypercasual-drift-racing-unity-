@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f73b2a93cc0d2443b11b202c9773ca8, type: 3}
+  m_Name: CarWheelsJointSO_police
+  m_EditorClassIdentifier: 
+  _linearLimitSpring_spring: 10000000
+  _linearLimitSpring_damper: 900000
+  _linearLimit_limit: 0.4
+  _linearLimit_contactDistance: 1
+  _yDrive_positionSpring: 13000000
+  _yDrive_positionDamper: 1200000
+  _angularYZLimitSpring_spring: 5000000
+  _angularYZLimitSpring_damper: 90000
+  _angularXLimitSpring_spring: 60000
+  _angularXLimitSpring_damper: 4000
+  _angularZLimit_limit: 30
