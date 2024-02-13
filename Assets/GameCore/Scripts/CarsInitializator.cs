@@ -31,7 +31,7 @@ public class CarsInitializator : MonoBehaviour
 
     public void InitializeCars()
     {
-        ÑarController playerCar = _playerCar.SpawnCar();
+        CarController playerCar = _playerCar.SpawnCar();
         playerCar.Initialize();
 
         foreach(PoliceCarContainer car in _policeCars)

@@ -58,7 +58,7 @@ public class VehicleEditor : MonoBehaviour
 	    
 		if(transform.GetComponent<References>().GroundRayPt == null)
 		{
-			transform.GetComponent<СarController>().maxRayLength = -wheelYPosition + (DeltaRayLength + wheelRadious);
+			transform.GetComponent<CarController>().maxRayLength = -wheelYPosition + (DeltaRayLength + wheelRadious);
 			return;
 		}
 		else
@@ -66,7 +66,7 @@ public class VehicleEditor : MonoBehaviour
 			GroundRayPt = transform.GetComponent<References>().GroundRayPt;
 		}
     	
-		transform.GetComponent<СarController>().maxRayLength = GroundRayPt.localPosition.y-wheelYPosition + (DeltaRayLength + wheelRadious);
+		transform.GetComponent<CarController>().maxRayLength = GroundRayPt.localPosition.y-wheelYPosition + (DeltaRayLength + wheelRadious);
 	    
     }
 }

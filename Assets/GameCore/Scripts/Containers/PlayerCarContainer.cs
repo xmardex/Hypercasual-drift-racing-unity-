@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerCarContainer
 {
     public Transform _spawnPoint;
-    public СarController carPrefab;
+    public CarController carPrefab;
 
-    public СarController SpawnCar()
+    public CarController SpawnCar()
     {
-        return GameObject.Instantiate(carPrefab,_spawnPoint.position,Quaternion.identity).GetComponent<СarController>();
+        return GameObject.Instantiate(carPrefab,_spawnPoint.position,Quaternion.identity).GetComponent<CarController>();
     }
 }

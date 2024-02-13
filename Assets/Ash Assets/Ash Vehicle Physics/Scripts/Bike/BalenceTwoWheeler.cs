@@ -16,13 +16,13 @@ public class BalenceTwoWheeler : MonoBehaviour
 	    
 		Vector3 LeanTorque = new Vector3(0,0,100*LeanTorqueAmount 
 			* Vector3.Dot(transform.right, Bike.transform.up)
-		    *BalanceTorqueCurve.Evaluate(Mathf.Abs(Bike.GetComponent<СarController>().carVelocity.z)));
+		    *BalanceTorqueCurve.Evaluate(Mathf.Abs(Bike.GetComponent<CarController>().carVelocity.z)));
 		
 		if(AlwaysAddTorque)
 		{
 			Bike.AddRelativeTorque(LeanTorque);
 		}
-		else if(Bike.GetComponent<СarController>().grounded)
+		else if(Bike.GetComponent<CarController>().grounded)
 		{
 			Bike.AddRelativeTorque(LeanTorque);
 		}

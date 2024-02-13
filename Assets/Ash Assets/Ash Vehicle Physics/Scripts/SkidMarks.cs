@@ -7,7 +7,7 @@ public class SkidMarks : MonoBehaviour
     public Rigidbody wheel;
     private TrailRenderer skidMark;
     private ParticleSystem smoke;
-    public СarController carController;
+    public CarController carController;
     private void Awake()
     {
         smoke = GetComponent<ParticleSystem>();

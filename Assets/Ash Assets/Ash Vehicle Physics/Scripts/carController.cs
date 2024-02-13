@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Splines;
 
-public class СarController : MonoBehaviour
+public class CarController : MonoBehaviour
 {
     [Header("Spline inputs")]
     [Header("Pointer:")]

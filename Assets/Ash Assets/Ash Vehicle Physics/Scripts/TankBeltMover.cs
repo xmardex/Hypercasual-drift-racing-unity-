@@ -16,7 +16,7 @@ public class TankBeltMover : MonoBehaviour
 	
     void Update()
 	{
-		Vector2 TextureOffset = new Vector2 (0,-BeltSpeed* (vehicle.GetComponent<СarController>().carVelocity.z)/1000 );
+		Vector2 TextureOffset = new Vector2 (0,-BeltSpeed* (vehicle.GetComponent<CarController>().carVelocity.z)/1000 );
     	
 		//beltMat.SetTextureOffset(beltMat.name,TextureOffset);
 		beltMat.mainTextureOffset += TextureOffset;

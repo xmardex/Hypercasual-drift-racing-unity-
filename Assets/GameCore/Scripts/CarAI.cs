@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 
-[RequireComponent(typeof(ÑarController))]
+[RequireComponent(typeof(CarController))]
 public class CarAI : MonoBehaviour
 {
-    [SerializeField] private CarAIPhysicsSO _carPhycicsSO;
-
-    private ÑarController _playerCar;
-    private ÑarController _carController;
+    private CarController _playerCar;
+    private CarController _carController;
     private CarSplinePointer _carSplinePointer;
 
     private float _distanceForDetectPlayer;
@@ -36,9 +34,9 @@ public class CarAI : MonoBehaviour
     private float _currentChaseSpotLerpSpeed;
     private float _newSpeedValue;
 
-    public void Initialize(ÑarController playerCar, CarAIParameters carAIParameters, float levelPlayerDetectionDistance, float levelPlayerPointerOffset)
+    public void Initialize(CarController playerCar, CarAIParameters carAIParameters, float levelPlayerDetectionDistance, float levelPlayerPointerOffset)
     {
-        _carController = GetComponent<ÑarController>();
+        _carController = GetComponent<CarController>();
         _carController.Initialize();
 
         _carSplinePointer = _carController.CarSplinePointer;
@@ -79,8 +77,10 @@ public class CarAI : MonoBehaviour
 
         if (!_sleepUntilPlayerDetected)
         {
+            //looking for player
             if (isPlayerNear && isPlayerReachable)
             {
+                //Player chasing
                 if (!_chaseTarget)
                 {
                     ChasePlayer();
@@ -90,6 +90,7 @@ public class CarAI : MonoBehaviour
             }
             if(!isPlayerNear)
             {
+                //Try follow spline until player detected
                 if (!_findTarget)
                 {
                     FindPlayer();
@@ -125,13 +126,16 @@ public class CarAI : MonoBehaviour
             if (GetDistanceToPlayer() > _maxDistanceToAddSpeedValue)
                 _carController.ChangeSpeedValue(_newSpeedValue);
             else
-                _carController.ChangeSpeedValue(_newSpeedValue/1.5f);
+                _carController.ChangeSpeedValue(_newSpeedValue/1.2f);
+        }
+        else
+        {
+            
         }
     }
 
     private void ChasePlayer() 
     {
-        _carController.ChangeMovementParameters(_carPhycicsSO.CarMovementParametersForChase);
         _carController.UseDefalutSpeed(false);
 
         if (_playerCar.ChaseSpot != null)
@@ -142,19 +146,11 @@ public class CarAI : MonoBehaviour
 
     private void FindPlayer()
     {
-        if (!IsPlayerBehind())
-        {
-            _carController.ChangeMovementParameters(_carPhycicsSO.CarMovementParametersForFind);
-            _carController.UseDefalutSpeed(true);
+        _carController.UseDefalutSpeed(true);
 
-            float playerLastSeenAtSplineDistance = _playerCar.CarSplinePointer.DistancePercentage;
-            _carSplinePointer.ChangePointerOnSplineDistance(playerLastSeenAtSplineDistance - _playerPointerOffset);
-            _carController.ChangeTarget(_splinePointerTarget);
-        }
-        else
-        {
-            _sleepUntilPlayerDetected = true;
-        }
+        float playerLastSeenAtSplineDistance = _playerCar.CarSplinePointer.DistancePercentage;
+        _carSplinePointer.ChangePointerOnSplineDistance(playerLastSeenAtSplineDistance - _playerPointerOffset);
+        _carController.ChangeTarget(_splinePointerTarget);
     }
 
     private bool IsPlayerReachable()
@@ -173,10 +169,6 @@ public class CarAI : MonoBehaviour
         return false;
     }
 
-    private bool IsPlayerBehind()
-    {
-        return _carSplinePointer.DistancePercentage > _playerCar.CarSplinePointer.DistancePercentage;
-    }
     private float GetDistanceToPlayer()
     {
         return Vector3.Distance(_playerCar.transform.position, transform.position);

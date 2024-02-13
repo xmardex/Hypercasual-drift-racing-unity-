@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carSplinePointerPrefab: {fileID: 327957079147428300, guid: fd7a8d3229d23644b82551d53d7652b3, type: 3}
   _chaseSpot: {fileID: 6727255069207191869}
-  _straightSteerAngleThreshold: 3
+  _straightSteerAngleThreshold: 1
   _steerDumpingSpeed: 30
   _autoSpeed: 750
   _breakToThisVelocityMagnitudeOnAutoMove: 35
