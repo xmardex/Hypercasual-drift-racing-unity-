@@ -9,6 +9,9 @@ public class PlayerCarContainer
 
     public CarController SpawnCar()
     {
-        return GameObject.Instantiate(carPrefab,_spawnPoint.position,Quaternion.identity).GetComponent<CarController>();
+        Vector3 spawnPosition = _spawnPoint.position;
+        spawnPosition.y += 2f;
+
+        return GameObject.Instantiate(carPrefab, spawnPosition, Quaternion.identity).GetComponent<CarController>();
     }
 }
