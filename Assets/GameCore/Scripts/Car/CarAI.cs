@@ -134,10 +134,7 @@ public class CarAI : MonoBehaviour
         if (!_sleepUntilPlayerDetected && _chaseTarget)
         {
             _newSpeedValue = _playerCar.GetCurrentSpeedValue() + (GetDistanceToPlayer() < _maxDistanceToAddSpeedValue ? 0 : _carSpeedAddedValue);
-            if (GetDistanceToPlayer() > _maxDistanceToAddSpeedValue)
-                _carController.ChangeSpeedValue(_newSpeedValue);
-            else
-                _carController.ChangeSpeedValue(_newSpeedValue / 1.2f);
+            _carController.ChangeSpeedValue(_newSpeedValue);
         }
     }
 

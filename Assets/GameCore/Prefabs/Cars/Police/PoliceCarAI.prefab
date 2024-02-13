@@ -15,7 +15,9 @@ GameObject:
   - component: {fileID: 7760664925117288057}
   - component: {fileID: 4717396645522636567}
   - component: {fileID: 6395737827811951200}
-  m_Layer: 8
+  - component: {fileID: 2250412256337323404}
+  - component: {fileID: -8408464932768784903}
+  m_Layer: 6
   m_Name: PoliceCarAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +389,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69b5f1a127ff184888e3aa3fdb29763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _carPhycicsSO: {fileID: 11400000, guid: 0fa7b4c38a4ad194c9b68e16e0a98dee, type: 2}
+--- !u!114 &2250412256337323404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328257203560105399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 968c82c0ba8910d40934ad16302c4143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHP: 500
+  _currentHP: 0
+  _minDamage: 0
+  _maxDamage: 60
+  _minDamageFactorValue: 2
+  _maxDamageFactorValue: 100
+  _collisionDetecter: {fileID: 0}
+--- !u!114 &-8408464932768784903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328257203560105399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19575104a627cc746a893c33261cdee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allowedLayers:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &505443618032541409
 GameObject:
   m_ObjectHideFlags: 0

@@ -21042,7 +21042,9 @@ GameObject:
   - component: {fileID: 8778706503470417953}
   - component: {fileID: 2243245576821713232}
   - component: {fileID: 8431509352292262107}
-  m_Layer: 8
+  - component: {fileID: 41674566545146914}
+  - component: {fileID: 6042870897005700895}
+  m_Layer: 6
   m_Name: PlayerCar
   m_TagString: playerCar
   m_Icon: {fileID: 0}
@@ -21382,6 +21384,40 @@ CapsuleCollider:
   m_Height: 6.69
   m_Direction: 2
   m_Center: {x: 0, y: 0.12, z: 0}
+--- !u!114 &41674566545146914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603360156841295877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 968c82c0ba8910d40934ad16302c4143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHP: 1000
+  _currentHP: 0
+  _minDamage: 0
+  _maxDamage: 60
+  _minDamageFactorValue: 2
+  _maxDamageFactorValue: 100
+  _collisionDetecter: {fileID: 0}
+--- !u!114 &6042870897005700895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603360156841295877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19575104a627cc746a893c33261cdee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allowedLayers:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &8191876168924315250
 GameObject:
   m_ObjectHideFlags: 0
@@ -21602,7 +21638,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 055de6cccad442f4582b393344a88e5f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 0.34807685
+  m_Pitch: 0.6264186
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -21794,7 +21830,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 2c3d914dbaa4b7d4a90dedb7e6ea952a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
-  m_Pitch: 0.34807685
+  m_Pitch: 0.6264186
   Loop: 1
   Mute: 1
   Spatialize: 0
@@ -21985,7 +22021,7 @@ Transform:
   m_GameObject: {fileID: 8820372114845569759}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.44, z: 4.69}
+  m_LocalPosition: {x: -0, y: -0.44, z: 3.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
