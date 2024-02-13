@@ -40,6 +40,10 @@ public class CarSplinePointer : MonoBehaviour
 
         transform.position = currentPosition;
     }
+    public void SetMaxDistance(float newDistance)
+    {
+        _maxDistance = newDistance;
+    }
 
     /// <summary>
     /// From 0 to 1 - new distance of pointer on spline

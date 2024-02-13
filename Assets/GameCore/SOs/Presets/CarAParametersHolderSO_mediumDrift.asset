@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5661823adad93654190ddbbd63334867, type: 3}
-  m_Name: CarAIPhysicsSO
+  m_Name: CarAParametersHolderSO_mediumDrift
   m_EditorClassIdentifier: 
   _carMovementParameters_chase:
-    mass: 1000
-    turn: 2600
-    speed: 2200
-    friction: 4500
-    dragAmount: 4.5
+    _mass: 1000
+    _turn: 2500
+    _speed: 1650
+    _friction: 1400
+    _dragAmount: 3.5
+    _distanceToPointer: 11
   _carMovementParameters_find:
-    mass: 1000
-    turn: 2800
-    speed: 2500
-    friction: 8000
-    dragAmount: 7
+    _mass: 1000
+    _turn: 2600
+    _speed: 1900
+    _friction: 1400
+    _dragAmount: 3.5
+    _distanceToPointer: 11

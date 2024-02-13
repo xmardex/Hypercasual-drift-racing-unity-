@@ -5105,8 +5105,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210027470}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21124326, y: 0.58918256, z: -0.16319926, w: 0.7626312}
-  m_LocalPosition: {x: 126.12409, y: 47.972492, z: -478.85153}
+  m_LocalRotation: {x: 0.2112433, y: 0.58918244, z: -0.16319929, w: 0.7626312}
+  m_LocalPosition: {x: 676.5125, y: 35.272453, z: -978.8984}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34554,91 +34554,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 825612343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1563851613
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 470855318544123700, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -35.650005
-      objectReference: {fileID: 0}
-    - target: {fileID: 470855318544123700, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 30.403769
-      objectReference: {fileID: 0}
-    - target: {fileID: 470855318544123700, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 35.99681
-      objectReference: {fileID: 0}
-    - target: {fileID: 470855318544123700, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.36662662
-      objectReference: {fileID: 0}
-    - target: {fileID: 470855318544123700, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.10153221
-      objectReference: {fileID: 0}
-    - target: {fileID: 470855318544123700, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.89123964
-      objectReference: {fileID: 0}
-    - target: {fileID: 470855318544123700, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.2469171
-      objectReference: {fileID: 0}
-    - target: {fileID: 7603360156841295877, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_Name
-      value: PlayerCar
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220374099774932318, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 174.41158
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220374099774932318, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 15.00004
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220374099774932318, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -469.3532
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220374099774932318, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.86644834
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220374099774932318, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.000045347617
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220374099774932318, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.4992667
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220374099774932318, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.0000261303
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220374099774932318, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0.006
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220374099774932318, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -59.903
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220374099774932318, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
 --- !u!1001 &1564752499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37837,6 +37752,89 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2057757400}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1676406868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1676406871}
+  - component: {fileID: 1676406870}
+  - component: {fileID: 1676406869}
+  m_Layer: 0
+  m_Name: PoliceSpawnPoint_1_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1676406869
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676406868}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 59d39455c94966842861479d6a7599e6, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1676406870
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676406868}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1676406871
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676406868}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.007252177, z: -0, w: 0.9999738}
+  m_LocalPosition: {x: 182.7, y: 15.00004, z: -470.48}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -0.831, z: 0}
 --- !u!1001 &1676924453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46408,39 +46406,22 @@ MonoBehaviour:
   levelPlayerPointerOffset: 0.00175
   levelPlayerDetectionDistance: 32
   _policeCars:
-  - spawnPoint: {fileID: 501570785}
+  - carAIParametersHolder: {fileID: 11400000, guid: 29f8ce3fa9bd4ef468f68b8951db071c, type: 2}
+    spawnPoint: {fileID: 501570785}
     carPrefab: {fileID: 6395737827811951200, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
-    carAIParameters:
-      sleepUntilPlayerDetect: 1
-      minChaseSpotLerpSpeed: 0.1
-      maxChaseSpotLerpSpeed: 0.6
-      minChaseSpotOffset: -3
-      maxChaseSpotOffset: 3
-      lerpSpeedForChaseSpotSpeedLerp: 0.2
-      carSpeedAddedValue: 0
-      maxDistanceToAddSpeedValue: 2
-  - spawnPoint: {fileID: 829265340}
+    carAIParametersSO: {fileID: 11400000, guid: fe28aa3be81471a48897c09b806ad66c, type: 2}
+  - carAIParametersHolder: {fileID: 11400000, guid: 0fa7b4c38a4ad194c9b68e16e0a98dee, type: 2}
+    spawnPoint: {fileID: 1676406871}
     carPrefab: {fileID: 6395737827811951200, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
-    carAIParameters:
-      sleepUntilPlayerDetect: 1
-      minChaseSpotLerpSpeed: 0.1
-      maxChaseSpotLerpSpeed: 0.6
-      minChaseSpotOffset: -3
-      maxChaseSpotOffset: 3
-      lerpSpeedForChaseSpotSpeedLerp: 0.2
-      carSpeedAddedValue: 0
-      maxDistanceToAddSpeedValue: 2
-  - spawnPoint: {fileID: 1688997578}
+    carAIParametersSO: {fileID: 11400000, guid: fe28aa3be81471a48897c09b806ad66c, type: 2}
+  - carAIParametersHolder: {fileID: 11400000, guid: 0fa7b4c38a4ad194c9b68e16e0a98dee, type: 2}
+    spawnPoint: {fileID: 829265340}
     carPrefab: {fileID: 6395737827811951200, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
-    carAIParameters:
-      sleepUntilPlayerDetect: 1
-      minChaseSpotLerpSpeed: 0.1
-      maxChaseSpotLerpSpeed: 0.6
-      minChaseSpotOffset: -3
-      maxChaseSpotOffset: 3
-      lerpSpeedForChaseSpotSpeedLerp: 0.2
-      carSpeedAddedValue: 0
-      maxDistanceToAddSpeedValue: 2
+    carAIParametersSO: {fileID: 11400000, guid: fe28aa3be81471a48897c09b806ad66c, type: 2}
+  - carAIParametersHolder: {fileID: 11400000, guid: 29f8ce3fa9bd4ef468f68b8951db071c, type: 2}
+    spawnPoint: {fileID: 1688997578}
+    carPrefab: {fileID: 6395737827811951200, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
+    carAIParametersSO: {fileID: 11400000, guid: fe28aa3be81471a48897c09b806ad66c, type: 2}
 --- !u!4 &1946620397
 Transform:
   m_ObjectHideFlags: 0
@@ -51067,6 +51048,6 @@ SceneRoots:
   - {fileID: 1946620397}
   - {fileID: 1765831733}
   - {fileID: 501570785}
+  - {fileID: 1676406871}
   - {fileID: 829265340}
   - {fileID: 1688997578}
-  - {fileID: 1563851613}

@@ -258,12 +258,14 @@ public class CarController : MonoBehaviour
     {
         _useDefaultSpeed = use;
     }
-    public void ChangeMovementParameters(CarMovementParameters parameters)
+    public void ChangeMovementParameters(CarMovementParameters carMovementParameters)
     {
-        turn = parameters.turn;
-        speed = parameters.speed;
-        friction = parameters.friction;
-        rb.mass = parameters.mass;
+        turn = carMovementParameters.Turn;
+        speed = carMovementParameters.Speed;
+        friction = carMovementParameters.Friction;
+        rb.mass = carMovementParameters.Mass;
+        dragAmount = carMovementParameters.DragAmount;
+        _carSplinePointer.SetMaxDistance(carMovementParameters.DistanceToPointer);
     }
     #endregion
 

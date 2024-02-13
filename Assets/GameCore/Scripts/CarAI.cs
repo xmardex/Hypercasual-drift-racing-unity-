@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(CarController))]
@@ -9,6 +10,8 @@ public class CarAI : MonoBehaviour
     private CarController _playerCar;
     private CarController _carController;
     private CarSplinePointer _carSplinePointer;
+
+    private CarAIParametersHolderSO _carAIParametersHolderSO;
 
     private float _distanceForDetectPlayer;
     private float _playerPointerOffset;
@@ -34,8 +37,10 @@ public class CarAI : MonoBehaviour
     private float _currentChaseSpotLerpSpeed;
     private float _newSpeedValue;
 
-    public void Initialize(CarController playerCar, CarAIParameters carAIParameters, float levelPlayerDetectionDistance, float levelPlayerPointerOffset)
+    public void Initialize(CarController playerCar, CarAIParametersSO carAIParametersSO, float levelPlayerDetectionDistance, float levelPlayerPointerOffset, CarAIParametersHolderSO carAIParametersHolderSO)
     {
+        _carAIParametersHolderSO = carAIParametersHolderSO;
+
         _carController = GetComponent<CarController>();
         _carController.Initialize();
 
@@ -44,16 +49,16 @@ public class CarAI : MonoBehaviour
         _splinePointerTarget = _carSplinePointer.transform;
         _thisAIchaseSpot = _carController.ChaseSpot;
 
-        _minPlayerChaseSpotOffset = carAIParameters.minChaseSpotOffset;
-        _maxPlayerChaseSpotOffset = carAIParameters.maxChaseSpotOffset;
+        _minPlayerChaseSpotOffset = carAIParametersSO.MinChaseSpotOffset;
+        _maxPlayerChaseSpotOffset = carAIParametersSO.MaxChaseSpotOffset;
         _distanceForDetectPlayer = levelPlayerDetectionDistance;
         _playerPointerOffset = levelPlayerPointerOffset;
-        _sleepUntilPlayerDetected = carAIParameters.sleepUntilPlayerDetect;
-        _minChaseSpotLerpSpeed = carAIParameters.minChaseSpotLerpSpeed;
-        _maxChaseSpotLerpSpeed = carAIParameters.maxChaseSpotLerpSpeed;
-        _lerpSpeedForChaseSpotSpeedLerp = carAIParameters.lerpSpeedForChaseSpotSpeedLerp;
-        _carSpeedAddedValue = carAIParameters.carSpeedAddedValue;
-        _maxDistanceToAddSpeedValue = carAIParameters.maxDistanceToAddSpeedValue;
+        _sleepUntilPlayerDetected = carAIParametersSO.SleepUntilPlayerDetect;
+        _minChaseSpotLerpSpeed = carAIParametersSO.MinChaseSpotLerpSpeed;
+        _maxChaseSpotLerpSpeed = carAIParametersSO.MaxChaseSpotLerpSpeed;
+        _lerpSpeedForChaseSpotSpeedLerp = carAIParametersSO.LerpSpeedForChaseSpotSpeedLerp;
+        _carSpeedAddedValue = carAIParametersSO.CarSpeedAddedValue;
+        _maxDistanceToAddSpeedValue = carAIParametersSO.MaxDistanceToAddSpeedValue;
 
         _playerCar = playerCar;
 
@@ -71,6 +76,9 @@ public class CarAI : MonoBehaviour
 
     private void Update()
     {
+        if (IsPlayerBehind())
+            return;
+
         bool isPlayerReachable = IsPlayerReachable();
         float distanceToPlayer = GetDistanceToPlayer();
         bool isPlayerNear = distanceToPlayer < _distanceForDetectPlayer;
@@ -120,22 +128,22 @@ public class CarAI : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (IsPlayerBehind())
+            return;
+
         if (!_sleepUntilPlayerDetected && _chaseTarget)
         {
-            _newSpeedValue = _playerCar.GetCurrentSpeedValue()  + (GetDistanceToPlayer() < _maxDistanceToAddSpeedValue ? 0 : _carSpeedAddedValue);
+            _newSpeedValue = _playerCar.GetCurrentSpeedValue() + (GetDistanceToPlayer() < _maxDistanceToAddSpeedValue ? 0 : _carSpeedAddedValue);
             if (GetDistanceToPlayer() > _maxDistanceToAddSpeedValue)
                 _carController.ChangeSpeedValue(_newSpeedValue);
             else
-                _carController.ChangeSpeedValue(_newSpeedValue/1.2f);
-        }
-        else
-        {
-            
+                _carController.ChangeSpeedValue(_newSpeedValue / 1.2f);
         }
     }
 
     private void ChasePlayer() 
     {
+        _carController.ChangeMovementParameters(_carAIParametersHolderSO.CarMovementParametersForChase);
         _carController.UseDefalutSpeed(false);
 
         if (_playerCar.ChaseSpot != null)
@@ -146,6 +154,7 @@ public class CarAI : MonoBehaviour
 
     private void FindPlayer()
     {
+        _carController.ChangeMovementParameters(_carAIParametersHolderSO.CarMovementParametersForFind);
         _carController.UseDefalutSpeed(true);
 
         float playerLastSeenAtSplineDistance = _playerCar.CarSplinePointer.DistancePercentage;
@@ -167,6 +176,11 @@ public class CarAI : MonoBehaviour
             return false;
         }
         return false;
+    }
+
+    private bool IsPlayerBehind()
+    {
+        return _carController.CarSplinePointer.DistancePercentage > _playerCar.CarSplinePointer.DistancePercentage;
     }
 
     private float GetDistanceToPlayer()

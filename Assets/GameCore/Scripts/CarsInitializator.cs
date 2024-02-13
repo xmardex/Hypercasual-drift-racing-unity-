@@ -37,7 +37,7 @@ public class CarsInitializator : MonoBehaviour
         foreach(PoliceCarContainer car in _policeCars)
         {
             CarAI policeCar = car.SpawnCar();
-            policeCar.Initialize(playerCar, car.carAIParameters, levelPlayerDetectionDistance, levelPlayerPointerOffset);
+            policeCar.Initialize(playerCar, car.carAIParametersSO, levelPlayerDetectionDistance, levelPlayerPointerOffset, car.carAIParametersHolder);
         }
     }
 }
