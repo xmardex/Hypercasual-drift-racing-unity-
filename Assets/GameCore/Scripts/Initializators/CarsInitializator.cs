@@ -9,6 +9,11 @@ public class CarsInitializator : MonoBehaviour
 {
     public static CarsInitializator Instance;
 
+    [SerializeField] private bool _useCarsHP;
+
+    [SerializeField] private bool _spawnPlayer;
+    [SerializeField] private CarController _prespawnedPlayer;
+
     [SerializeField] private PlayerCarContainer _playerCar;
     [Space(20) , Header("AI Cars:")]
     [Range(0f, 1f)]
@@ -33,13 +38,16 @@ public class CarsInitializator : MonoBehaviour
 
     public void InitializeCars()
     {
-        CarController playerCar = _playerCar.SpawnCar();
+        CarController playerCar = _spawnPlayer ? _playerCar.SpawnCar() : _prespawnedPlayer;
         playerCar.Initialize();
+        playerCar.GetComponent<CarReferences>().CarHealth.EnableHealthSystem(_useCarsHP);
 
         foreach(PoliceCarContainer car in _policeCars)
         {
             CarAI policeCar = car.SpawnCar();
-            policeCar.Initialize(playerCar, car.carAIParametersSO, levelPlayerDetectionDistance, levelPlayerPointerOffset, car.carAIParametersHolder);
+            policeCar.Initialize(playerCar, car.carAIParametersSO, levelPlayerDetectionDistance, levelPlayerPointerOffset, car.carAIMovementParametersHolder);
+            policeCar.GetComponent<CarReferences>().CarHealth.EnableHealthSystem(_useCarsHP);
         }
     }
+
 }

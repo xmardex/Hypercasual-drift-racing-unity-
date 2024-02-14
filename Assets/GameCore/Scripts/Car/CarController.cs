@@ -74,8 +74,24 @@ public class CarController : MonoBehaviour
 
     private int _gasValue;
 
+    private CarHealth _carHealth;
+
     public CarSplinePointer CarSplinePointer => _carSplinePointer;
     public Transform ChaseSpot => _chaseSpot;
+
+    private bool _isDead;
+
+    private void Awake()
+    {
+        if(TryGetComponent(out CarHealth carHealth))
+        {
+            _carHealth = carHealth;
+        }
+        else
+        {
+            Debug.LogError("Car should have carHealth");
+        }
+    }
 
     public void Initialize()
     {
@@ -84,15 +100,18 @@ public class CarController : MonoBehaviour
         _carSplinePointer.Initialize(transform,_roadSplineContainer);
         _carTarget = _carSplinePointer.transform;
 
+        _carHealth.OnDead += SetCanMove;
+
         rb = GetComponent<Rigidbody>();
         grounded = false;
         engineSounds[1].mute = true;
         rb.centerOfMass = CentreOfMass.localPosition;
+        _isDead = false;
     }
 
     void FixedUpdate()
     {
-        if (_carTarget != null)
+        if (_carTarget != null && !_isDead)
         {
             carVelocity = transform.InverseTransformDirection(rb.velocity); //local velocity of car
             curveVelocity = Mathf.Abs(carVelocity.magnitude) / 100;
@@ -141,7 +160,7 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        if (_carTarget != null) 
+        if (_carTarget != null && !_isDead) 
         {
             _gasValue = _isAI || !_isAI && Input.GetKey(KeyCode.W) ? 1 : 0;
             _carSplinePointer.UpdatePointerPosition(carVelocity.magnitude);
@@ -241,6 +260,11 @@ public class CarController : MonoBehaviour
         }
     }
 
+    public void SetCanMove(bool canMove)
+    {
+        _isDead = canMove;
+    }
+
     #region CAR AI
     public void ChangeTarget(Transform newTarget)
     {
@@ -296,6 +320,11 @@ public class CarController : MonoBehaviour
             Debug.LogError("car target not set");
             return 0f;
         }
+    }
+
+    private void OnDestroy()
+    {
+        _carHealth.OnDead -= SetCanMove;
     }
 
     //private void OnDrawGizmos()

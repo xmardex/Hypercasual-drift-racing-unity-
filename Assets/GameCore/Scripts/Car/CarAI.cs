@@ -11,8 +11,8 @@ public class CarAI : MonoBehaviour
     private CarController _carController;
     private CarSplinePointer _carSplinePointer;
 
-    private CarAIParametersHolderSO _carAIParametersHolderSO;
-
+    private CarAIMovementParametersHolderSO _carAIParametersHolderSO;
+#region AiParameters
     private float _distanceForDetectPlayer;
     private float _playerPointerOffset;
 
@@ -27,7 +27,7 @@ public class CarAI : MonoBehaviour
     private float _maxDistanceToAddSpeedValue;
 
     private bool _sleepUntilPlayerDetected;
-
+#endregion
     private bool _chaseTarget;
     private bool _findTarget;
 
@@ -37,7 +37,7 @@ public class CarAI : MonoBehaviour
     private float _currentChaseSpotLerpSpeed;
     private float _newSpeedValue;
 
-    public void Initialize(CarController playerCar, CarAIParametersSO carAIParametersSO, float levelPlayerDetectionDistance, float levelPlayerPointerOffset, CarAIParametersHolderSO carAIParametersHolderSO)
+    public void Initialize(CarController playerCar, CarAIParametersSO carAIParametersSO, float levelPlayerDetectionDistance, float levelPlayerPointerOffset, CarAIMovementParametersHolderSO carAIParametersHolderSO)
     {
         _carAIParametersHolderSO = carAIParametersHolderSO;
 
@@ -49,16 +49,10 @@ public class CarAI : MonoBehaviour
         _splinePointerTarget = _carSplinePointer.transform;
         _thisAIchaseSpot = _carController.ChaseSpot;
 
-        _minPlayerChaseSpotOffset = carAIParametersSO.MinChaseSpotOffset;
-        _maxPlayerChaseSpotOffset = carAIParametersSO.MaxChaseSpotOffset;
         _distanceForDetectPlayer = levelPlayerDetectionDistance;
         _playerPointerOffset = levelPlayerPointerOffset;
-        _sleepUntilPlayerDetected = carAIParametersSO.SleepUntilPlayerDetect;
-        _minChaseSpotLerpSpeed = carAIParametersSO.MinChaseSpotLerpSpeed;
-        _maxChaseSpotLerpSpeed = carAIParametersSO.MaxChaseSpotLerpSpeed;
-        _lerpSpeedForChaseSpotSpeedLerp = carAIParametersSO.LerpSpeedForChaseSpotSpeedLerp;
-        _carSpeedAddedValue = carAIParametersSO.CarSpeedAddedValue;
-        _maxDistanceToAddSpeedValue = carAIParametersSO.MaxDistanceToAddSpeedValue;
+
+        SetupAIParameters(carAIParametersSO);
 
         _playerCar = playerCar;
 
@@ -72,6 +66,19 @@ public class CarAI : MonoBehaviour
         {
             _carController.ChangeTarget(_splinePointerTarget);
         }
+    }
+
+    private void SetupAIParameters(CarAIParametersSO carAIParametersSO)
+    {
+        _minPlayerChaseSpotOffset = carAIParametersSO.MinChaseSpotOffset;
+        _maxPlayerChaseSpotOffset = carAIParametersSO.MaxChaseSpotOffset;
+
+        _sleepUntilPlayerDetected = carAIParametersSO.SleepUntilPlayerDetect;
+        _minChaseSpotLerpSpeed = carAIParametersSO.MinChaseSpotLerpSpeed;
+        _maxChaseSpotLerpSpeed = carAIParametersSO.MaxChaseSpotLerpSpeed;
+        _lerpSpeedForChaseSpotSpeedLerp = carAIParametersSO.LerpSpeedForChaseSpotSpeedLerp;
+        _carSpeedAddedValue = carAIParametersSO.CarSpeedAddedValue;
+        _maxDistanceToAddSpeedValue = carAIParametersSO.MaxDistanceToAddSpeedValue;
     }
 
     private void Update()
