@@ -17,7 +17,7 @@ public abstract class DamagableEntity : MonoBehaviour, IDamageDealer, IHealth
     protected float _maxDamageFactorValue; //if maxDamageFactorValue is reached or more - deal maxDamage;
 
     public Action<float> OnHPChanged;
-    public Action<bool> OnDead;
+    public Action OnDead;
     public Action<IDamageDealer, float> OnDamageRecive;
 
 
@@ -97,7 +97,7 @@ public abstract class DamagableEntity : MonoBehaviour, IDamageDealer, IHealth
 
         OnHPChanged?.Invoke(_currentHP);
         if (_currentHP == 0)
-            OnDead?.Invoke(true);
+            OnDead?.Invoke();
     }
 
 

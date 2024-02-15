@@ -10,6 +10,9 @@ TagManager:
   - roadSpline
   - playerCar
   - overlayCamera
+  - playerSplinePointer
+  - starRoad
+  - finishRoad
   layers:
   - Default
   - TransparentFX

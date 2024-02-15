@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2314871478315093814}
   m_Layer: 0
   m_Name: PlayerCarSplinePointer
-  m_TagString: Untagged
+  m_TagString: playerSplinePointer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

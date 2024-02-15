@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class LevelLoseState : LevelState
+{
+    public override void EnterState()
+    {
+        _cameraManager.EnableOverlays(false);
+        _carsInitializator.EnableMovementOnCars(false);
+    }
+
+    public override void ExitState()
+    {
+        
+    }
+
+    public override void StateUpdate()
+    {
+        
+    }
+}

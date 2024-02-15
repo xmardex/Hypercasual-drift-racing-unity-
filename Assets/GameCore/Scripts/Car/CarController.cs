@@ -79,7 +79,7 @@ public class CarController : MonoBehaviour
     public CarSplinePointer CarSplinePointer => _carSplinePointer;
     public Transform ChaseSpot => _chaseSpot;
 
-    private bool _isDead;
+    private bool _canMove;
 
     private void Awake()
     {
@@ -100,18 +100,18 @@ public class CarController : MonoBehaviour
         _carSplinePointer.Initialize(transform,_roadSplineContainer);
         _carTarget = _carSplinePointer.transform;
 
-        _carHealth.OnDead += SetCanMove;
+        _carHealth.OnDead += Dead;
 
         rb = GetComponent<Rigidbody>();
         grounded = false;
         engineSounds[1].mute = true;
         rb.centerOfMass = CentreOfMass.localPosition;
-        _isDead = false;
+        _canMove = false;
     }
 
     void FixedUpdate()
     {
-        if (_carTarget != null && !_isDead)
+        if (_carTarget != null && _canMove)
         {
             carVelocity = transform.InverseTransformDirection(rb.velocity); //local velocity of car
             curveVelocity = Mathf.Abs(carVelocity.magnitude) / 100;
@@ -160,7 +160,7 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        if (_carTarget != null && !_isDead) 
+        if (_carTarget != null && _canMove) 
         {
             _gasValue = _isAI || !_isAI && Input.GetKey(KeyCode.W) ? 1 : 0;
             _carSplinePointer.UpdatePointerPosition(carVelocity.magnitude);
@@ -262,7 +262,12 @@ public class CarController : MonoBehaviour
 
     public void SetCanMove(bool canMove)
     {
-        _isDead = canMove;
+        _canMove = canMove;
+    }
+
+    private void Dead()
+    {
+        SetCanMove(false);
     }
 
     #region CAR AI
@@ -324,7 +329,7 @@ public class CarController : MonoBehaviour
 
     private void OnDestroy()
     {
-        _carHealth.OnDead -= SetCanMove;
+        _carHealth.OnDead -= Dead;
     }
 
     //private void OnDrawGizmos()
