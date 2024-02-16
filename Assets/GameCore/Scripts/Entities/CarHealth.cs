@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(CollisionDetecter))]
+[RequireComponent(typeof(CollisionDetector))]
 public class CarHealth : DamagableEntity
 {
     [SerializeField] private HealthBar _healthBar;
 
-    private CollisionDetecter _collisionDetecter;
+    private CollisionDetector _collisionDetecter;
 
     private void Awake()
     {
-        _collisionDetecter = GetComponent<CollisionDetecter>();
+        _collisionDetecter = GetComponent<CollisionDetector>();
     }
 
     private new void Initialize()
@@ -22,6 +22,10 @@ public class CarHealth : DamagableEntity
             _healthBar.SetHpMinMaxValue(0, MaxHP);
             OnHPChanged += UpdateHealthBar;
             SetCurrentToMaxHP();
+        }
+        else
+        {
+            Debug.LogWarning("Entity doesn't have healthBar", this);
         }
     }
 
@@ -33,7 +37,7 @@ public class CarHealth : DamagableEntity
 
     private void UpdateHealthBar(float newHP)
     {
-        _healthBar.ChangeValueTo(newHP);
+        _healthBar?.ChangeValueTo(newHP);
     }
 
     private void ProcessCarHit(Collider hit, float hitFactor)
@@ -56,7 +60,7 @@ public class CarHealth : DamagableEntity
     private void OnDestroy()
     {
         _collisionDetecter.OnCollideWithSomething -= ProcessCarHit;
-        OnHPChanged += UpdateHealthBar;
+        OnHPChanged -= UpdateHealthBar;
     }
 
     public void EnableHealthSystem(bool enable)

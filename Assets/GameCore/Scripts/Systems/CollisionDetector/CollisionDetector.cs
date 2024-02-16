@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class CollisionDetecter : MonoBehaviour
+public class CollisionDetector : MonoBehaviour
 {
     [SerializeField] private LayerMask _allowedLayers;
     public Action<Collider, float> OnCollideWithSomething;
