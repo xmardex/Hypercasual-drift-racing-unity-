@@ -3,7 +3,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private bool _useHP;
-
+    [SerializeField] private SplineColoringManager _splineColoringManager;
     [SerializeField] private LevelStateManager _stateManager;
     [SerializeField] private UILevelManager _uiLevelManager;
     [SerializeField] private CameraManager _cameraManager;
@@ -15,6 +15,11 @@ public class LevelManager : MonoBehaviour
 
     private bool _loseGame = false;
     private bool _winGame = false;
+
+    private void Awake()
+    {
+        _splineColoringManager.Initialize();
+    }
 
     private void Start()
     {

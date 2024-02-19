@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 using System;
+using System.Collections.Generic;
 
 public class CameraManager : MonoBehaviour
 {
@@ -11,6 +12,18 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private int disabledCameraPriority = 10;
     [SerializeField] private CameraLevelPosition[] _cameraLevelPositions;
 
+    [SerializeField] private float _cameraHeightLerpSpeed = 4;
+
+    [SerializeField] private float _minCameraHeight = 0.3f;
+    [SerializeField] private float _maxCameraHeight = 2f;
+
+    [SerializeField] private float _minCarVelocityToChangeCameraHeight = 0;
+    [SerializeField] private float _maxCarVelocityToChangeCameraHeight = 50;
+
+    [SerializeField] private Transform _allCamerasParent;
+    private List<CinemachineCameraOffset> _camerasOffsets;
+
+    private CarController _playerCarController;
     private CarSplinePointer _playerCarSplinePointer;
 
     private int _currentPositionIndex;
@@ -22,13 +35,27 @@ public class CameraManager : MonoBehaviour
         _currentPositionIndex = 0;
         _currentCameraPosition = _cameraLevelPositions[_currentPositionIndex];
         _nextCameraPosition = _cameraLevelPositions[_currentPositionIndex + 1];
+        _playerCarController = GameObject.FindGameObjectWithTag(Constants.PLYAER_CAR_TAG).GetComponent<CarController>();
+        _playerCarSplinePointer = _playerCarController.CarSplinePointer;
+        InitAllCamerasOffsets();
+    }
 
-        _playerCarSplinePointer = GameObject.FindGameObjectWithTag(Constants.PLAYER_SPLINE_POINTER).GetComponent<CarSplinePointer>();
+    private void InitAllCamerasOffsets()
+    {
+        _camerasOffsets ??= new List<CinemachineCameraOffset>();
+        foreach(Transform t in _allCamerasParent) 
+        {
+            if(t.TryGetComponent(out CinemachineCameraOffset cco))
+            {
+                _camerasOffsets.Add(cco);
+            }
+        }
     }
 
     public void LateUpdate()
     {
-        if(_playerCarSplinePointer.DistancePercentage > _nextCameraPosition._pointerDistanceToActivate)
+        UpdateCameraHeight();
+        if (_playerCarSplinePointer.DistancePercentage > _nextCameraPosition._pointerDistanceToActivate)
         {
             SwitchCameraToNext();
         }
@@ -48,6 +75,38 @@ public class CameraManager : MonoBehaviour
     public void EnableOverlays(bool enable)
     {
         _overLayCamera.enabled = enable;
+    }
+
+    private void UpdateCameraHeight()
+    {
+        float actualHeight = CalculateCameraHeight(_playerCarController.CarVelocityMagnitude);
+        foreach(CinemachineCameraOffset cinemachineCameraOffset in _camerasOffsets)
+        {
+            cinemachineCameraOffset.m_Offset.z = Mathf.Lerp(cinemachineCameraOffset.m_Offset.z, -actualHeight, Time.deltaTime * _cameraHeightLerpSpeed);
+        }
+    }
+
+    public float CalculateCameraHeight(float carVelocity)
+    {
+        float actualHeight = 0f;
+
+        if (carVelocity < _minCarVelocityToChangeCameraHeight)
+        {
+            actualHeight = _minCameraHeight;
+        }
+        else if (carVelocity >= _minCarVelocityToChangeCameraHeight && carVelocity <= _maxCarVelocityToChangeCameraHeight)
+        {
+            float factorRange = _maxCarVelocityToChangeCameraHeight - _minCarVelocityToChangeCameraHeight;
+            float heightRange = _maxCameraHeight;
+
+            float factorRelativeToRange = (carVelocity - _minCarVelocityToChangeCameraHeight) / factorRange;
+            actualHeight = factorRelativeToRange * heightRange;
+        }
+        else
+        {
+            actualHeight = _maxCameraHeight;
+        }
+        return actualHeight;
     }
 }
 

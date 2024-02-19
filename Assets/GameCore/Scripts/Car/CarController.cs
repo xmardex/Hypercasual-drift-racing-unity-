@@ -5,6 +5,7 @@ public class CarController : MonoBehaviour
 {
     [Header("Spline inputs")]
     [Header("Pointer:")]
+    [SerializeField] private bool _showInGUIPointerProgress;
     [SerializeField] private CarSplinePointer _carSplinePointerPrefab;
     [SerializeField] private Transform _chaseSpot;
     private SplineContainer _roadSplineContainer;
@@ -61,6 +62,7 @@ public class CarController : MonoBehaviour
     private float speedValue, autoSpeedValue, fricValue, turnValue, curveVelocity, brakeValue;
     [HideInInspector]
     public Vector3 carVelocity;
+    
     [HideInInspector]
     public RaycastHit hit;
 
@@ -78,6 +80,8 @@ public class CarController : MonoBehaviour
 
     public CarSplinePointer CarSplinePointer => _carSplinePointer;
     public Transform ChaseSpot => _chaseSpot;
+
+    public float CarVelocityMagnitude => carVelocity.magnitude;
 
     private bool _canMove;
 
@@ -97,6 +101,7 @@ public class CarController : MonoBehaviour
     {
         _roadSplineContainer = GameObject.FindGameObjectWithTag(Constants.ROAD_SPLINE_CONTAINER_TAG).GetComponent<SplineContainer>();
         _carSplinePointer = Instantiate(_carSplinePointerPrefab).GetComponent<CarSplinePointer>();
+        _carSplinePointer.ShowInGUIProgress(_showInGUIPointerProgress);
         _carSplinePointer.Initialize(transform,_roadSplineContainer);
         _carTarget = _carSplinePointer.transform;
 

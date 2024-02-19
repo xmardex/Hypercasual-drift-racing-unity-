@@ -16,6 +16,8 @@ public class CarSplinePointer : MonoBehaviour
     private float _distancePercentage = 0f;
     public float DistancePercentage => _distancePercentage;
 
+    private bool _showInGUI;
+
     public void Initialize(Transform carTransform, SplineContainer roadSpline)
     {
         _splineContainer = roadSpline;
@@ -45,6 +47,11 @@ public class CarSplinePointer : MonoBehaviour
         _maxDistance = newDistance;
     }
 
+    public void ShowInGUIProgress(bool showInGUI)
+    {
+        _showInGUI = showInGUI;
+    }
+
     /// <summary>
     /// From 0 to 1 - new distance of pointer on spline
     /// </summary>
@@ -53,4 +60,22 @@ public class CarSplinePointer : MonoBehaviour
     {
         _distancePercentage = newDistance;
     }
+    
+    private void OnGUI()
+    {
+        if (_showInGUI)
+        {
+            GUIStyle style = new GUIStyle();
+            style.fontSize = 21;
+            style.normal.textColor = Color.white;
+
+            // Позиция в верхнем левом углу
+            Vector2 position = new Vector2(10, 10);
+
+            // Отобразить значение _distancePercentage
+            GUI.Label(new Rect(position.x, position.y, 200, 50), "Distance Percentage: " + _distancePercentage.ToString(), style);
+        }
+    }
+
 }
+

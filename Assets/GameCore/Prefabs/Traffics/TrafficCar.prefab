@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 5884197712137277760}
   - component: {fileID: 7024372636799500772}
   - component: {fileID: 5746690882136406620}
+  - component: {fileID: 8629309389347370157}
   m_Layer: 7
   m_Name: TrafficCar
   m_TagString: Untagged
@@ -320,6 +321,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthSO: {fileID: 11400000, guid: 0da72ca783187714da7dd95532e2cadd, type: 2}
   _healthBar: {fileID: 0}
+--- !u!114 &8629309389347370157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6631318006607093610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf423a1010df3b42afa2ab6a4284646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity: -30
 --- !u!1 &7391017236867876291
 GameObject:
   m_ObjectHideFlags: 0
