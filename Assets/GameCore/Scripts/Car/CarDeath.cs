@@ -19,6 +19,11 @@ public class CarDeath : MonoBehaviour
 
     [SerializeField] private CarReferences _carReferences;
 
+    private void Start()
+    {
+        _carReferences.CarHealth.OnDead += ExplodeCar;
+    }
+
     public void ExplodeCar()
     {
         //play fx should be "play on awake"=true and loop=false
@@ -78,6 +83,11 @@ public class CarDeath : MonoBehaviour
                 //kill everithing that have health
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        _carReferences.CarHealth.OnDead -= ExplodeCar;
     }
 
     private void OnDrawGizmosSelected()
