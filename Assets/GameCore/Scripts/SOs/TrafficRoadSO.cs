@@ -6,6 +6,6 @@ public class TrafficRoadSO : ScriptableObject
     [SerializeField] private float _carsSpeed;
     [SerializeField] private float _carsRotateSpeed;
 
-    public float ÑarsSpeed => _carsSpeed;
-    public float ÑarsRotateSpeed => _carsRotateSpeed;
+    public float CarsSpeed => _carsSpeed;
+    public float CarsRotateSpeed => _carsRotateSpeed;
 }

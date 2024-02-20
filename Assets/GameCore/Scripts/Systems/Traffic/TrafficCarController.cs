@@ -34,8 +34,8 @@ public class TrafficCarController : MonoBehaviour
         _trafficRoadContainer = trafficRoadContainer;
 
         _road = trafficRoadContainer.roadSpline;
-        _carSpeed = trafficRoadContainer.trafficRoadSO.ÑarsSpeed;
-        _carRotateSpeed = trafficRoadContainer.trafficRoadSO.ÑarsRotateSpeed;
+        _carSpeed = trafficRoadContainer.trafficRoadSO.CarsSpeed;
+        _carRotateSpeed = trafficRoadContainer.trafficRoadSO.CarsRotateSpeed;
         _lookAheadDistance = trafficRoadContainer.lookAheadDistance;
 
         _splineLength = _road.CalculateLength();
