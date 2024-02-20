@@ -35,6 +35,7 @@ public class CarController : MonoBehaviour
     public Transform CentreOfMass;
 
     private Rigidbody rb;
+    public Rigidbody RB => rb;
 
     [Header("Car Stats")]
     public float speed = 200f;

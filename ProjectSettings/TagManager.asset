@@ -13,6 +13,7 @@ TagManager:
   - playerSplinePointer
   - starRoad
   - finishRoad
+  - policeCar
   layers:
   - Default
   - TransparentFX
@@ -20,11 +21,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Cars
+  - CarsAI
   - Obstacles
   - Overlays
-  - 
-  - 
+  - Track
+  - PlayerCar
   - 
   - 
   - 

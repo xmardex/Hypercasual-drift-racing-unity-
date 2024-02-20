@@ -11,6 +11,7 @@ public class CarSplinePointer : MonoBehaviour
 
     private Transform _carTransform;
     private SplineContainer _splineContainer;
+    public SplineContainer SplineContainer => _splineContainer;
 
     private float _splineLength;
     private float _distancePercentage = 0f;
@@ -71,9 +72,10 @@ public class CarSplinePointer : MonoBehaviour
 
             // Позиция в верхнем левом углу
             Vector2 position = new Vector2(10, 10);
-
+            Vector2 position2 = new Vector2(10, 60);
             // Отобразить значение _distancePercentage
             GUI.Label(new Rect(position.x, position.y, 200, 50), "Distance Percentage: " + _distancePercentage.ToString(), style);
+            GUI.Label(new Rect(position2.x, position2.y, 200, 50), "Velocity magnitude: " + _carTransform.GetComponent<CarController>().RB.velocity.magnitude.ToString(), style);
         }
     }
 

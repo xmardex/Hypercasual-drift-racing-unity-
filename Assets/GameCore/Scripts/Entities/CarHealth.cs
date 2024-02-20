@@ -7,7 +7,7 @@ using UnityEngine;
 public class CarHealth : DamagableEntity
 {
     [SerializeField] private HealthBar _healthBar;
-
+    [SerializeField] private CarDeath _carDeath;
     private CollisionDetector _collisionDetecter;
 
     private void Awake()
@@ -21,6 +21,8 @@ public class CarHealth : DamagableEntity
         {
             _healthBar.SetHpMinMaxValue(0, MaxHP);
             OnHPChanged += UpdateHealthBar;
+            if (_carDeath != null)
+                OnDead += _carDeath.ExplodeCar;
             SetCurrentToMaxHP();
         }
         else
@@ -61,6 +63,8 @@ public class CarHealth : DamagableEntity
     {
         _collisionDetecter.OnCollideWithSomething -= ProcessCarHit;
         OnHPChanged -= UpdateHealthBar;
+        if (_carDeath != null)
+            OnDead -= _carDeath.ExplodeCar;
     }
 
     public void EnableHealthSystem(bool enable)

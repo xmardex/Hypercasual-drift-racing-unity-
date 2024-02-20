@@ -82,11 +82,12 @@ public class TrafficCarController : MonoBehaviour
 
     public void PlaceCarAt(Vector3 position, Vector3 rotation)
     {
-        Vector3 newPosition = new Vector3(position.x, position.y+0.2f, position.z);
+        Vector3 newPosition = new Vector3(position.x, position.y+0.25f, position.z);
         transform.position = newPosition;
         transform.eulerAngles = rotation;
     }
 
     public void StartMoving() => _startMoving = true;
+    public void StopMoving() => _startMoving = false;
 
 }

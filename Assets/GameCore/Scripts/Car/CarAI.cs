@@ -37,6 +37,8 @@ public class CarAI : MonoBehaviour
     private float _currentChaseSpotLerpSpeed;
     private float _newSpeedValue;
 
+    private bool _active;
+
     public void Initialize(CarController playerCar, CarAIParametersSO carAIParametersSO, float levelPlayerDetectionDistance, float levelPlayerPointerOffset, CarAIMovementParametersHolderSO carAIParametersHolderSO)
     {
         _carAIParametersHolderSO = carAIParametersHolderSO;
@@ -66,6 +68,7 @@ public class CarAI : MonoBehaviour
         {
             _carController.ChangeTarget(_splinePointerTarget);
         }
+        _active = true;
     }
 
     private void SetupAIParameters(CarAIParametersSO carAIParametersSO)
@@ -83,7 +86,7 @@ public class CarAI : MonoBehaviour
 
     private void Update()
     {
-        if (IsPlayerBehind())
+        if (IsPlayerBehind() || !_active)
             return;
 
         bool isPlayerReachable = IsPlayerReachable();
@@ -135,7 +138,7 @@ public class CarAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsPlayerBehind())
+        if (IsPlayerBehind() || !_active)
             return;
 
         if (!_sleepUntilPlayerDetected && _chaseTarget)
@@ -191,6 +194,8 @@ public class CarAI : MonoBehaviour
     {
         return Vector3.Distance(_playerCar.transform.position, transform.position);
     }
+
+    public void DeactivateAI() => _active = false;
 
     private void OnDrawGizmos()
     {

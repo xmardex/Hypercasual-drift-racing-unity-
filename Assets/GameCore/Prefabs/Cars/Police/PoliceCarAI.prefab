@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 6556667859136778288}
   m_Layer: 6
   m_Name: PoliceCarAI
-  m_TagString: Untagged
+  m_TagString: policeCar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ebc9ab3c7c5a0b46a1b4b56ad86ebcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showInGUIPointerProgress: 0
   _carSplinePointerPrefab: {fileID: 327957079147428300, guid: fd7a8d3229d23644b82551d53d7652b3, type: 3}
   _chaseSpot: {fileID: 6727255069207191869}
   _straightSteerAngleThreshold: 1
@@ -418,6 +419,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carHealth: {fileID: 2250412256337323404}
+  carController: {fileID: 0}
+  _carStuck: {fileID: 0}
 --- !u!114 &6556667859136778288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,7 +435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _allowedLayers:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 1728
 --- !u!1 &505443618032541409
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,18 +47,20 @@ public class LevelManager : MonoBehaviour
 
     private void BeginRace()
     {
-
+        _playerCarReferences.CarStuck.Initialize(this);
     }
 
     private void FinishRace()
     {
-        if(!_loseGame)
+        if (!_loseGame)
             WinGame();
     }
 
     private void LoseGame()
     {
         _loseGame = true;
+        _cameraManager.EnableOverlays(false);
+        _playerCarReferences.CarStuck.StopCheck();
         _stateManager.ChangeState(LevelStateType.loseGame);
         //TODO: change to lose canvas
         _uiLevelManager.ActivateCanvas(UICanvasType.levelMenu, true);
@@ -86,6 +88,22 @@ public class LevelManager : MonoBehaviour
         _startTrigger.OnCarTriggerEnter -= BeginRace;
         _finishTrigger.OnCarTriggerEnter -= FinishRace;
         _playerCarReferences.CarHealth.OnDead -= LoseGame;
+    }
+
+    public void CarStuckWithPolice()
+    {
+        Debug.Log("CAR STUCK WITH POLICE -> GAME OVER");
+        LoseGame();
+    }
+
+    public void CarStuckSimple()
+    {
+        Debug.Log("CAR STUCK SIMPLE RESET");
+    }
+
+    public void CarOffRoad()
+    {
+        Debug.Log("CAR OFF ROAD RESET");
     }
 
     private void OnDestroy()
