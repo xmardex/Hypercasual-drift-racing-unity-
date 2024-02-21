@@ -29,7 +29,9 @@ public class CarAI : MonoBehaviour
     private bool _sleepUntilPlayerDetected;
 #endregion
     private bool _chaseTarget;
+    public bool IsChasing => _chaseTarget;
     private bool _findTarget;
+    public bool IsFinding => _findTarget;
 
     private Transform _splinePointerTarget;
     private Transform _thisAIchaseSpot;

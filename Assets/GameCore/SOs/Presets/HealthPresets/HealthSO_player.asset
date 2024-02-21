@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 436d02c720b8ea346b218a89844ca168, type: 3}
   m_Name: HealthSO_player
   m_EditorClassIdentifier: 
-  _maxHP: 30
+  _maxHP: 100
   _minDamage: 0
   _maxDamage: 20
   _minDamageFactorValue: 5

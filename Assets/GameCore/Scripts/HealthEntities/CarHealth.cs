@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,7 +8,12 @@ using UnityEngine;
 public class CarHealth : DamagableEntity
 {
     [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private List<HealthFXStates> _healthFXStates;
+
+    private HealthFXStates _currentHealthFXState;
     private CollisionDetector _collisionDetecter;
+
+    public Action OnHit;
 
     private void Awake()
     {
@@ -19,13 +25,12 @@ public class CarHealth : DamagableEntity
         if (_healthBar != null)
         {
             _healthBar.SetHpMinMaxValue(0, MaxHP);
+            OnDead += _healthBar.HideHP;
             OnHPChanged += UpdateHealthBar;
             SetCurrentToMaxHP();
         }
-        else
-        {
-            Debug.LogWarning("Entity doesn't have healthBar", this);
-        }
+
+        OnDead += DisableAllStatesFX;
     }
 
     private void SetCurrentToMaxHP()
@@ -37,6 +42,7 @@ public class CarHealth : DamagableEntity
     private void UpdateHealthBar(float newHP)
     {
         _healthBar?.ChangeValueTo(newHP);
+        ApplyHealthStateFX();
     }
 
     private void ProcessCarHit(Collider hit, float hitFactor)
@@ -54,12 +60,18 @@ public class CarHealth : DamagableEntity
 
         //TODO: Add here other collide scenario
 
+        OnHit?.Invoke();
     }
 
     private void OnDestroy()
     {
         _collisionDetecter.OnCollideWithSomething -= ProcessCarHit;
-        OnHPChanged -= UpdateHealthBar;
+        if (_healthBar != null)
+        {
+            OnHPChanged -= UpdateHealthBar;
+            OnDead -= _healthBar.HideHP;
+        }
+        OnDead -= DisableAllStatesFX;
     }
 
     public void EnableHealthSystem(bool enable)
@@ -77,6 +89,54 @@ public class CarHealth : DamagableEntity
             _collisionDetecter.OnCollideWithSomething -= ProcessCarHit;
             _healthBar.HideHP();
         }
-
     }
+
+    private void ApplyHealthStateFX()
+    {
+        float currentProportion = CurrentHP / MaxHP;
+
+        if (_healthFXStates != null && _healthFXStates.Count > 0)
+        {
+            HealthFXStates healthFXStates = null;
+
+            foreach (var healthState in _healthFXStates)
+            {
+                if (currentProportion >= healthState.minProportion &&
+                    currentProportion <= healthState.maxProportion)
+                {
+                    healthFXStates = healthState;
+                    break;
+                }
+            }
+
+            if (healthFXStates != null)
+            {
+                _currentHealthFXState?.fx?.Stop();
+                healthFXStates.fx.gameObject.SetActive(true);
+                healthFXStates.fx.Play();
+               _currentHealthFXState = healthFXStates;
+            }
+            else
+            {
+                _currentHealthFXState?.fx?.Stop();
+            }
+        }
+    }
+    private void DisableAllStatesFX()
+    {
+        foreach (var healthState in _healthFXStates)
+        {
+            healthState.fx.Stop();
+        }
+    }
+}
+
+[Serializable]
+public class HealthFXStates
+{
+    [Range(0f, 1f)]
+    public float minProportion;
+    [Range(0f, 1f)]
+    public float maxProportion;
+    public ParticleSystem fx;
 }

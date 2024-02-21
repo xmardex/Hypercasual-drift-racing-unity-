@@ -4,6 +4,7 @@ using UnityEngine;
 [Serializable]
 public class PoliceCarContainer
 {
+    public bool isActive;
     public CarAIMovementParametersHolderSO carAIMovementParametersHolder;
     public Transform spawnPoint;
     public CarAI carPrefab;

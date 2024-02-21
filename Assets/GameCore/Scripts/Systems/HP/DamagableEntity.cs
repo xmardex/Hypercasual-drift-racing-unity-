@@ -20,6 +20,8 @@ public abstract class DamagableEntity : MonoBehaviour, IDamageDealer, IHealth
     public Action OnDead;
     public Action<IDamageDealer, float> OnDamageRecive;
 
+    private bool _dead = false;
+    public bool IsDead => _dead;
 
     public float MaxHP => _maxHP;
     public float CurrentHP => _currentHP;
@@ -47,6 +49,7 @@ public abstract class DamagableEntity : MonoBehaviour, IDamageDealer, IHealth
         {
             Debug.LogError("Car health SO doesnt set", this);
         }
+        _dead = false;
     }
 
     public virtual void ReciveDamageFrom(float damageFactor, IDamageDealer from)
@@ -93,12 +96,18 @@ public abstract class DamagableEntity : MonoBehaviour, IDamageDealer, IHealth
 
     public virtual void Damage(float damage)
     {
-        _currentHP = (CurrentHP - damage) < 0 ? 0 : (_currentHP - damage);
-
-        OnHPChanged?.Invoke(_currentHP);
-        if (_currentHP == 0)
-            OnDead?.Invoke();
+        if (!_dead)
+        {
+            _currentHP = (CurrentHP - damage) < 0 ? 0 : (_currentHP - damage);
+            if (_currentHP == 0)
+            {
+                _dead = true;
+                OnDead?.Invoke();
+            }
+            else
+            {
+                OnHPChanged?.Invoke(_currentHP);
+            }
+        }
     }
-
-
 }

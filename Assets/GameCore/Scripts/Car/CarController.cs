@@ -106,8 +106,6 @@ public class CarController : MonoBehaviour
         _carSplinePointer.Initialize(transform,_roadSplineContainer);
         _carTarget = _carSplinePointer.transform;
 
-        _carHealth.OnDead += Dead;
-
         rb = GetComponent<Rigidbody>();
         grounded = false;
         engineSounds[1].mute = true;
@@ -271,10 +269,6 @@ public class CarController : MonoBehaviour
         _canMove = canMove;
     }
 
-    private void Dead()
-    {
-        SetCanMove(false);
-    }
 
     #region CAR AI
     public void ChangeTarget(Transform newTarget)
@@ -331,11 +325,6 @@ public class CarController : MonoBehaviour
             Debug.LogError("car target not set");
             return 0f;
         }
-    }
-
-    private void OnDestroy()
-    {
-        _carHealth.OnDead -= Dead;
     }
 
     //private void OnDrawGizmos()

@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +21,7 @@ public class HealthBar : MonoBehaviour
     {
         if (_lerpSliderIE != null)
             StopCoroutine(_lerpSliderIE);
-
+        
         _lerpSliderIE = StartCoroutine(LerpBarIE(newValue));
     }
 
@@ -49,4 +51,11 @@ public class HealthBar : MonoBehaviour
 
         _slider.value = newValue;
     }
+
+    private void OnDisable()
+    {
+        if(_lerpSliderIE != null)
+            StopCoroutine(_lerpSliderIE);
+    }
 }
+

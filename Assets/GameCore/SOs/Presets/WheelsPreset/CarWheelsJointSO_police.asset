@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CarWheelsJointSO_police
   m_EditorClassIdentifier: 
   _linearLimitSpring_spring: 10000000
-  _linearLimitSpring_damper: 9000
-  _linearLimit_limit: 0.4
+  _linearLimitSpring_damper: 90000
+  _linearLimit_limit: 3
   _linearLimit_contactDistance: 1
   _yDrive_positionSpring: 13000000
   _yDrive_positionDamper: 1200000

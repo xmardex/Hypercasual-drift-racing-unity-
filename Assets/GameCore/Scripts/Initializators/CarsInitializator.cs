@@ -36,6 +36,8 @@ public class CarsInitializator : MonoBehaviour
 
         foreach (PoliceCarContainer car in _policeCarsContainers)
         {
+            if (!car.isActive)
+                continue;
             CarAI policeCar = car.SpawnCar();
             policeCar.Initialize(playerCar, car.carAIParametersSO, levelPlayerDetectionDistance, levelPlayerPointerOffset, car.carAIMovementParametersHolder);
             policeCar.GetComponent<CarReferences>().CarHealth.EnableHealthSystem(_useHP);

@@ -2,14 +2,20 @@ using UnityEngine;
 using Cinemachine;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private Camera _overLayCamera;
+    [SerializeField] private Camera _overlayCamera;
+
+    [Space(20), Header("Camera fx:")]
+    [SerializeField] private float _shakeIntensity = 5f;
+    [SerializeField] private float _shakeDuration = 0.5f;
 
     [Space(20),Header("Camera switchers:")]
-    [SerializeField] private int activeCameraPriority = 20;
-    [SerializeField] private int disabledCameraPriority = 10;
+    [SerializeField] private int _activeCameraPriority = 20;
+    [SerializeField] private int _disabledCameraPriority = 10;
+    [SerializeField] private int _chasingCameraPriority = 30;
     [SerializeField] private CameraLevelPosition[] _cameraLevelPositions;
 
     [SerializeField] private float _cameraHeightLerpSpeed = 4;
@@ -20,9 +26,15 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float _minCarVelocityToChangeCameraHeight = 0;
     [SerializeField] private float _maxCarVelocityToChangeCameraHeight = 50;
 
+    [SerializeField] private CinemachineVirtualCamera _chasingCamera;
+    [SerializeField] private LayerMask _carsAILayerMask;
+
+    [SerializeField] private float _chasingDistanceToActivateCamera = 30;
+
     [SerializeField] private Transform _allCamerasParent;
     private List<CinemachineCameraOffset> _camerasOffsets;
 
+    private CarReferences _playerCarReferences;
     private CarController _playerCarController;
     private CarSplinePointer _playerCarSplinePointer;
 
@@ -30,13 +42,19 @@ public class CameraManager : MonoBehaviour
     private CameraLevelPosition _currentCameraPosition;
     private CameraLevelPosition _nextCameraPosition;
 
+    private bool _isChasingCameraActive;
+
+    private Coroutine _shakeIE;
+
     public void Initialize()
     {
         _currentPositionIndex = 0;
         _currentCameraPosition = _cameraLevelPositions[_currentPositionIndex];
         _nextCameraPosition = _cameraLevelPositions[_currentPositionIndex + 1];
-        _playerCarController = GameObject.FindGameObjectWithTag(Constants.PLYAER_CAR_TAG).GetComponent<CarController>();
-        _playerCarSplinePointer = _playerCarController.CarSplinePointer;
+        _playerCarReferences = GameObject.FindGameObjectWithTag(Constants.PLYAER_CAR_TAG).GetComponent<CarReferences>();
+        _playerCarController = _playerCarReferences.CarController;
+        _playerCarSplinePointer = _playerCarReferences.CarController.CarSplinePointer;
+        _playerCarReferences.CollisionDetector.OnCollideWithSomething += ShakeCurrentCamera;
         InitAllCamerasOffsets();
     }
 
@@ -54,19 +72,22 @@ public class CameraManager : MonoBehaviour
 
     public void LateUpdate()
     {
-        UpdateCameraHeight();
-        if (_playerCarSplinePointer.DistancePercentage > _nextCameraPosition._pointerDistanceToActivate)
+        CheckForChase();
+        if (!_isChasingCameraActive)
         {
-            SwitchCameraToNext();
+            UpdateCameraHeight();
+            if (_playerCarSplinePointer.DistancePercentage > _nextCameraPosition._pointerDistanceToActivate)
+            {
+                SwitchCameraToNext();
+            }
         }
     }
 
     private void SwitchCameraToNext()
     {
-        _currentCameraPosition._virtualCamera.Priority = disabledCameraPriority;
-        _nextCameraPosition._virtualCamera.Priority = activeCameraPriority;
+        _currentCameraPosition._virtualCamera.Priority = _disabledCameraPriority;
+        _nextCameraPosition._virtualCamera.Priority = _activeCameraPriority;
         _currentCameraPosition = _nextCameraPosition;
-
         _currentPositionIndex++;
         if (_currentPositionIndex + 1 < _cameraLevelPositions.Length)
             _nextCameraPosition = _cameraLevelPositions[_currentPositionIndex+1];
@@ -74,7 +95,7 @@ public class CameraManager : MonoBehaviour
 
     public void EnableOverlays(bool enable)
     {
-        _overLayCamera.enabled = enable;
+        _overlayCamera.enabled = enable;
     }
 
     private void UpdateCameraHeight()
@@ -86,7 +107,7 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    public float CalculateCameraHeight(float carVelocity)
+    private float CalculateCameraHeight(float carVelocity)
     {
         float actualHeight = 0f;
 
@@ -108,6 +129,59 @@ public class CameraManager : MonoBehaviour
         }
         return actualHeight;
     }
+
+    private void CheckForChase()
+    {
+        Collider[] colliders = Physics.OverlapSphere(_playerCarController.transform.position, _chasingDistanceToActivateCamera, _carsAILayerMask);
+
+        bool isChasingAny = false;
+        CarAI carAI = null;
+        foreach (Collider col in colliders)
+        {
+            carAI = col.GetComponent<CarAI>();
+            isChasingAny = carAI.IsChasing;
+            if (isChasingAny)
+                break;
+        }
+
+        if (isChasingAny)
+        {
+            //_chasingCamera.LookAt = carAI.transform;
+            _chasingCamera.Priority = _chasingCameraPriority;
+            _isChasingCameraActive = true;
+        }
+        else
+        {
+            _chasingCamera.Priority = _disabledCameraPriority;
+            _isChasingCameraActive = false;
+        }
+    }
+
+    private void ShakeCurrentCamera(Collider hit, float hitFactor)
+    {
+        //TODO: May be use hitFactor for shakeIntensity
+        CinemachineVirtualCamera currentCamera = (CinemachineVirtualCamera)CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
+        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = currentCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        if(_shakeIE != null)
+        {
+            StopCoroutine(_shakeIE);
+            Noise(cinemachineBasicMultiChannelPerlin, 0, 0);
+        }
+        _shakeIE = StartCoroutine(ProcessShakeIE(cinemachineBasicMultiChannelPerlin));
+    }
+    private IEnumerator ProcessShakeIE(CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin)
+    {
+        Noise(cinemachineBasicMultiChannelPerlin, 1, _shakeIntensity);
+        yield return new WaitForSeconds(_shakeDuration);
+        Noise(cinemachineBasicMultiChannelPerlin,0, 0);
+    }
+
+    private void Noise(CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin, float amplitudeGain, float frequencyGain)
+    {
+        cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = amplitudeGain;
+        cinemachineBasicMultiChannelPerlin.m_FrequencyGain = frequencyGain;
+    }
+
 }
 
 [Serializable]

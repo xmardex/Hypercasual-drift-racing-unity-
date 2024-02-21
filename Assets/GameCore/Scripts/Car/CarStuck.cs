@@ -98,7 +98,6 @@ public class CarStuck : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
-        Debug.ClearDeveloperConsole();
     }
 
     private IEnumerator CarRespawnIE()
