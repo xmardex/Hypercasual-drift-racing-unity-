@@ -116,7 +116,7 @@ Rigidbody:
   m_GameObject: {fileID: 667035375823534965}
   serializedVersion: 4
   m_Mass: 100
-  m_Drag: 0
+  m_Drag: 0.3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -145,8 +145,8 @@ GameObject:
   - component: {fileID: 6004960097986063205}
   - component: {fileID: 7965428582334420499}
   - component: {fileID: 3556689258657211076}
-  - component: {fileID: 7397391656694988211}
   - component: {fileID: 5667946713863107150}
+  - component: {fileID: 5693524132199178315}
   m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
@@ -223,28 +223,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7397391656694988211
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1070532841372397709}
-  m_Material: {fileID: 13400000, guid: ecced3aacfe9ee449930c039f383b7e6, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2959467708922500008, guid: 360e9453f9e8f594d81c38d31445837d, type: 3}
 --- !u!54 &5667946713863107150
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -254,7 +232,7 @@ Rigidbody:
   m_GameObject: {fileID: 1070532841372397709}
   serializedVersion: 4
   m_Mass: 600
-  m_Drag: 0
+  m_Drag: 0.3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -272,6 +250,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &5693524132199178315
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070532841372397709}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0810857, y: 1.4095259, z: 4.586349}
+  m_Center: {x: 0.000013080823, y: 0.99662125, z: -0.084022336}
 --- !u!1 &2197732951667214776
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,7 +723,7 @@ Rigidbody:
   m_GameObject: {fileID: 6098495755123323797}
   serializedVersion: 4
   m_Mass: 100
-  m_Drag: 0
+  m_Drag: 0.3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -941,7 +940,7 @@ Rigidbody:
   m_GameObject: {fileID: 6769816697518723777}
   serializedVersion: 4
   m_Mass: 100
-  m_Drag: 0
+  m_Drag: 0.3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1075,7 +1074,7 @@ Rigidbody:
   m_GameObject: {fileID: 7427976509752008993}
   serializedVersion: 4
   m_Mass: 100
-  m_Drag: 0
+  m_Drag: 0.3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
