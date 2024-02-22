@@ -835,7 +835,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: ATMOSPHERIC_HEIGHT_FOG
+    Standalone: ATMOSPHERIC_HEIGHT_FOG;LETAI_TRUESHADOW
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

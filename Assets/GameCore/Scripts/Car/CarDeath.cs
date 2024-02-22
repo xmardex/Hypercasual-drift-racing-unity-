@@ -19,10 +19,13 @@ public class CarDeath : MonoBehaviour
 
     [SerializeField] private CarReferences _carReferences;
 
+    private CapsuleCollider _carCollider;
+
     private bool _isExploded;
     private void Start()
     {
         _isExploded = false;
+        _carCollider = GetComponent<CapsuleCollider>();
         _carReferences.CarHealth.OnDead += DisableCarMovement;
         _carReferences.CarHealth.OnDead += ExplodeCar;
     }
@@ -35,6 +38,7 @@ public class CarDeath : MonoBehaviour
             if (_explodeFX != null)
                 _explodeFX.gameObject.SetActive(true);
 
+            _carCollider.enabled = false;
             // flip car parts to dead one
             for (int i = 0; i < _aliveCarObjects.Length; i++)
             {
@@ -47,6 +51,7 @@ public class CarDeath : MonoBehaviour
             for (int i = 0; i < _aliveCarWheels.Length; i++)
             {
                 Rigidbody wheelAlive = _aliveCarWheels[i];
+                wheelAlive.gameObject.SetActive(false);
                 Rigidbody wheelDead = _deadCarWheels[i];
                 wheelDead.velocity = wheelAlive.velocity;
                 wheelDead.angularVelocity = wheelAlive.angularVelocity;

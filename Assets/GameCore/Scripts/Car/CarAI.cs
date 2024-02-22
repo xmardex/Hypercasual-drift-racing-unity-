@@ -180,7 +180,7 @@ public class CarAI : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, directionToPlayer, out hit, _distanceForDetectPlayer))
             {
-                return hit.collider.CompareTag(Constants.PLYAER_CAR_TAG);
+                return hit.collider.CompareTag(Constants.PLAYER_CAR_TAG);
             }
             return false;
         }

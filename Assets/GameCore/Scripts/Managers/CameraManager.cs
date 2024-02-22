@@ -51,11 +51,23 @@ public class CameraManager : MonoBehaviour
         _currentPositionIndex = 0;
         _currentCameraPosition = _cameraLevelPositions[_currentPositionIndex];
         _nextCameraPosition = _cameraLevelPositions[_currentPositionIndex + 1];
-        _playerCarReferences = GameObject.FindGameObjectWithTag(Constants.PLYAER_CAR_TAG).GetComponent<CarReferences>();
+        _playerCarReferences = GameObject.FindGameObjectWithTag(Constants.PLAYER_CAR_TAG).GetComponent<CarReferences>();
         _playerCarController = _playerCarReferences.CarController;
         _playerCarSplinePointer = _playerCarReferences.CarController.CarSplinePointer;
         _playerCarReferences.CollisionDetector.OnCollideWithSomething += ShakeCurrentCamera;
+        UpdateFollowAndLook();
         InitAllCamerasOffsets();
+    }
+
+    private void UpdateFollowAndLook()
+    {
+        foreach(CameraLevelPosition cameraLevelPosition in _cameraLevelPositions)
+        {
+            cameraLevelPosition._virtualCamera.LookAt = _playerCarController.transform;
+            cameraLevelPosition._virtualCamera.Follow = _playerCarController.transform;
+        }
+        _chasingCamera.LookAt = _playerCarController.transform;
+        _chasingCamera.Follow = _playerCarController.transform;
     }
 
     private void InitAllCamerasOffsets()

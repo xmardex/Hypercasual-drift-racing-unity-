@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private UILevelManager _uiLevelManager;
     [SerializeField] private CameraManager _cameraManager;
     [SerializeField] private CarsInitializator _carsInitializator;
-    [SerializeField] private CarReferences _playerCarReferences;
+    
 
     [SerializeField] private RoadTrigger _startTrigger;
     [SerializeField] private RoadTrigger _finishTrigger;
+
+    private CarReferences _playerCarReferences;
 
     private bool _loseGame = false;
     private bool _winGame = false;
@@ -23,15 +26,17 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        SubscribeToEvents();
         InitializeLevel();
+        SubscribeToEvents();
         _stateManager.ChangeState(LevelStateType.preStart);
     }
 
     private void InitializeLevel()
     {
+        _playerCarReferences = _carsInitializator.PrespawnedPlayer.GetComponent<CarReferences>();
+
         _uiLevelManager.Initialize();
-        _uiLevelManager.ActivateCanvas(UICanvasType.levelMenu, true);
+        _uiLevelManager.ActivateCanvas(UICanvasType.mainMenu, true);
 
         _carsInitializator.InitializeCars(_useHP, canMoveOnStart: false);
 
@@ -63,7 +68,7 @@ public class LevelManager : MonoBehaviour
         _playerCarReferences.CarStuck.StopCheck();
         _stateManager.ChangeState(LevelStateType.loseGame);
         //TODO: change to lose canvas
-        _uiLevelManager.ActivateCanvas(UICanvasType.levelMenu, true);
+        _uiLevelManager.ActivateCanvas(UICanvasType.lose, true);
     }
 
     private void WinGame()
@@ -71,12 +76,18 @@ public class LevelManager : MonoBehaviour
         _winGame = true;
         _stateManager.ChangeState(LevelStateType.winGame);
         //TODO: change to win canvas
-        _uiLevelManager.ActivateCanvas(UICanvasType.levelMenu, true);
+        _uiLevelManager.ActivateCanvas(UICanvasType.win, true);
+    }
+
+    private void RetryLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void SubscribeToEvents()
     {
         _uiLevelManager.OnPlayBtnClick += StartGame;
+        _uiLevelManager.OnRetryBtnClick += RetryLevel;
         _startTrigger.OnCarTriggerEnter += BeginRace;
         _finishTrigger.OnCarTriggerEnter += FinishRace;
         _playerCarReferences.CarHealth.OnDead += LoseGame;
@@ -85,6 +96,7 @@ public class LevelManager : MonoBehaviour
     private void UnsubscribeFromEvents()
     {
         _uiLevelManager.OnPlayBtnClick -= StartGame;
+        _uiLevelManager.OnRetryBtnClick -= RetryLevel;
         _startTrigger.OnCarTriggerEnter -= BeginRace;
         _finishTrigger.OnCarTriggerEnter -= FinishRace;
         _playerCarReferences.CarHealth.OnDead -= LoseGame;

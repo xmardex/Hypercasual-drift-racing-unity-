@@ -8,7 +8,7 @@ using UnityEngine.Splines;
 public class CarsInitializator : MonoBehaviour
 {
     [SerializeField] private bool _spawnPlayer;
-    [SerializeField] private CarController _prespawnedPlayer;
+    public CarController PrespawnedPlayer => _prespawnedPlayer;
     [SerializeField] private PlayerCarContainer _playerCarContainer;
 
     [Space(20) , Header("AI Cars:")]
@@ -19,10 +19,18 @@ public class CarsInitializator : MonoBehaviour
     [SerializeField] private float levelPlayerDetectionDistance;
     [SerializeField] private PoliceCarContainer[] _policeCarsContainers;
 
+    private CarController _prespawnedPlayer;
+
     private List<CarController> _allCars;
 
     private void Awake()
     {
+        _prespawnedPlayer = GameObject.FindWithTag(Constants.PLAYER_CAR_TAG)?.GetComponent<CarController>();
+        if (_prespawnedPlayer == null)
+        {
+            Debug.LogError("Use prespawned player or spawn one");
+            return;
+        }
         _allCars ??= new List<CarController>();
     }
 
