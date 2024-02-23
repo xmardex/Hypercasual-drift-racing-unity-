@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 190209648227706095}
   - component: {fileID: 7374617849726229151}
   - component: {fileID: 4253062993907032145}
+  - component: {fileID: 9005024428413174754}
   m_Layer: 0
   m_Name: Spline - Road - 2
   m_TagString: roadSpline
@@ -527,6 +528,18 @@ MonoBehaviour:
   m_Capped: 1
   m_Radius: 0.25
   m_Range: {x: 0, y: 1}
+--- !u!114 &9005024428413174754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517582552543341374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8675e8f423bf58945a82c08626a778f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &586469142925187224
 GameObject:
   m_ObjectHideFlags: 0
@@ -4478,6 +4491,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2843508062992385047}
     m_Modifications:
+    - target: {fileID: 1088595176125154810, guid: e9dce4d120eb44bb9b45bcfbc391a767, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 121.79801
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088595176125154810, guid: e9dce4d120eb44bb9b45bcfbc391a767, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.0616
+      objectReference: {fileID: 0}
     - target: {fileID: 1362567445574823901, guid: e9dce4d120eb44bb9b45bcfbc391a767, type: 3}
       propertyPath: m_LocalPosition.x
       value: -258.5
@@ -4525,6 +4546,14 @@ PrefabInstance:
     - target: {fileID: 5564808284244760013, guid: e9dce4d120eb44bb9b45bcfbc391a767, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402997928164801756, guid: e9dce4d120eb44bb9b45bcfbc391a767, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 122.76489
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402997928164801756, guid: e9dce4d120eb44bb9b45bcfbc391a767, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.5468
       objectReference: {fileID: 0}
     - target: {fileID: 6420082237350929057, guid: e9dce4d120eb44bb9b45bcfbc391a767, type: 3}
       propertyPath: m_Name
