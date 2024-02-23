@@ -1210,6 +1210,10 @@ PrefabInstance:
       propertyPath: _healthSO
       value: 
       objectReference: {fileID: 11400000, guid: 7173eeb0c6c8d2b4bad6c3434a9ff5c4, type: 2}
+    - target: {fileID: 1028777115450721590, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
+      propertyPath: _carSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c446d87b8efc4846a4d39b91afe1b65, type: 2}
     - target: {fileID: 2352718942160390271, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.66

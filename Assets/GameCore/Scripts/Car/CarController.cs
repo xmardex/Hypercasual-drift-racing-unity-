@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.Splines;
 
 public class CarController : MonoBehaviour
 {
+    [SerializeField] private PlayerCarSO _carSO;
+
     [Header("Spline inputs")]
     [Header("Pointer:")]
     [SerializeField] private bool _showInGUIPointerProgress;
@@ -102,6 +105,9 @@ public class CarController : MonoBehaviour
     {
         _roadSplineContainer = GameObject.FindGameObjectWithTag(Constants.ROAD_SPLINE_CONTAINER_TAG).GetComponent<SplineContainer>();
         _carSplinePointer = Instantiate(_carSplinePointerPrefab).GetComponent<CarSplinePointer>();
+
+        InitCarStats();
+
         _carSplinePointer.ShowInGUIProgress(_showInGUIPointerProgress);
         _carSplinePointer.Initialize(transform,_roadSplineContainer);
         _carTarget = _carSplinePointer.transform;
@@ -113,51 +119,79 @@ public class CarController : MonoBehaviour
         _canMove = false;
     }
 
+    private void InitCarStats()
+    {
+        if(_carSO != null)
+        {
+            _carSplinePointer.SetMaxDistance(_carSO.DistanceToPointer);
+            _straightSteerAngleThreshold = _carSO.StraightSteerAngleThreshold;
+            _steerDumpingSpeed = _carSO.SteerDumpingSpeed;
+            _autoSpeed = _carSO.AutoSpeed;
+            _breakToThisVelocityMagnitudeOnAutoMove = _carSO.BrakeToThisVelocityMagnitudeOnAutoMove;
+            turn = _carSO.Turn;
+            speed = _carSO.Speed;
+            brake = _carSO.Brake;
+            TurnAngle = _carSO.TurnAngle;
+            friction = _carSO.Friction;
+            dragAmount = _carSO.DragAmount;
+        }
+    }
+
     void FixedUpdate()
     {
-        if (_carTarget != null && _canMove)
+        carVelocity = transform.InverseTransformDirection(rb.velocity); //local velocity of car
+        if (_canMove)
         {
-            carVelocity = transform.InverseTransformDirection(rb.velocity); //local velocity of car
-            curveVelocity = Mathf.Abs(carVelocity.magnitude) / 100;
-
-            float turnInput = turn * GetSteerPointerValue() * Time.fixedDeltaTime * 1000;
-
-            float speedInput = speed * _gasValue * Time.fixedDeltaTime * 1000;
-            float autoSpeedInput = _autoSpeed * Time.fixedDeltaTime * 1000;
-            brakeValue = brake * Time.fixedDeltaTime * 1000;
-
-            //helping veriables
-            autoSpeedValue = autoSpeedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
-            if(!_isAI || _isAI && _useDefaultSpeed)
-                speedValue = speedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
-
-            fricValue = friction * frictionCurve.Evaluate(carVelocity.magnitude / 100);
-            turnValue = turnInput * turnCurve.Evaluate(carVelocity.magnitude / 100);
-
-            //grounded check
-            if (Physics.Raycast(groundCheck.position, -transform.up, out hit, maxRayLength))
+            if (_carTarget != null)
             {
-                AccelarationLogic();
-                TurningLogic();
-                FrictionLogic();
-                //for drift behaviour
-                rb.angularDrag = dragAmount * driftCurve.Evaluate(Mathf.Abs(carVelocity.x) / 70);
+                curveVelocity = Mathf.Abs(carVelocity.magnitude) / 100;
 
-                //draws green ground checking ray ....ingnore
-                Debug.DrawLine(groundCheck.position, hit.point, Color.green);
-                grounded = true;
+                float turnInput = turn * GetSteerPointerValue() * Time.fixedDeltaTime * 1000;
 
-                rb.centerOfMass = Vector3.zero;
-            }
-            else
-            {
-                grounded = false;
-                rb.drag = 0.1f;
-                rb.centerOfMass = CentreOfMass.localPosition;
-                if (!airDrag)
+                float speedInput = speed * _gasValue * Time.fixedDeltaTime * 1000;
+                float autoSpeedInput = _autoSpeed * Time.fixedDeltaTime * 1000;
+                brakeValue = brake * Time.fixedDeltaTime * 1000;
+
+                //helping veriables
+                autoSpeedValue = autoSpeedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
+                if (!_isAI || _isAI && _useDefaultSpeed)
+                    speedValue = speedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
+
+                fricValue = friction * frictionCurve.Evaluate(carVelocity.magnitude / 100);
+                turnValue = turnInput * turnCurve.Evaluate(carVelocity.magnitude / 100);
+
+                //grounded check
+                if (Physics.Raycast(groundCheck.position, -transform.up, out hit, maxRayLength))
                 {
-                    rb.angularDrag = 0.1f;
+                    AccelarationLogic();
+                    TurningLogic();
+                    FrictionLogic();
+                    //for drift behaviour
+                    rb.angularDrag = dragAmount * driftCurve.Evaluate(Mathf.Abs(carVelocity.x) / 70);
+
+                    //draws green ground checking ray ....ingnore
+                    Debug.DrawLine(groundCheck.position, hit.point, Color.green);
+                    grounded = true;
+
+                    rb.centerOfMass = Vector3.zero;
                 }
+                else
+                {
+                    grounded = false;
+                    rb.drag = 0.1f;
+                    rb.centerOfMass = CentreOfMass.localPosition;
+                    if (!airDrag)
+                    {
+                        rb.angularDrag = 0.1f;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if(carVelocity.z > 1)
+            {
+                Brake();
             }
         }
     }
@@ -231,10 +265,15 @@ public class CarController : MonoBehaviour
         else
         {
             if (carVelocity.magnitude > _breakToThisVelocityMagnitudeOnAutoMove)
-                rb.AddForceAtPosition(transform.forward * -brakeValue, groundCheck.position);
+                Brake();
             else
                 rb.AddForceAtPosition(transform.forward * autoSpeedValue, groundCheck.position);
         }
+    }
+
+    private void Brake()
+    {
+        rb.AddForceAtPosition(transform.forward * -brakeValue, groundCheck.position);
     }
 
     public void TurningLogic()

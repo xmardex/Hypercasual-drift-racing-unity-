@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private UILevelManager _uiLevelManager;
     [SerializeField] private CameraManager _cameraManager;
     [SerializeField] private CarsInitializator _carsInitializator;
-    
+    [SerializeField] private ChasingStarsManager _carsStarsManager;
 
     [SerializeField] private RoadTrigger _startTrigger;
     [SerializeField] private RoadTrigger _finishTrigger;
@@ -39,7 +39,7 @@ public class LevelManager : MonoBehaviour
         _uiLevelManager.ActivateCanvas(UICanvasType.mainMenu, true);
 
         _carsInitializator.InitializeCars(_useHP, canMoveOnStart: false);
-
+        _carsStarsManager.Initialize(_carsInitializator.AllAICars);
         _cameraManager.Initialize();
         _stateManager.Initialize();
     }
@@ -64,8 +64,7 @@ public class LevelManager : MonoBehaviour
     private void LoseGame()
     {
         _loseGame = true;
-        _cameraManager.EnableOverlays(false);
-        _playerCarReferences.CarStuck.StopCheck();
+        StopGame();
         _stateManager.ChangeState(LevelStateType.loseGame);
         //TODO: change to lose canvas
         _uiLevelManager.ActivateCanvas(UICanvasType.lose, true);
@@ -74,6 +73,7 @@ public class LevelManager : MonoBehaviour
     private void WinGame()
     {
         _winGame = true;
+        StopGame();
         _stateManager.ChangeState(LevelStateType.winGame);
         //TODO: change to win canvas
         _uiLevelManager.ActivateCanvas(UICanvasType.win, true);
@@ -116,6 +116,13 @@ public class LevelManager : MonoBehaviour
     public void CarOffRoad()
     {
         Debug.Log("CAR OFF ROAD RESET");
+    }
+
+    private void StopGame()
+    {
+        _cameraManager.EnableOverlays(false);
+        _playerCarReferences.CarStuck.StopCheck();
+        _carsInitializator.EnableMovementOnCars(false);
     }
 
     private void OnDestroy()

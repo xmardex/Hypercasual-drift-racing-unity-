@@ -413,6 +413,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: icon_chasingStar
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 544
+        width: 256
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c89b52a2127070e4594903aa2d7e3069
+      internalID: 67934798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -428,6 +449,7 @@ TextureImporter:
       btn_blue: 180754034
       btn_green: -731790876
       coin_icon: 1761873858
+      icon_chasingStar: 67934798
       icon_close: 311022404
       icon_music: -1100821116
       icon_vibro: -1434079252

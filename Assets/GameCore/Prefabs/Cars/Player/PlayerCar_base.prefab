@@ -31561,6 +31561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ebc9ab3c7c5a0b46a1b4b56ad86ebcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _carSO: {fileID: 0}
   _showInGUIPointerProgress: 0
   _carSplinePointerPrefab: {fileID: 2314871478315093814, guid: 979c80b474a597349acf045c820b7680, type: 3}
   _chaseSpot: {fileID: 1268315493166062318}
@@ -32187,7 +32188,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 055de6cccad442f4582b393344a88e5f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 0.34855145
+  m_Pitch: 0.9875493
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -32379,7 +32380,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 2c3d914dbaa4b7d4a90dedb7e6ea952a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
-  m_Pitch: 0.34855145
+  m_Pitch: 0.9875493
   Loop: 1
   Mute: 1
   Spatialize: 0

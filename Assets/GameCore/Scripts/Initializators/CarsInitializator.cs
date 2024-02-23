@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
-using UnityEngine.Splines;
 
 public class CarsInitializator : MonoBehaviour
 {
@@ -22,6 +19,8 @@ public class CarsInitializator : MonoBehaviour
     private CarController _prespawnedPlayer;
 
     private List<CarController> _allCars;
+    private List<CarAI> _allAICars;
+    public List<CarAI> AllAICars => _allAICars;
 
     private void Awake()
     {
@@ -32,6 +31,7 @@ public class CarsInitializator : MonoBehaviour
             return;
         }
         _allCars ??= new List<CarController>();
+        _allAICars ??= new List<CarAI>();
     }
 
     public void InitializeCars(bool _useHP, bool canMoveOnStart = false)
@@ -49,7 +49,7 @@ public class CarsInitializator : MonoBehaviour
             CarAI policeCar = car.SpawnCar();
             policeCar.Initialize(playerCar, car.carAIParametersSO, levelPlayerDetectionDistance, levelPlayerPointerOffset, car.carAIMovementParametersHolder);
             policeCar.GetComponent<CarReferences>().CarHealth.EnableHealthSystem(_useHP);
-
+            _allAICars.Add(policeCar);
             _allCars.Add(policeCar.GetComponent<CarController>());
         }
 

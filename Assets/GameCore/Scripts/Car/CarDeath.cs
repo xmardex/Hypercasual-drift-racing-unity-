@@ -21,10 +21,15 @@ public class CarDeath : MonoBehaviour
 
     private CapsuleCollider _carCollider;
 
+    private CarAI _carAI;
+
     private bool _isExploded;
     private void Start()
     {
         _isExploded = false;
+
+        TryGetComponent(out _carAI);
+
         _carCollider = GetComponent<CapsuleCollider>();
         _carReferences.CarHealth.OnDead += DisableCarMovement;
         _carReferences.CarHealth.OnDead += ExplodeCar;
@@ -66,6 +71,8 @@ public class CarDeath : MonoBehaviour
             Explode(transform.position);
             _isExploded = true;
         }
+
+        _carAI?.DeactivateAI();
     }
 
     private void Explode(Vector3 explodePosition)
@@ -81,10 +88,10 @@ public class CarDeath : MonoBehaviour
                 {
                     trafficCar.StopMoving();
                 }
-                if(hit.TryGetComponent(out CarAI carAI))
-                {
-                    carAI.DeactivateAI();
-                }
+                //if(hit.TryGetComponent(out CarAI carAI))
+                //{
+                //    carAI.DeactivateAI();
+                //}
                 if(hit.TryGetComponent(out DamagableEntity damagableEntity))
                 {
                     if(damagableEntity != _carReferences.CarHealth && !damagableEntity.IsDead)

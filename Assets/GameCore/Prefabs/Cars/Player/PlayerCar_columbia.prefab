@@ -1111,6 +1111,10 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 2.1099925
       objectReference: {fileID: 0}
+    - target: {fileID: 1028777115450721590, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
+      propertyPath: _carSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 3ba6e04d388462548b6316d623185a91, type: 2}
     - target: {fileID: 2352718942160390271, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.66

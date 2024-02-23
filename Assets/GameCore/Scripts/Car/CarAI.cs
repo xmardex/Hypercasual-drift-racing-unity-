@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(CarController))]
 public class CarAI : MonoBehaviour
 {
     private CarController _playerCar;
+
     private CarController _carController;
     private CarSplinePointer _carSplinePointer;
+    public CarSplinePointer CarSplinePointer => _carSplinePointer;
 
     private CarAIMovementParametersHolderSO _carAIParametersHolderSO;
-#region AiParameters
+
+    #region AiParameters
     private float _distanceForDetectPlayer;
     private float _playerPointerOffset;
 
@@ -27,11 +28,11 @@ public class CarAI : MonoBehaviour
     private float _maxDistanceToAddSpeedValue;
 
     private bool _sleepUntilPlayerDetected;
-#endregion
+    #endregion
+    
     private bool _chaseTarget;
-    public bool IsChasing => _chaseTarget;
+
     private bool _findTarget;
-    public bool IsFinding => _findTarget;
 
     private Transform _splinePointerTarget;
     private Transform _thisAIchaseSpot;
@@ -40,6 +41,15 @@ public class CarAI : MonoBehaviour
     private float _newSpeedValue;
 
     private bool _active;
+
+    private bool _chasingStartedOnce;
+
+    public Action OnAIStartChasing;
+    public Action OnAIDeactivated;
+
+    public bool IsChasing => _chaseTarget;
+    public bool IsFinding => _findTarget;
+    public CarController PlayerCar => _playerCar;
 
     public void Initialize(CarController playerCar, CarAIParametersSO carAIParametersSO, float levelPlayerDetectionDistance, float levelPlayerPointerOffset, CarAIMovementParametersHolderSO carAIParametersHolderSO)
     {
@@ -106,6 +116,13 @@ public class CarAI : MonoBehaviour
                     ChasePlayer();
                     _chaseTarget = true;
                     _findTarget = false;
+
+                    if (!_chasingStartedOnce)
+                    {
+                        OnAIStartChasing?.Invoke();
+                        _chasingStartedOnce = true;
+                    }
+                    
                 }
             }
             if(!isPlayerNear)
@@ -197,7 +214,13 @@ public class CarAI : MonoBehaviour
         return Vector3.Distance(_playerCar.transform.position, transform.position);
     }
 
-    public void DeactivateAI() => _active = false;
+    public void DeactivateAI()
+    {
+        _active = false;
+        _chaseTarget = false;
+        _findTarget = false;
+        OnAIDeactivated?.Invoke();
+    }
 
     private void OnDrawGizmos()
     {

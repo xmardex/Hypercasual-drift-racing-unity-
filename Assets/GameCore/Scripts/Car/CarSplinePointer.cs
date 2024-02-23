@@ -43,10 +43,6 @@ public class CarSplinePointer : MonoBehaviour
 
         transform.position = currentPosition;
     }
-    public void SetMaxDistance(float newDistance)
-    {
-        _maxDistance = newDistance;
-    }
 
     public void ShowInGUIProgress(bool showInGUI)
     {
@@ -62,6 +58,11 @@ public class CarSplinePointer : MonoBehaviour
         _distancePercentage = newDistance;
     }
     
+    public void SetMaxDistance(float maxDistance)
+    {
+        _maxDistance = maxDistance;
+    }
+
     private void OnGUI()
     {
         if (_showInGUI)

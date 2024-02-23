@@ -23,6 +23,7 @@ public class CarStuck : MonoBehaviour
     private CarController _carController;
 
     private Coroutine _carCheckForRespawnIE;
+    private bool _stuckProcessing;
 
     private bool _checkForStuck = false;
     private int _playerCarLayer;
@@ -54,13 +55,17 @@ public class CarStuck : MonoBehaviour
     {
         if (_checkForStuck)
         {
-            if (_carController.CarVelocityMagnitude <= _minCarVelocityToStuck)
+            if (_carController.CarVelocityMagnitude <= _minCarVelocityToStuck && !_stuckProcessing)
+            {
                 _carCheckForRespawnIE = StartCoroutine(CarCheckForRespawnIE());
-            else if (_carCheckForRespawnIE != null)
+            }
+            if (_carCheckForRespawnIE != null && _carController.CarVelocityMagnitude > _minCarVelocityToStuck)
+            {
+                _stuckProcessing = false;
                 StopCoroutine(_carCheckForRespawnIE);
+            }
         }
     }
-
     private IEnumerator WaitBeforCheckStuckIE()
     {
         _checkForStuck = false;
@@ -70,6 +75,8 @@ public class CarStuck : MonoBehaviour
 
     private IEnumerator CarCheckForRespawnIE()
     {
+        _stuckProcessing = true;
+
         float t = 0;
         while (_checkForStuck)
         {
@@ -98,6 +105,8 @@ public class CarStuck : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
+
+        _stuckProcessing = false;
     }
 
     private IEnumerator CarRespawnIE()
@@ -113,6 +122,7 @@ public class CarStuck : MonoBehaviour
         if (initialWheelRotations.Count > 0) 
             initialWheelRotations.Clear();
 
+
         _carController.RB.isKinematic = true;
         foreach (Rigidbody wheel in _wheels)
         {
@@ -123,11 +133,13 @@ public class CarStuck : MonoBehaviour
 
         ResetCarOnSpline();
 
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+
         for (int i = 0; i < _blinkAmount*2; i++)
         {
             if(i == 0)
             {
-                yield return new WaitForSecondsRealtime(0.1f);
                 _carController.RB.isKinematic = false;
                 for (int w = 0; w < _wheels.Length; w++)
                 {
