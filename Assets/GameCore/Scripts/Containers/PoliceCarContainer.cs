@@ -9,6 +9,7 @@ public class PoliceCarContainer
     public Transform spawnPoint;
     public CarAI carPrefab;
     public CarAIParametersSO carAIParametersSO;
+    public float resetSplineDistance;
 
     public CarAI SpawnCar()
     {

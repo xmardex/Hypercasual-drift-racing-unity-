@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/LushkinR.meta
 guid: f82fc06d939294ea58aad8a59c284281
+========
+guid: a2a7540ec4650c74fbbf276d68fcb924
+>>>>>>>> _newFog:Assets/MeshCombiner/Scripts.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

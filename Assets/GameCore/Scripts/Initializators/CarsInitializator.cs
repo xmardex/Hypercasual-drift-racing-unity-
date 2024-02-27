@@ -49,6 +49,7 @@ public class CarsInitializator : MonoBehaviour
             CarAI policeCar = car.SpawnCar();
             policeCar.Initialize(playerCar, car.carAIParametersSO, levelPlayerDetectionDistance, levelPlayerPointerOffset, car.carAIMovementParametersHolder);
             policeCar.GetComponent<CarReferences>().CarHealth.EnableHealthSystem(_useHP);
+            policeCar.GetComponent<CarAIStuck>().SetResetDistance(car.resetSplineDistance);
             _allAICars.Add(policeCar);
             _allCars.Add(policeCar.GetComponent<CarController>());
         }

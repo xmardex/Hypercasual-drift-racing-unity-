@@ -40,6 +40,12 @@ public class CarAIStuck : MonoBehaviour
             return;
         }
     }
+
+    public void SetResetDistance(float _distance)
+    {
+        _resetSplineDistanceOffsetFromPlayer = _distance;
+    }
+
     public void FixedUpdate()
     {
         if (_carAI.IsFinding)
