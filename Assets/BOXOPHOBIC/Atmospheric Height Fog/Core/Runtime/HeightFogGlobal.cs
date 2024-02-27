@@ -149,7 +149,7 @@ namespace AtmosphericHeightFog
 
         void OnEnable()
         {
-            gameObject.name = "Height Fog Global";
+            gameObject.name = "_fog";
 
             if (!manualPositionAndScale)
             {

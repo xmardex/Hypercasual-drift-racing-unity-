@@ -13,9 +13,10 @@ public class SplineColoringManager : MonoBehaviour
     MaterialPropertyBlock propBlock;
     public void Initialize()
     {
+        InitColors();
         if (ValidateParams(_spheres))
         {
-            InitColors();
+            
         }
     }
 

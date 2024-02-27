@@ -1130,6 +1130,9 @@
         },
         {
             "m_Id": "66d3e81f235f4834a1e385f2f520a914"
+        },
+        {
+            "m_Id": "0719af7b1eba4e348744a9b6a0026a90"
         }
     ],
     "m_GroupDatas": [
@@ -6027,6 +6030,9 @@
             },
             {
                 "m_Id": "72b3f653b1c04c03ad5f6574a6a8b36c"
+            },
+            {
+                "m_Id": "0719af7b1eba4e348744a9b6a0026a90"
             }
         ]
     },
@@ -6864,6 +6870,40 @@
         "z": 0.0,
         "w": 0.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "0719af7b1eba4e348744a9b6a0026a90",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.AlphaClipThreshold",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "46d7b4e7e05f439b8509e797d2387994"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.AlphaClipThreshold"
 }
 
 {
@@ -14427,6 +14467,21 @@
         "e32": 0.0,
         "e33": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "46d7b4e7e05f439b8509e797d2387994",
+    "m_Id": 0,
+    "m_DisplayName": "Alpha Clip Threshold",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "AlphaClipThreshold",
+    "m_StageCapability": 2,
+    "m_Value": 0.5,
+    "m_DefaultValue": 0.5,
+    "m_Labels": []
 }
 
 {
@@ -23219,10 +23274,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 14857.9990234375,
-            "y": 11812.9990234375,
-            "width": 115.998046875,
-            "height": 34.0009765625
+            "x": 14835.0,
+            "y": 11847.0,
+            "width": 116.0,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -26641,7 +26696,7 @@
     "m_ActiveSubTarget": {
         "m_Id": "77e4dbd0be204ae799301b831108a4a1"
     },
-    "m_AllowMaterialOverride": false,
+    "m_AllowMaterialOverride": true,
     "m_SurfaceType": 1,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
