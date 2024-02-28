@@ -27,6 +27,8 @@ public class CarAIStuck : MonoBehaviour
 
     private Coroutine _carCheckForRespawnIE;
 
+    private bool _isObjectVisible;
+
     private void Awake()
     {
         _carAI = GetComponent<CarAI>();
@@ -80,7 +82,8 @@ public class CarAIStuck : MonoBehaviour
             yield return null;
         }
 
-         StartCoroutine(CarRespawnIE());
+        if(!_isObjectVisible)
+            StartCoroutine(CarRespawnIE());
         
         _stuckProcessing = false;
     }
@@ -148,5 +151,15 @@ public class CarAIStuck : MonoBehaviour
     private float DistanceToPlayer()
     {
         return Vector3.Distance(_carAI.transform.position, _carAI.PlayerCar.transform.position);
+    }
+
+    void OnBecameVisible()
+    {
+        _isObjectVisible = true;
+    }
+
+    void OnBecameInvisible()
+    {
+        _isObjectVisible = false;
     }
 }

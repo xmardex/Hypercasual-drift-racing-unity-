@@ -1,4 +1,4 @@
-public static class Constants 
+﻿public static class Constants 
 {
     //TAGS
     public const string ROAD_SPLINE_CONTAINER_TAG = "roadSpline";
@@ -9,4 +9,11 @@ public static class Constants
 
     //FLOATS
     public const float HEALTH_BAR_LERP_SPEED = 0.5f;
+    public const float ON_EXPLODE_DAMAGE_MAX_DAMAGE_DIVIDER = 3;
+
+    //RESET DISTANCES
+    public const float ROAD_SPLINE_LENGTH_ETALON = 3483.976f;
+    public const float POLICE_RESET_DISTANCE_ON_SPLINE_K = 0.015f;
+    public const float PLAYER_RESET_DISTANCE_ON_SPLINE_K = 0.002f; 
+
 }

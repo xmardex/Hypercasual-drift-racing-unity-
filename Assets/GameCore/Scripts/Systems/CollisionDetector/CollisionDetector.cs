@@ -4,7 +4,11 @@ using System;
 public class CollisionDetector : MonoBehaviour
 {
     [SerializeField] private LayerMask _allowedLayers;
+    [SerializeField] private bool _debugAllCollision;
+    [SerializeField] private bool _useTrigger;
     public Action<Collider, float> OnCollideWithSomething;
+
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -12,6 +16,18 @@ public class CollisionDetector : MonoBehaviour
         {
             float collisionFactor = CalculateCollisionForce(collision);
             OnCollideWithSomething?.Invoke(collision.collider, collisionFactor);
+        }
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (_debugAllCollision)
+            Debug.Log(collider.gameObject.name);
+
+        if (IsCollisionAllowed(collider))
+        {
+            float collisionFactor = 0;
+            OnCollideWithSomething?.Invoke(collider, collisionFactor);
         }
     }
 

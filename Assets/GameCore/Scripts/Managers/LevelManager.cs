@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private bool _useHP;
+    [SerializeField] private LevelSO _levelSO;
     [SerializeField] private SplineColoringManager _splineColoringManager;
     [SerializeField] private LevelStateManager _stateManager;
     [SerializeField] private UILevelManager _uiLevelManager;

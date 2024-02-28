@@ -45,6 +45,11 @@ public class CarStuck : MonoBehaviour
         StartCoroutine(WaitBeforCheckStuckIE());
     }
 
+    public void SetResetDistance(float newDistance)
+    {
+        _splineDistanceFromPointerOffset = newDistance;
+    }
+
     public void StopCheck()
     {
         StopAllCoroutines();
@@ -63,6 +68,17 @@ public class CarStuck : MonoBehaviour
             {
                 _stuckProcessing = false;
                 StopCoroutine(_carCheckForRespawnIE);
+            }
+            if (IsOutOfTrack())
+            {
+                if (_carCheckForRespawnIE != null)
+                {
+                    StopCoroutine(_carCheckForRespawnIE);
+                    _stuckProcessing = false;
+                }
+
+                if(!_stuckProcessing)
+                    CarOutOfTrackRespawn();
             }
         }
     }
@@ -87,13 +103,13 @@ public class CarStuck : MonoBehaviour
                     _levelManager.CarStuckWithPolice();
                     yield break;
                 }
-                else if (IsOutOfTrack())
-                {
-                    _levelManager.CarOffRoad();
-                    StartCoroutine(CarRespawnIE());
-                    StartCoroutine(WaitBeforCheckStuckIE());
-                    yield break;
-                }
+                //else if (IsOutOfTrack())
+                //{
+                //    _levelManager.CarOffRoad();
+                //    StartCoroutine(CarRespawnIE());
+                //    StartCoroutine(WaitBeforCheckStuckIE());
+                //    yield break;
+                //}
                 else
                 {
                     _levelManager.CarStuckSimple();
@@ -107,6 +123,14 @@ public class CarStuck : MonoBehaviour
         }
 
         _stuckProcessing = false;
+    }
+
+    private void CarOutOfTrackRespawn() 
+    {
+        _stuckProcessing = true;
+        _levelManager.CarOffRoad();
+        StartCoroutine(CarRespawnIE());
+        StartCoroutine(WaitBeforCheckStuckIE());
     }
 
     private IEnumerator CarRespawnIE()
@@ -135,6 +159,8 @@ public class CarStuck : MonoBehaviour
 
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
+
+        _stuckProcessing = false;
 
         for (int i = 0; i < _blinkAmount*2; i++)
         {
@@ -196,11 +222,9 @@ public class CarStuck : MonoBehaviour
 
     private bool IsOutOfTrack()
     {
-        float xDifference = Mathf.Abs(_carController.transform.position.x - _carSplinePointer.transform.position.x);
-        float yDifference = Mathf.Abs(_carController.transform.position.x - _carSplinePointer.transform.position.x);
-        float zDifference = Mathf.Abs(_carController.transform.position.x - _carSplinePointer.transform.position.x);
+        float yDifference = Mathf.Abs(_carController.transform.position.y - _carSplinePointer.transform.position.y);
 
-        return xDifference > _limitPointerDistanceToReset.x || yDifference > _limitPointerDistanceToReset.y || zDifference > _limitPointerDistanceToReset.z;
+        return yDifference > _limitPointerDistanceToReset.y;
 
     }
 

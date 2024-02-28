@@ -41,9 +41,12 @@ public class CarDeath : MonoBehaviour
         {
             //play fx should be "play on awake"=true and loop=false
             if (_explodeFX != null)
+            {
                 _explodeFX.gameObject.SetActive(true);
+                _explodeFX.Play();
+            }
 
-            _carCollider.enabled = false;
+                _carCollider.enabled = false;
             // flip car parts to dead one
             for (int i = 0; i < _aliveCarObjects.Length; i++)
             {
@@ -96,7 +99,7 @@ public class CarDeath : MonoBehaviour
                 {
                     if(damagableEntity != _carReferences.CarHealth && !damagableEntity.IsDead)
                     {
-                        damagableEntity.Damage(damagableEntity.MaxHP);
+                        damagableEntity.Damage(damagableEntity.MaxHP/Constants.ON_EXPLODE_DAMAGE_MAX_DAMAGE_DIVIDER);
                     }
                 }
                 //stop traffic near

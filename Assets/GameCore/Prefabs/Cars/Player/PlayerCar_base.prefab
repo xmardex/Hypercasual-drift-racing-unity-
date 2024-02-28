@@ -1045,7 +1045,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -6007,7 +6007,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -16972,7 +16972,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -27038,7 +27038,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -31799,7 +31799,7 @@ MonoBehaviour:
   - {fileID: 4779742729593713556}
   airDrag: 0
   UpForce: 0
-  SkidEnable: 15
+  SkidEnable: 7
   skidWidth: 0.1
 --- !u!114 &8778706503470417953
 MonoBehaviour:
@@ -31878,7 +31878,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _allowedLayers:
     serializedVersion: 2
-    m_Bits: 704
+    m_Bits: 8896
+  _debugAllCollision: 0
+  _useTrigger: 0
 --- !u!114 &2047393568466727466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31912,7 +31914,7 @@ MonoBehaviour:
   _blinkDuration: 0.25
   _blinkAmount: 10
   _splineDistanceFromPointerOffset: -0.002
-  _minCarVelocityToStuck: 1
+  _minCarVelocityToStuck: 2.5
   _resetHeightOffset: 3
   _policeCarsDetectDistance: 12
   _ignoringOnBlinkLayers: 0600000007000000
@@ -32188,7 +32190,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 055de6cccad442f4582b393344a88e5f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 0.84416765
+  m_Pitch: 1.0279653
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -32380,7 +32382,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 2c3d914dbaa4b7d4a90dedb7e6ea952a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
-  m_Pitch: 0.84416765
+  m_Pitch: 1.0279653
   Loop: 1
   Mute: 1
   Spatialize: 0

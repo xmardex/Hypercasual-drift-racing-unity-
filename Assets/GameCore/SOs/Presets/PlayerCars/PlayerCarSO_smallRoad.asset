@@ -16,10 +16,10 @@ MonoBehaviour:
   _steerDumpingSpeed: 30
   _autoSpeed: 750
   _brakeToThisVelocityMagnitudeOnAutoMove: 35
-  _turn: 3000
-  _speed: 1400
+  _turn: 2400
+  _speed: 1600
   _brake: 2000
-  _turnAngle: 40
-  _distanceToPointer: 13
+  _turnAngle: 33
+  _distanceToPointer: 12
   _friction: 2300
-  _dragAmount: 4.5
+  _dragAmount: 4

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class CarsInitializator : MonoBehaviour
 {
@@ -22,9 +23,18 @@ public class CarsInitializator : MonoBehaviour
     private List<CarAI> _allAICars;
     public List<CarAI> AllAICars => _allAICars;
 
+    private SplineContainer _roadSpline;
+
+    private float _playerResetDistance;
+    private float _carAIResetDistance;
+
     private void Awake()
     {
         _prespawnedPlayer = GameObject.FindWithTag(Constants.PLAYER_CAR_TAG)?.GetComponent<CarController>();
+        _roadSpline = GameObject.FindGameObjectWithTag(Constants.ROAD_SPLINE_CONTAINER_TAG).GetComponent<SplineContainer>();
+
+        CalculateResetDistances();
+
         if (_prespawnedPlayer == null)
         {
             Debug.LogError("Use prespawned player or spawn one");
@@ -39,7 +49,7 @@ public class CarsInitializator : MonoBehaviour
         CarController playerCar = _spawnPlayer ? _playerCarContainer.SpawnCar() : _prespawnedPlayer;
         playerCar.Initialize();
         playerCar.GetComponent<CarReferences>().CarHealth.EnableHealthSystem(_useHP);
-
+        playerCar.GetComponent<CarStuck>().SetResetDistance(_playerResetDistance);
         _allCars.Add(playerCar);
 
         foreach (PoliceCarContainer car in _policeCarsContainers)
@@ -49,7 +59,8 @@ public class CarsInitializator : MonoBehaviour
             CarAI policeCar = car.SpawnCar();
             policeCar.Initialize(playerCar, car.carAIParametersSO, levelPlayerDetectionDistance, levelPlayerPointerOffset, car.carAIMovementParametersHolder);
             policeCar.GetComponent<CarReferences>().CarHealth.EnableHealthSystem(_useHP);
-            policeCar.GetComponent<CarAIStuck>().SetResetDistance(car.resetSplineDistance);
+            Debug.Log(_carAIResetDistance);
+            policeCar.GetComponent<CarAIStuck>().SetResetDistance(_carAIResetDistance);
             _allAICars.Add(policeCar);
             _allCars.Add(policeCar.GetComponent<CarController>());
         }
@@ -63,6 +74,16 @@ public class CarsInitializator : MonoBehaviour
         {
             car.SetCanMove(enable);
         }
+    }
+
+    private void CalculateResetDistances()
+    {
+        float roadSplineLength = _roadSpline.Spline.GetLength();
+        _playerResetDistance = (Constants.ROAD_SPLINE_LENGTH_ETALON / roadSplineLength) * Constants.PLAYER_RESET_DISTANCE_ON_SPLINE_K;
+        _carAIResetDistance = (Constants.ROAD_SPLINE_LENGTH_ETALON / roadSplineLength) * Constants.POLICE_RESET_DISTANCE_ON_SPLINE_K;
+        Debug.Log($"playerRD: {_playerResetDistance} policeRD: {_carAIResetDistance}");
+        _playerResetDistance = -_playerResetDistance;
+        _carAIResetDistance = -_carAIResetDistance;
     }
 
 }

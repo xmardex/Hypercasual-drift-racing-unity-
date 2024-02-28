@@ -63,8 +63,8 @@ public class CameraManager : MonoBehaviour
     {
         foreach(CameraLevelPosition cameraLevelPosition in _cameraLevelPositions)
         {
-            cameraLevelPosition._virtualCamera.LookAt = _playerCarController.transform;
-            cameraLevelPosition._virtualCamera.Follow = _playerCarController.transform;
+            cameraLevelPosition.virtualCamera.LookAt = _playerCarController.transform;
+            cameraLevelPosition.virtualCamera.Follow = _playerCarController.transform;
         }
         _chasingCamera.LookAt = _playerCarController.transform;
         _chasingCamera.Follow = _playerCarController.transform;
@@ -85,20 +85,18 @@ public class CameraManager : MonoBehaviour
     public void LateUpdate()
     {
         CheckForChase();
-        if (!_isChasingCameraActive)
+        UpdateCameraHeight();
+        if (_playerCarSplinePointer.DistancePercentage > _nextCameraPosition.pointerDistanceToActivate)
         {
-            UpdateCameraHeight();
-            if (_playerCarSplinePointer.DistancePercentage > _nextCameraPosition._pointerDistanceToActivate)
-            {
-                SwitchCameraToNext();
-            }
+            SwitchCameraToNext();
         }
+
     }
 
     private void SwitchCameraToNext()
     {
-        _currentCameraPosition._virtualCamera.Priority = _disabledCameraPriority;
-        _nextCameraPosition._virtualCamera.Priority = _activeCameraPriority;
+        _currentCameraPosition.virtualCamera.Priority = _disabledCameraPriority;
+        _nextCameraPosition.virtualCamera.Priority = _nextCameraPosition.overridePriority > 0 ? _nextCameraPosition.overridePriority : _activeCameraPriority;
         _currentCameraPosition = _nextCameraPosition;
         _currentPositionIndex++;
         if (_currentPositionIndex + 1 < _cameraLevelPositions.Length)
@@ -147,13 +145,11 @@ public class CameraManager : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(_playerCarController.transform.position, _chasingDistanceToActivateCamera, _carsAILayerMask);
 
         bool isChasingAny = false;
-        CarAI carAI = null;
         foreach (Collider col in colliders)
         {
-            carAI = col.GetComponent<CarAI>();
-            isChasingAny = carAI.IsChasing;
             if (isChasingAny)
                 break;
+            isChasingAny = true; 
         }
 
         if (isChasingAny)
@@ -199,6 +195,7 @@ public class CameraManager : MonoBehaviour
 [Serializable]
 public class CameraLevelPosition
 {
-    public float _pointerDistanceToActivate;
-    public CinemachineVirtualCamera _virtualCamera;
+    public float pointerDistanceToActivate;
+    public CinemachineVirtualCamera virtualCamera;
+    public int overridePriority;
 }
