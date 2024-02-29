@@ -47,16 +47,16 @@ public class CarHealth : DamagableEntity
 
     private void ProcessCarHit(Collider hit, float hitFactor)
     {
-        bool collideWithOtherCar = hit.gameObject.TryGetComponent(out CarHealth otherCarHealth);
-        bool collideWithProps = hit.gameObject.TryGetComponent(out PropsHealth hittedPropsHealth);
+        //bool collideWithOtherCar = hit.gameObject.TryGetComponent(out CarHealth otherCarHealth);
+        //bool collideWithProps = hit.gameObject.TryGetComponent(out PropsHealth hittedPropsHealth);
 
-        if (collideWithProps)
-            SendDamageTo(hitFactor, hittedPropsHealth);
-        else
-        {
+        //if (collideWithProps)
+        //    SendDamageTo(hitFactor, hittedPropsHealth);
+        //else
+        //{
             //Cars and static obstacle
-            ReciveDamageFrom(hitFactor, collideWithOtherCar ? otherCarHealth : null);
-        }
+            ReciveDamageFactor(hitFactor);
+        //}
 
         //TODO: Add here other collide scenario
 

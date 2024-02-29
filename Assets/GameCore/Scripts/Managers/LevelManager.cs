@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,8 @@ public class LevelManager : MonoBehaviour
 
     private bool _loseGame = false;
     private bool _winGame = false;
+
+    public Action OnGameEnd;
 
     private void Awake()
     {
@@ -69,6 +72,7 @@ public class LevelManager : MonoBehaviour
         _stateManager.ChangeState(LevelStateType.loseGame);
         //TODO: change to lose canvas
         _uiLevelManager.ActivateCanvas(UICanvasType.lose, true);
+        OnGameEnd?.Invoke();
     }
 
     private void WinGame()
@@ -78,6 +82,7 @@ public class LevelManager : MonoBehaviour
         _stateManager.ChangeState(LevelStateType.winGame);
         //TODO: change to win canvas
         _uiLevelManager.ActivateCanvas(UICanvasType.win, true);
+        OnGameEnd?.Invoke();
     }
 
     private void RetryLevel()

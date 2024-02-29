@@ -42,6 +42,8 @@ public class CarStuck : MonoBehaviour
         _carSplinePointer = _carController.CarSplinePointer;
         _splineContainer = _carSplinePointer.SplineContainer;
 
+        _levelManager.OnGameEnd += ForcedEnableMeshes;
+
         StartCoroutine(WaitBeforCheckStuckIE());
     }
 
@@ -188,6 +190,12 @@ public class CarStuck : MonoBehaviour
             Physics.IgnoreLayerCollision(_playerCarLayer, layer, false);
     }
 
+    public void ForcedEnableMeshes()
+    {
+        foreach (MeshRenderer renderer in _meshRenderers)
+            renderer.enabled = true;
+    }
+
     private void ResetCarOnSpline()
     {
         float resetOnDistancePercentage = _carSplinePointer.DistancePercentage + _splineDistanceFromPointerOffset;
@@ -226,6 +234,12 @@ public class CarStuck : MonoBehaviour
 
         return yDifference > _limitPointerDistanceToReset.y;
 
+    }
+
+    private void OnDestroy()
+    {
+        if(_levelManager != null)
+            _levelManager.OnGameEnd -= ForcedEnableMeshes;
     }
 
     //private void OnDrawGizmos()

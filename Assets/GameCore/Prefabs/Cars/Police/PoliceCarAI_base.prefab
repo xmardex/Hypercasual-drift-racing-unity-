@@ -420,7 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _allowedLayers:
     serializedVersion: 2
-    m_Bits: 9920
+    m_Bits: 75456
   _debugAllCollision: 0
   _useTrigger: 0
 --- !u!114 &4169616207059293390
@@ -688,8 +688,8 @@ ConfigurableJoint:
     serializedVersion: 4
     positionSpring: 0
     positionDamper: 0
-    maximumForce: 3.4028233e+38
-    useAcceleration: 0
+    maximumForce: 640000
+    useAcceleration: 1
   m_ZDrive:
     serializedVersion: 4
     positionSpring: 0
@@ -713,10 +713,10 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 0
-    positionDamper: 0
-    maximumForce: 0
-    useAcceleration: 0
+    positionSpring: 600000
+    positionDamper: 80000
+    maximumForce: 3.4028233e+38
+    useAcceleration: 1
   m_ProjectionMode: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -5727,8 +5727,8 @@ ConfigurableJoint:
     serializedVersion: 4
     positionSpring: 0
     positionDamper: 0
-    maximumForce: 3.4028233e+38
-    useAcceleration: 0
+    maximumForce: 640000
+    useAcceleration: 1
   m_ZDrive:
     serializedVersion: 4
     positionSpring: 0
@@ -5752,10 +5752,10 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 0
-    positionDamper: 0
-    maximumForce: 0
-    useAcceleration: 0
+    positionSpring: 600000
+    positionDamper: 80000
+    maximumForce: 3.4028233e+38
+    useAcceleration: 1
   m_ProjectionMode: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -21452,8 +21452,8 @@ ConfigurableJoint:
     serializedVersion: 4
     positionSpring: 0
     positionDamper: 0
-    maximumForce: 3.4028233e+38
-    useAcceleration: 0
+    maximumForce: 640000
+    useAcceleration: 1
   m_ZDrive:
     serializedVersion: 4
     positionSpring: 0
@@ -21477,10 +21477,10 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 0
-    positionDamper: 0
-    maximumForce: 0
-    useAcceleration: 0
+    positionSpring: 600000
+    positionDamper: 80000
+    maximumForce: 3.4028233e+38
+    useAcceleration: 1
   m_ProjectionMode: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
@@ -22297,8 +22297,8 @@ ConfigurableJoint:
     serializedVersion: 4
     positionSpring: 0
     positionDamper: 0
-    maximumForce: 3.4028233e+38
-    useAcceleration: 0
+    maximumForce: 640000
+    useAcceleration: 1
   m_ZDrive:
     serializedVersion: 4
     positionSpring: 0
@@ -22322,10 +22322,10 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 0
-    positionDamper: 0
-    maximumForce: 0
-    useAcceleration: 0
+    positionSpring: 600000
+    positionDamper: 80000
+    maximumForce: 3.4028233e+38
+    useAcceleration: 1
   m_ProjectionMode: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180

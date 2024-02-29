@@ -59,7 +59,6 @@ public class CarsInitializator : MonoBehaviour
             CarAI policeCar = car.SpawnCar();
             policeCar.Initialize(playerCar, car.carAIParametersSO, levelPlayerDetectionDistance, levelPlayerPointerOffset, car.carAIMovementParametersHolder);
             policeCar.GetComponent<CarReferences>().CarHealth.EnableHealthSystem(_useHP);
-            Debug.Log(_carAIResetDistance);
             policeCar.GetComponent<CarAIStuck>().SetResetDistance(_carAIResetDistance);
             _allAICars.Add(policeCar);
             _allCars.Add(policeCar.GetComponent<CarController>());
@@ -81,7 +80,7 @@ public class CarsInitializator : MonoBehaviour
         float roadSplineLength = _roadSpline.Spline.GetLength();
         _playerResetDistance = (Constants.ROAD_SPLINE_LENGTH_ETALON / roadSplineLength) * Constants.PLAYER_RESET_DISTANCE_ON_SPLINE_K;
         _carAIResetDistance = (Constants.ROAD_SPLINE_LENGTH_ETALON / roadSplineLength) * Constants.POLICE_RESET_DISTANCE_ON_SPLINE_K;
-        Debug.Log($"playerRD: {_playerResetDistance} policeRD: {_carAIResetDistance}");
+        //Debug.Log($"playerRD: {_playerResetDistance} policeRD: {_carAIResetDistance}");
         _playerResetDistance = -_playerResetDistance;
         _carAIResetDistance = -_carAIResetDistance;
     }

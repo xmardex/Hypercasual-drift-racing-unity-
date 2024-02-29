@@ -17,8 +17,10 @@ public abstract class DamagableEntity : MonoBehaviour, IDamageDealer, IHealth
     protected float _maxDamageFactorValue; //if maxDamageFactorValue is reached or more - deal maxDamage;
 
     public Action<float> OnHPChanged;
+    public Action<float> OnDamage;
+    public Action<float> OnHeal;
     public Action OnDead;
-    public Action<IDamageDealer, float> OnDamageRecive;
+    public Action<IDamageDealer, float> OnDamageFactorRecive;
 
     private bool _dead = false;
     public bool IsDead => _dead;
@@ -55,7 +57,13 @@ public abstract class DamagableEntity : MonoBehaviour, IDamageDealer, IHealth
     public virtual void ReciveDamageFrom(float damageFactor, IDamageDealer from)
     {
         Damage(CalculateActualDamage(damageFactor));
-        OnDamageRecive?.Invoke(from, damageFactor);
+        if(from != null)
+            OnDamageFactorRecive?.Invoke(from, damageFactor);
+    }
+
+    public virtual void ReciveDamageFactor(float damageFactor)
+    {
+        Damage(CalculateActualDamage(damageFactor));
     }
 
     public virtual void SendDamageTo(float damageFactor, IHealth to)
@@ -90,7 +98,7 @@ public abstract class DamagableEntity : MonoBehaviour, IDamageDealer, IHealth
     public virtual void Heal(float heal)
     {
         _currentHP = (CurrentHP + heal) > MaxHP ? MaxHP : (_currentHP + heal);
-
+        OnHeal?.Invoke(heal);
         OnHPChanged?.Invoke(_currentHP);
     }
 
@@ -98,6 +106,7 @@ public abstract class DamagableEntity : MonoBehaviour, IDamageDealer, IHealth
     {
         if (!_dead)
         {
+            OnDamage?.Invoke(damage);
             _currentHP = (CurrentHP - damage) < 0 ? 0 : (_currentHP - damage);
             if (_currentHP == 0)
             {

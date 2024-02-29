@@ -253,6 +253,14 @@ PrefabInstance:
       propertyPath: m_Drag
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 199479859917241110, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
+      propertyPath: m_Radius
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 199479859917241110, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
+      propertyPath: m_Center.y
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 328257203560105399, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
       propertyPath: m_Name
       value: PoliceCarAI_aletheia
@@ -263,6 +271,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 604070901570221073, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
       propertyPath: m_Drag
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603333926299407410, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
+      propertyPath: m_Radius
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603333926299407410, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
+      propertyPath: m_Center.y
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2693624534534884813, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
@@ -305,6 +321,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3233709341698732539, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
+      propertyPath: m_Radius
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233709341698732539, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
+      propertyPath: m_Center.y
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4671509024620608234, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -323,6 +347,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8362950110691272578, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
       propertyPath: m_Drag
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417388364478822058, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
+      propertyPath: m_Radius
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417388364478822058, guid: ddd49ea5499c4d9458ff58d5316394bb, type: 3}
+      propertyPath: m_Center.y
       value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents:

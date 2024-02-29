@@ -9,6 +9,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Camera _overlayCamera;
 
     [Space(20), Header("Camera fx:")]
+    [SerializeField] private float _minDamageToShake = 3;
     [SerializeField] private float _shakeIntensity = 5f;
     [SerializeField] private float _shakeDuration = 0.5f;
 
@@ -54,7 +55,7 @@ public class CameraManager : MonoBehaviour
         _playerCarReferences = GameObject.FindGameObjectWithTag(Constants.PLAYER_CAR_TAG).GetComponent<CarReferences>();
         _playerCarController = _playerCarReferences.CarController;
         _playerCarSplinePointer = _playerCarReferences.CarController.CarSplinePointer;
-        _playerCarReferences.CollisionDetector.OnCollideWithSomething += ShakeCurrentCamera;
+        _playerCarReferences.CarHealth.OnDamage += ShakeCurrentCamera;
         UpdateFollowAndLook();
         InitAllCamerasOffsets();
     }
@@ -165,17 +166,21 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    private void ShakeCurrentCamera(Collider hit, float hitFactor)
+    private void ShakeCurrentCamera(float damageValue)
     {
-        //TODO: May be use hitFactor for shakeIntensity
-        CinemachineVirtualCamera currentCamera = (CinemachineVirtualCamera)CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
-        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = currentCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        if(_shakeIE != null)
+        //Debug.Log(damageValue);
+        if (damageValue >= _minDamageToShake)
         {
-            StopCoroutine(_shakeIE);
-            Noise(cinemachineBasicMultiChannelPerlin, 0, 0);
+            //TODO: May be use hitFactor for shakeIntensity
+            CinemachineVirtualCamera currentCamera = (CinemachineVirtualCamera)CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
+            CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = currentCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            if (_shakeIE != null)
+            {
+                StopCoroutine(_shakeIE);
+                Noise(cinemachineBasicMultiChannelPerlin, 0, 0);
+            }
+            _shakeIE = StartCoroutine(ProcessShakeIE(cinemachineBasicMultiChannelPerlin));
         }
-        _shakeIE = StartCoroutine(ProcessShakeIE(cinemachineBasicMultiChannelPerlin));
     }
     private IEnumerator ProcessShakeIE(CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin)
     {

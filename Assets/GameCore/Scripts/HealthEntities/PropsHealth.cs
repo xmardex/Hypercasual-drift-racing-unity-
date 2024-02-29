@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PropsHealth : DamagableEntity
 {
-    [SerializeField] private GameObject _destroyFX;
+    [SerializeField] private CollisionDetector _collisionDetector;
 
-    private bool _isDestroyed;
+    private PropsExplode _explode;
+
+    private bool _isExploded;
 
     private void Start()
     {
@@ -15,29 +17,27 @@ public class PropsHealth : DamagableEntity
     private new void Initialize()
     {
         base.Initialize();
+        _explode = GetComponent<PropsExplode>();
         _currentHP = MaxHP;
-        OnDamageRecive += PropsHit;
+        _collisionDetector.OnCollideWithSomething += PropsHit;
     }
 
-    private void PropsHit(IDamageDealer damageDealer, float damageFactor)
+    private void PropsHit(Collider hitBy, float damageFactor)
     {
-        if (_currentHP == 0)
-            PropsDestroy();
-        if (damageDealer is IHealth damagable)
-            damageDealer.SendDamageTo(damageFactor, damagable);
-    }
+        //Debug.Log($"PROPS {gameObject.name} hit by {hitBy.gameObject.name} with factor {damageFactor}");
 
-    private void PropsDestroy()
-    {
-        _isDestroyed = true;
-        _destroyFX.transform.SetParent(null);
-        _destroyFX.SetActive(true);
-        Destroy(gameObject);
-        //explode
+        ReciveDamageFactor(damageFactor);
+
+        if (_currentHP == 0 && _explode != null && !_isExploded)
+        {
+            _explode.Explode();
+            _isExploded = true;
+        }
     }
 
     private void OnDestroy()
     {
-        OnDamageRecive -= PropsHit;
+        if(_collisionDetector !=null)
+            _collisionDetector.OnCollideWithSomething -= PropsHit;
     }
 }

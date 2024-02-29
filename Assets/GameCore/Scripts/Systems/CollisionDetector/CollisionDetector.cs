@@ -15,6 +15,10 @@ public class CollisionDetector : MonoBehaviour
         if (IsCollisionAllowed(collision.collider))
         {
             float collisionFactor = CalculateCollisionForce(collision);
+
+            if (_debugAllCollision)
+                Debug.Log($" {collision.gameObject.name} COLLIDE WITH {gameObject.name}");
+
             OnCollideWithSomething?.Invoke(collision.collider, collisionFactor);
         }
     }
@@ -22,7 +26,7 @@ public class CollisionDetector : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         if (_debugAllCollision)
-            Debug.Log(collider.gameObject.name);
+            Debug.Log($" {collider.gameObject.name} COLLIDE WITH {gameObject.name}");
 
         if (IsCollisionAllowed(collider))
         {

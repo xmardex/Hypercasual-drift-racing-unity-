@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f73b2a93cc0d2443b11b202c9773ca8, type: 3}
   m_Name: CarWheelsJointSO_player
   m_EditorClassIdentifier: 
-  _linearLimitSpring_spring: 9000000
-  _linearLimitSpring_damper: 900000
+  _linearLimitSpring_spring: 900000000
+  _linearLimitSpring_damper: 10000000
   _linearLimit_limit: 0.4
   _linearLimit_contactDistance: 2
-  _yDrive_positionSpring: 13000000
-  _yDrive_positionDamper: 1200000
-  _angularYZLimitSpring_spring: 5000000
-  _angularYZLimitSpring_damper: 900
-  _angularXLimitSpring_spring: 600000
-  _angularXLimitSpring_damper: 400
-  _angularZLimit_limit: 30
+  _yDrive_positionSpring: 64000000
+  _yDrive_positionDamper: 32000000
+  _angularYZLimitSpring_spring: 0
+  _angularYZLimitSpring_damper: 0
+  _angularXLimitSpring_spring: 0
+  _angularXLimitSpring_damper: 0
+  _angularZLimit_limit: 34

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 436d02c720b8ea346b218a89844ca168, type: 3}
-  m_Name: HealthSO_civilian
+  m_Name: HealthSO_circeStatic
   m_EditorClassIdentifier: 
   _maxHP: 100
-  _minDamage: 0
-  _maxDamage: 40
-  _minDamageFactorValue: 1
-  _maxDamageFactorValue: 100
+  _minDamage: 100
+  _maxDamage: 100
+  _minDamageFactorValue: 45
+  _maxDamageFactorValue: 45

@@ -31,8 +31,8 @@ TagManager:
   - GameElements
   - TrackWalls
   - CarsAIElements
-  - 
-  - 
+  - IgnoreSelf
+  - PlayerCarElements
   - 
   - 
   - 
