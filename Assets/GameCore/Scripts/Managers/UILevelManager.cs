@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,14 +13,18 @@ public class UILevelManager : MonoBehaviour
     [SerializeField] private Button _openSettingsBtn;
     [SerializeField] private Button _closeSettingsBtn;
 
+    [SerializeField] private TMP_Text _levelNumInGame, _levelNumInMenu;
+    [SerializeField] private Slider _levelProgressSlider;
+
+
     private Dictionary<UICanvasType, UICanvasContainer> _canvases = new Dictionary<UICanvasType, UICanvasContainer>();
 
-    public Action OnPlayBtnClick, OnRetryBtnClick, OnCollectBtnClick;
+    public Action OnPlayBtnClick, OnRetryBtnClick, OnCollectBtnClick, OnSettingsOpenBtnClick, OnSettingsCloseBtnClick;
 
     public void Initialize()
     {
         InitCanvases();
-        SetDefaulCanvas();
+        SetDefaultCanvas();
         SetListeners();
     }
     private void InitCanvases()
@@ -42,7 +45,7 @@ public class UILevelManager : MonoBehaviour
         }
     }
 
-    private void SetDefaulCanvas()
+    private void SetDefaultCanvas()
     {
         foreach(UICanvasContainer canvasContainer in canvasesContainers)
         {
@@ -56,8 +59,8 @@ public class UILevelManager : MonoBehaviour
         _retryBtn.onClick.AddListener(InvokeRetryButtonClick);
         _collectBtn.onClick.AddListener(InvokeCollectButtonClick);
 
-        _openSettingsBtn.onClick.AddListener(OnOpenSettingsButtonClick);
-        _closeSettingsBtn.onClick.AddListener(OnCloseSettingsButtonClick);
+        _openSettingsBtn.onClick.AddListener(InvokeSettingsOpenButtonClick);
+        _closeSettingsBtn.onClick.AddListener(InvokeSettingsCloseButtonClick);
     }
 
     public void ActivateCanvas(UICanvasType canvasType, bool activate)
@@ -75,13 +78,19 @@ public class UILevelManager : MonoBehaviour
     private void InvokeRetryButtonClick() => OnRetryBtnClick?.Invoke();
     private void InvokeCollectButtonClick() => OnCollectBtnClick?.Invoke();
 
-    private void OnOpenSettingsButtonClick()
+    private void InvokeSettingsOpenButtonClick() => OnSettingsOpenBtnClick?.Invoke();
+    private void InvokeSettingsCloseButtonClick() => OnSettingsCloseBtnClick?.Invoke();
+
+    public void ApplyLevelSO(LevelSO levelSO)
     {
-        ActivateCanvas(UICanvasType.settings, true);
+        string levelNumStr = levelSO.LevelNum.ToString();
+        _levelNumInMenu.text = $"Level: {levelNumStr}";
+        _levelNumInGame.text = levelNumStr;
     }
-    private void OnCloseSettingsButtonClick()
+
+    public void UpdateLevelProgerssSlider(float newValue)
     {
-        ActivateCanvas(UICanvasType.settings, false);
+        _levelProgressSlider.value = newValue;
     }
 
 }

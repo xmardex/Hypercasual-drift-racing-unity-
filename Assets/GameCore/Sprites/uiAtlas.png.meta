@@ -288,48 +288,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: progress_bar2
-      rect:
-        serializedVersion: 2
-        x: 3819
-        y: 47
-        width: 270
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 16, y: 0, z: 16, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8665bab4cc4310142a8c8ca74b02d25e
-      internalID: 1769601450
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: progress_bar
-      rect:
-        serializedVersion: 2
-        x: 3571
-        y: 7
-        width: 518
-        height: 38
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 16, y: 0, z: 16, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8eb14ed9cfe662d4d8ed540d7faa2250
-      internalID: 1593616226
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: icon_close
       rect:
         serializedVersion: 2
@@ -422,7 +380,7 @@ TextureImporter:
         width: 256
         height: 246
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -430,6 +388,27 @@ TextureImporter:
       bones: []
       spriteID: c89b52a2127070e4594903aa2d7e3069
       internalID: 67934798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: roundBox
+      rect:
+        serializedVersion: 2
+        x: 3820
+        y: 26
+        width: 258
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 37, y: 37, z: 37, w: 37}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 469b13668ec7b56409f1ce55854f9fa2
+      internalID: -1727855628
       vertices: []
       indices: 
       edges: []
@@ -457,6 +436,7 @@ TextureImporter:
       panel_gray: 389704392
       progress_bar: 1593616226
       progress_bar2: 1769601450
+      roundBox: -1727855628
       settings_icon: 239246161
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

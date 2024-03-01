@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _linearLimitSpring_spring: 900000000
   _linearLimitSpring_damper: 10000000
-  _linearLimit_limit: 0.4
+  _linearLimit_limit: 0.7
   _linearLimit_contactDistance: 2
-  _yDrive_positionSpring: 64000000
-  _yDrive_positionDamper: 32000000
+  _yDrive_positionSpring: 160000
+  _yDrive_positionDamper: 12000
   _angularYZLimitSpring_spring: 0
   _angularYZLimitSpring_damper: 0
   _angularXLimitSpring_spring: 0
   _angularXLimitSpring_damper: 0
-  _angularZLimit_limit: 34
+  _angularZLimit_limit: 32

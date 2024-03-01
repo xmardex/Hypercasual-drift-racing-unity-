@@ -11,6 +11,12 @@ public class LevelStateManager : MonoBehaviour
 
     private LevelState _currentState;
 
+    //LINKS:
+    private LevelPrestartState _prestartState;
+    private LevelStartState _startState;
+    private LevelLoseState _loseState;
+    private LevelWinState _winState;
+
     public void Initialize()
     {
         foreach (LevelStateContainer container in statesContainers)

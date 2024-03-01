@@ -774,8 +774,8 @@ MonoBehaviour:
   - {fileID: 4221694179766473403}
   - {fileID: 4286381577090373252}
   - {fileID: 8766927425039561048}
-  _roadRendere: {fileID: 0}
-  _executeInEditMode: 1
+  _roadRenderer: {fileID: 0}
+  _executeInEditMode: 0
 --- !u!1 &7745847359890701025
 GameObject:
   m_ObjectHideFlags: 0

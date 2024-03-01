@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -18,6 +19,8 @@ public class CarSplinePointer : MonoBehaviour
     public float DistancePercentage => _distancePercentage;
 
     private bool _showInGUI;
+
+    public Action<float> OnLevelDistancePercentageChange;
 
     public void Initialize(Transform carTransform, SplineContainer roadSpline)
     {
@@ -42,6 +45,8 @@ public class CarSplinePointer : MonoBehaviour
         Vector3 currentPosition = _splineContainer.EvaluatePosition(_distancePercentage);
 
         transform.position = currentPosition;
+
+        OnLevelDistancePercentageChange?.Invoke(_distancePercentage);
     }
 
     public void ShowInGUIProgress(bool showInGUI)

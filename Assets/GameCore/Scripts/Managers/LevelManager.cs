@@ -40,6 +40,7 @@ public class LevelManager : MonoBehaviour
         _playerCarReferences = _carsInitializator.PrespawnedPlayer.GetComponent<CarReferences>();
 
         _uiLevelManager.Initialize();
+        _uiLevelManager.ApplyLevelSO(_levelSO);
         _uiLevelManager.ActivateCanvas(UICanvasType.mainMenu, true);
 
         _carsInitializator.InitializeCars(_useHP, canMoveOnStart: false);
@@ -70,7 +71,6 @@ public class LevelManager : MonoBehaviour
         _loseGame = true;
         StopGame();
         _stateManager.ChangeState(LevelStateType.loseGame);
-        //TODO: change to lose canvas
         _uiLevelManager.ActivateCanvas(UICanvasType.lose, true);
         OnGameEnd?.Invoke();
     }
@@ -80,7 +80,6 @@ public class LevelManager : MonoBehaviour
         _winGame = true;
         StopGame();
         _stateManager.ChangeState(LevelStateType.winGame);
-        //TODO: change to win canvas
         _uiLevelManager.ActivateCanvas(UICanvasType.win, true);
         OnGameEnd?.Invoke();
     }
@@ -94,18 +93,31 @@ public class LevelManager : MonoBehaviour
     {
         _uiLevelManager.OnPlayBtnClick += StartGame;
         _uiLevelManager.OnRetryBtnClick += RetryLevel;
+        _uiLevelManager.OnSettingsOpenBtnClick += OpenSettings;
+        _uiLevelManager.OnSettingsCloseBtnClick += CloseSettings;
+
         _startTrigger.OnCarTriggerEnter += BeginRace;
         _finishTrigger.OnCarTriggerEnter += FinishRace;
         _playerCarReferences.CarHealth.OnDead += LoseGame;
+
+        _playerCarReferences.CarController.CarSplinePointer.OnLevelDistancePercentageChange +=
+            _uiLevelManager.UpdateLevelProgerssSlider;
     }
 
     private void UnsubscribeFromEvents()
     {
         _uiLevelManager.OnPlayBtnClick -= StartGame;
         _uiLevelManager.OnRetryBtnClick -= RetryLevel;
+
+        _uiLevelManager.OnSettingsOpenBtnClick -= OpenSettings;
+        _uiLevelManager.OnSettingsCloseBtnClick -= CloseSettings;
+
         _startTrigger.OnCarTriggerEnter -= BeginRace;
         _finishTrigger.OnCarTriggerEnter -= FinishRace;
         _playerCarReferences.CarHealth.OnDead -= LoseGame;
+
+        _playerCarReferences.CarController.CarSplinePointer.OnLevelDistancePercentageChange -= 
+            _uiLevelManager.UpdateLevelProgerssSlider;
     }
 
     public void CarStuckWithPolice()
@@ -130,6 +142,29 @@ public class LevelManager : MonoBehaviour
         _playerCarReferences.CarStuck.StopCheck();
         _carsInitializator.EnableMovementOnCars(false);
     }
+
+    private void OpenSettings()
+    {
+        PauseGame();
+        _uiLevelManager.ActivateCanvas(UICanvasType.settings, true);
+    }
+
+    private void CloseSettings()
+    {
+        UnPauseGame();
+        _uiLevelManager.ActivateCanvas(UICanvasType.settings, false);
+    }
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0.0f;
+    }
+
+    private void UnPauseGame()
+    {
+        Time.timeScale = 1.0f;
+    }
+
 
     private void OnDestroy()
     {
