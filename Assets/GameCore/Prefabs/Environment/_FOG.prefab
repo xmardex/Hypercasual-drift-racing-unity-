@@ -50,12 +50,12 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600981556301070669}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
@@ -111,13 +111,13 @@ MonoBehaviour:
   categoryFog: 1
   fogIntensity: 1
   fogAxisMode: 1
-  fogLayersMode: 10
+  fogLayersMode: 20
   fogCameraMode: 0
-  fogColorStart: {r: 0, g: 0.58431387, b: 1, a: 1}
-  fogColorEnd: {r: 0.8862745, g: 1.1921569, b: 1.4980392, a: 1}
-  fogColorDuo: 1
-  fogDistanceStart: -60
-  fogDistanceEnd: 60
+  fogColorStart: {r: 0.4279548, g: 0.50262165, b: 0.5566038, a: 1}
+  fogColorEnd: {r: 0.79408425, g: 0.9140653, b: 1.0327966, a: 1}
+  fogColorDuo: 0
+  fogDistanceStart: 0
+  fogDistanceEnd: 1000
   fogDistanceFalloff: 1
   fogHeightStart: 0
   fogHeightEnd: 15
@@ -132,16 +132,16 @@ MonoBehaviour:
   skyboxFogBottom: 0
   skyboxFogFill: 0
   categoryDirectional: 1
-  directionalIntensity: 1
+  directionalIntensity: 0
   directionalFalloff: 1
-  directionalColor: {r: 1, g: 0.53189665, b: 0.25, a: 1}
+  directionalColor: {r: 1, g: 1, b: 1, a: 1}
   categoryNoise: 1
-  noiseIntensity: 1
+  noiseIntensity: 0
   noiseMin: 0
-  noiseMax: 1
-  noiseScale: 30
+  noiseMax: 0
+  noiseScale: 0
   noiseSpeed: {x: 0.5, y: 0.5, z: 0}
-  noiseDistanceEnd: 30
+  noiseDistanceEnd: 0
   categoryAdvanced: 1
   jitterIntensity: 0
   renderPriority: 1

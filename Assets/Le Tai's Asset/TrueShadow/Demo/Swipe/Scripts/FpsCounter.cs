@@ -1,10 +1,8 @@
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace LeTai.Utils
 {
-[RequireComponent(typeof(Text))]
 public class FpsCounter : MonoBehaviour
 {
     const long FPS_SAMPLE_PERIOD = 500;

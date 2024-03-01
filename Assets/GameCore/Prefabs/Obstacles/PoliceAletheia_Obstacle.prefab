@@ -2051,6 +2051,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1759154663249310531}
     m_Modifications:
+    - target: {fileID: 1031463756709379696, guid: 5c6723df39d0d004abf8719508b0267b, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1031463756709379696, guid: 5c6723df39d0d004abf8719508b0267b, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1031463756709379696, guid: 5c6723df39d0d004abf8719508b0267b, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1031463756709379696, guid: 5c6723df39d0d004abf8719508b0267b, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1947728336743319713, guid: 5c6723df39d0d004abf8719508b0267b, type: 3}
       propertyPath: m_Layer
       value: 0

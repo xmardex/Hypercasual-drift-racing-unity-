@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private bool _useHP;
+    [SerializeField] private bool _enableDebug;
     [SerializeField] private LevelSO _levelSO;
     [SerializeField] private SplineColoringManager _splineColoringManager;
     [SerializeField] private LevelStateManager _stateManager;
@@ -26,6 +27,7 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         _splineColoringManager.Initialize();
+        Debug.unityLogger.logEnabled = _enableDebug;
     }
 
     private void Start()
