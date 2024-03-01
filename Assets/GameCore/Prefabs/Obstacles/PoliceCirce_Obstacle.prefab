@@ -1983,7 +1983,7 @@ MonoBehaviour:
   - {fileID: 3647408143604832446}
   - {fileID: 8044629381544871420}
   - {fileID: 6018875949672940002}
-  _deadObjecrs:
+  _deadObjects:
   - {fileID: 6311304104778310880}
   - {fileID: 2826262121556435460}
   - {fileID: 3267760058950051859}

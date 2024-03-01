@@ -11,7 +11,7 @@ public class CarsInitializator : MonoBehaviour
 
     [Space(20) , Header("AI Cars:")]
     [Header("It is set relative to the length of the spline, so you need to set it to the appropriate one by testing.")]
-    [Range(0f, 1f)] public float levelPlayerPointerOffset;
+    
 
     [Space(10)]
     [SerializeField] private float levelPlayerDetectionDistance;
@@ -27,15 +27,16 @@ public class CarsInitializator : MonoBehaviour
 
     private float _playerResetDistance;
     private float _carAIResetDistance;
+    public float _levelPlayerPointerOffset;
 
     private void Awake()
     {
         _prespawnedPlayer = GameObject.FindWithTag(Constants.PLAYER_CAR_TAG)?.GetComponent<CarController>();
         _roadSpline = GameObject.FindGameObjectWithTag(Constants.ROAD_SPLINE_CONTAINER_TAG).GetComponent<SplineContainer>();
 
-        CalculateResetDistances();
+        CalculateLevelSplineDistances();
 
-        if (_prespawnedPlayer == null)
+        if (_prespawnedPlayer == null && !_spawnPlayer)
         {
             Debug.LogError("Use prespawned player or spawn one");
             return;
@@ -57,7 +58,7 @@ public class CarsInitializator : MonoBehaviour
             if (!car.isActive)
                 continue;
             CarAI policeCar = car.SpawnCar();
-            policeCar.Initialize(playerCar, car.carAIParametersSO, levelPlayerDetectionDistance, levelPlayerPointerOffset, car.carAIMovementParametersHolder);
+            policeCar.Initialize(playerCar, car.carAIParametersSO, levelPlayerDetectionDistance, _levelPlayerPointerOffset, car.carAIMovementParametersHolder);
             policeCar.GetComponent<CarReferences>().CarHealth.EnableHealthSystem(_useHP);
             policeCar.GetComponent<CarAIStuck>().SetResetDistance(_carAIResetDistance);
             _allAICars.Add(policeCar);
@@ -75,12 +76,14 @@ public class CarsInitializator : MonoBehaviour
         }
     }
 
-    private void CalculateResetDistances()
+    private void CalculateLevelSplineDistances()
     {
         float roadSplineLength = _roadSpline.Spline.GetLength();
+
         _playerResetDistance = (Constants.ROAD_SPLINE_LENGTH_ETALON / roadSplineLength) * Constants.PLAYER_RESET_DISTANCE_ON_SPLINE_K;
         _carAIResetDistance = (Constants.ROAD_SPLINE_LENGTH_ETALON / roadSplineLength) * Constants.POLICE_RESET_DISTANCE_ON_SPLINE_K;
-        //Debug.Log($"playerRD: {_playerResetDistance} policeRD: {_carAIResetDistance}");
+        _levelPlayerPointerOffset = (Constants.ROAD_SPLINE_LENGTH_ETALON / roadSplineLength) * Constants.LEVEL_PLAYER_POINTER_OFFSET;
+
         _playerResetDistance = -_playerResetDistance;
         _carAIResetDistance = -_carAIResetDistance;
     }

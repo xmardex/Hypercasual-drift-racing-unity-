@@ -9,7 +9,7 @@ public class ExplodeBase : MonoBehaviour
     [SerializeField] private bool _deatachFX = true;
 
     [SerializeField] private GameObject[] _aliveObjects;
-    [SerializeField] private GameObject[] _deadObjecrs;
+    [SerializeField] private GameObject[] _deadObjects;
     [SerializeField] private Rigidbody[] _rbsToActivate;
 
     [SerializeField] private bool _useExplosionForce;
@@ -30,7 +30,7 @@ public class ExplodeBase : MonoBehaviour
             obj.SetActive(false);
         }
 
-        foreach (GameObject obj in _deadObjecrs)
+        foreach (GameObject obj in _deadObjects)
         {
             obj.transform.SetParent(null);
             obj.SetActive(true);

@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6579529821961183795
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7560438875587125832}
+  - component: {fileID: 1728731697596714215}
+  m_Layer: 0
+  m_Name: CarsInitializator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7560438875587125832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6579529821961183795}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1728731697596714215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6579529821961183795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9f089b40e7c821419db169786339273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPlayer: 0
+  _playerCarContainer:
+    _spawnPoint: {fileID: 0}
+    carPrefab: {fileID: 1028777115450721590, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
+  levelPlayerDetectionDistance: 32
+  _policeCarsContainers:
+  - isActive: 0
+    carAIMovementParametersHolder: {fileID: 11400000, guid: 29f8ce3fa9bd4ef468f68b8951db071c, type: 2}
+    spawnPoint: {fileID: 0}
+    carPrefab: {fileID: 715787065936881442, guid: fca378102305d4249bc89d9ae88c8afc, type: 3}
+    carAIParametersSO: {fileID: 11400000, guid: fe28aa3be81471a48897c09b806ad66c, type: 2}
+  - isActive: 0
+    carAIMovementParametersHolder: {fileID: 11400000, guid: 29f8ce3fa9bd4ef468f68b8951db071c, type: 2}
+    spawnPoint: {fileID: 0}
+    carPrefab: {fileID: 5043818689759666766, guid: 0401c3d5441ddd8468512646d6ceda1a, type: 3}
+    carAIParametersSO: {fileID: 11400000, guid: fe28aa3be81471a48897c09b806ad66c, type: 2}
+  _levelPlayerPointerOffset: 0

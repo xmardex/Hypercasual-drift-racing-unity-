@@ -7,7 +7,7 @@ public class SplineColoringManager : MonoBehaviour
     private int _maxBlocks = 20;
 
     [SerializeField] private GameObject[] _spheres;
-    [SerializeField] private Renderer _roadRendere;
+    [SerializeField] private Renderer _roadRenderer;
     [SerializeField] private bool _executeInEditMode = false;
 
     MaterialPropertyBlock propBlock;
@@ -45,7 +45,7 @@ public class SplineColoringManager : MonoBehaviour
                 propBlock.SetFloat($"_SphereRadius{i + 1}", sphereRadius);
             }
         }
-        _roadRendere.SetPropertyBlock(propBlock);
+        _roadRenderer.SetPropertyBlock(propBlock);
     }
 
     public bool ValidateParams(GameObject[] _spheres)

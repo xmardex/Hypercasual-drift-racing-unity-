@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &608794020397656656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4224765142220442958}
+  - component: {fileID: 5159899454278494782}
+  m_Layer: 0
+  m_Name: TrafficManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4224765142220442958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608794020397656656}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5159899454278494782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608794020397656656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41ef1a1df5b86404098c6809104f6154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trafficCars:
+  - {fileID: 4358189577911807055, guid: 0c1d30eb5874a434dabc85f38f5e1ec2, type: 3}
+  - {fileID: 4358189577911807055, guid: 16d594e4ac8d4004d82125f9389c6869, type: 3}
+  - {fileID: 4358189577911807055, guid: b656d133c09ab214b99dae6d67574a06, type: 3}
+  - {fileID: 4358189577911807055, guid: 901d301ca4050204ebc017f072b2420d, type: 3}
+  - {fileID: 4358189577911807055, guid: e88c68ef9dbd66f4490df1d30b6c564a, type: 3}
+  - {fileID: 4358189577911807055, guid: 8e1fc4b3cbfc2b6429775e00d765c7ec, type: 3}
+  - {fileID: 4358189577911807055, guid: 294278a5050c0ad4bb39b8eeb98a3993, type: 3}
+  - {fileID: 4358189577911807055, guid: d149e750d20b4e54a87a9a692ec2ddd3, type: 3}
+  - {fileID: 4358189577911807055, guid: 3c378d0b70f13fc48be549e12baaf1fc, type: 3}
+  - {fileID: 4358189577911807055, guid: 2ebdc47c3d6eeb84e983aeb855b3bf7b, type: 3}
+  - {fileID: 4358189577911807055, guid: 84ab8a20fbe569341b6079ac6161a74d, type: 3}
+  - {fileID: 4358189577911807055, guid: d76ea89d25af4b2498539309cfb76981, type: 3}
+  - {fileID: 4358189577911807055, guid: 88fa5d07196e8664b8f549adfd8cfd80, type: 3}
+  _trafficRoadContainers:
+  - name: road1
+    isActive: 1
+    carsCount: 10
+    lookAheadDistance: 0.002
+    spawnOffsetFromEnd: 0.1
+    roadSpline: {fileID: 0}
+    trafficRoadSO: {fileID: 11400000, guid: 97319c99143e5b54b9b931f02adabbd6, type: 2}
+  - name: road2
+    isActive: 1
+    carsCount: 8
+    lookAheadDistance: 0.002
+    spawnOffsetFromEnd: 0.1
+    roadSpline: {fileID: 0}
+    trafficRoadSO: {fileID: 11400000, guid: 97319c99143e5b54b9b931f02adabbd6, type: 2}
+  - name: road3
+    isActive: 1
+    carsCount: 25
+    lookAheadDistance: 0.002
+    spawnOffsetFromEnd: 0.1
+    roadSpline: {fileID: 0}
+    trafficRoadSO: {fileID: 11400000, guid: 97319c99143e5b54b9b931f02adabbd6, type: 2}

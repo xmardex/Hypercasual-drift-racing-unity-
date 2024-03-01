@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class TrafficManager : MonoBehaviour
 {
+    public TrafficCarController[] _trafficCars;
+
     [SerializeField] private TrafficRoadContainer[] _trafficRoadContainers;
 
     private List<TrafficCarController> _aciveTraficCars;
@@ -78,7 +80,7 @@ public class TrafficManager : MonoBehaviour
 
     private TrafficCarController GetRandomCarPrefab(TrafficRoadContainer trafficRoadContainer)
     {
-        return trafficRoadContainer.trafficCars[Random.Range(0, trafficRoadContainer.trafficCars.Length)];
+        return _trafficCars[Random.Range(0, _trafficCars.Length)];
     }
 }
 
@@ -96,5 +98,4 @@ public class TrafficRoadContainer
     public float spawnOffsetFromEnd;
     public SplineContainer roadSpline;
     public TrafficRoadSO trafficRoadSO;
-    public TrafficCarController[] trafficCars;
 }
