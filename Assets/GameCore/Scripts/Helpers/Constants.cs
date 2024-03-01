@@ -3,6 +3,7 @@
     //TAGS
     public const string ROAD_SPLINE_CONTAINER_TAG = "roadSpline";
     public const string PLAYER_CAR_TAG = "playerCar";
+    public const string PLAYER_CAR_ELEMENTS_TAG = "playerCarElement";
     public const string POLICE_CAR_TAG = "policeCar";
     public const string OVERLAY_CAMERA_TAG = "overlayCamera";
     public const string PLAYER_SPLINE_POINTER = "playerSplinePointer";

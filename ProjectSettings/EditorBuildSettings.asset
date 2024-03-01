@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/GameCore/Scenes/Levels/Level - 4.unity
+    guid: 10ff3db16e1ad41efab039ce43fa28d1
   m_configObjects: {}

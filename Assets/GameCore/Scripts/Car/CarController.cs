@@ -5,6 +5,7 @@ using UnityEngine.Splines;
 public class CarController : MonoBehaviour
 {
     [SerializeField] private PlayerCarSO _carSO;
+    [SerializeField] private bool _useMobileInput;
 
     [Header("Spline inputs")]
     [Header("Pointer:")]
@@ -200,7 +201,7 @@ public class CarController : MonoBehaviour
     {
         if (_carTarget != null && _canMove) 
         {
-            _gasValue = _isAI || !_isAI && Input.GetKey(KeyCode.W) ? 1 : 0;
+            _gasValue = _isAI || !_isAI && (_useMobileInput ? Input.touchCount > 0 : Input.GetKey(KeyCode.W)) ? 1 : 0;
             _carSplinePointer.UpdatePointerPosition(carVelocity.magnitude);
 
             TireVisuals();

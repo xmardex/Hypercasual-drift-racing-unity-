@@ -9964,7 +9964,7 @@ GameObject:
   - component: {fileID: 7514596228995117916}
   m_Layer: 16
   m_Name: RR rb
-  m_TagString: Untagged
+  m_TagString: playerCarElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10328,7 +10328,7 @@ GameObject:
   - component: {fileID: 1984725826640037962}
   m_Layer: 16
   m_Name: FR rb
-  m_TagString: Untagged
+  m_TagString: playerCarElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31028,7 +31028,7 @@ GameObject:
   - component: {fileID: 2139994719902667933}
   m_Layer: 16
   m_Name: RL rb
-  m_TagString: Untagged
+  m_TagString: playerCarElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31213,7 +31213,7 @@ GameObject:
   - component: {fileID: 1626468924922416018}
   m_Layer: 16
   m_Name: FL rb
-  m_TagString: Untagged
+  m_TagString: playerCarElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31562,6 +31562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _carSO: {fileID: 0}
+  _useMobileInput: 0
   _showInGUIPointerProgress: 0
   _carSplinePointerPrefab: {fileID: 2314871478315093814, guid: 979c80b474a597349acf045c820b7680, type: 3}
   _chaseSpot: {fileID: 1268315493166062318}
@@ -32190,7 +32191,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 055de6cccad442f4582b393344a88e5f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1.0267303
+  m_Pitch: 0.36615378
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -32382,7 +32383,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 2c3d914dbaa4b7d4a90dedb7e6ea952a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
-  m_Pitch: 1.0267303
+  m_Pitch: 0.36615378
   Loop: 1
   Mute: 1
   Spatialize: 0

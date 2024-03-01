@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _carSO: {fileID: 0}
+  _useMobileInput: 0
   _showInGUIPointerProgress: 0
   _carSplinePointerPrefab: {fileID: 327957079147428300, guid: fd7a8d3229d23644b82551d53d7652b3, type: 3}
   _chaseSpot: {fileID: 6727255069207191869}
@@ -390,6 +391,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69b5f1a127ff184888e3aa3fdb29763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _detectPlayerMask:
+    serializedVersion: 2
+    m_Bits: 73344
 --- !u!114 &4524431843710977275
 MonoBehaviour:
   m_ObjectHideFlags: 0

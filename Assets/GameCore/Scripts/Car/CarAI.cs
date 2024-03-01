@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(CarController))]
 public class CarAI : MonoBehaviour
 {
+    [SerializeField] private LayerMask _detectPlayerMask;
     private CarController _playerCar;
 
     private CarController _carController;
@@ -195,9 +196,10 @@ public class CarAI : MonoBehaviour
             Vector3 directionToPlayer = _playerCar.transform.position - transform.position;
 
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, directionToPlayer, out hit, _distanceForDetectPlayer))
+            if (Physics.Raycast(transform.position, directionToPlayer, out hit, _distanceForDetectPlayer, _detectPlayerMask))
             {
-                return hit.collider.CompareTag(Constants.PLAYER_CAR_TAG);
+                bool isPlayer = hit.collider.CompareTag(Constants.PLAYER_CAR_TAG) || hit.collider.CompareTag(Constants.PLAYER_CAR_ELEMENTS_TAG);
+                return isPlayer;
             }
             return false;
         }

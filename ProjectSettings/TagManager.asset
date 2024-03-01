@@ -15,6 +15,7 @@ TagManager:
   - finishRoad
   - policeCar
   - FxTemporaire
+  - playerCarElement
   layers:
   - Default
   - TransparentFX
