@@ -18,13 +18,37 @@ public class ExplodeBase : MonoBehaviour
     [SerializeField] private float _explosionUpwardModifier;
     [SerializeField] private Vector3 _explosionPositionOffset;
 
-    protected void Explode(DamagableEntity self, out List<DamagableEntity> damagableEntitiesAffected)
+    private bool _objectsReplaced = false;
+    private Vector3 actualExplosionPosition;
+
+    protected void Explode(DamagableEntity self, out List<DamagableEntity> damagableEntitiesAffected, out List<Rigidbody> explosionAffectedRBs)
     {
-        Vector3 actualExplosionPosition = transform.position + _explosionPositionOffset;
+        actualExplosionPosition = transform.position + _explosionPositionOffset;
+
+        SwitchToDead();
+
         damagableEntitiesAffected = new List<DamagableEntity>();
+        explosionAffectedRBs = new List<Rigidbody>();
 
+        Collider[] colliders = Physics.OverlapSphere(actualExplosionPosition, _explosionRadius);
+        foreach (Collider hit in colliders)
+        {
+            if (hit.TryGetComponent(out Rigidbody rb))
+            {
+                if(!hit.GetComponent<ConfigurableJoint>())
+                    explosionAffectedRBs.Add(rb);
+                    
+            }
+            DamagableEntity damagableEntity = hit.GetComponentInParent<DamagableEntity>();
+            if (damagableEntity != null && damagableEntity != self && !damagableEntitiesAffected.Contains(damagableEntity))
+            {
+                damagableEntitiesAffected.Add(damagableEntity);
+            }
+        }
+    }
 
-
+    protected void SwitchToDead()
+    {
         foreach (GameObject obj in _aliveObjects)
         {
             obj.SetActive(false);
@@ -38,7 +62,7 @@ public class ExplodeBase : MonoBehaviour
 
         foreach (ParticleSystem ep in _eplosionFXs)
         {
-            if(_deatachFX)
+            if (_deatachFX)
                 ep.gameObject.transform.SetParent(null);
             ep.gameObject.SetActive(true);
             ep.Play();
@@ -48,24 +72,16 @@ public class ExplodeBase : MonoBehaviour
         {
             rb.isKinematic = false;
         }
-
-        Collider[] colliders = Physics.OverlapSphere(actualExplosionPosition, _explosionRadius);
-        foreach (Collider hit in colliders)
-        {
-            if (hit.TryGetComponent(out Rigidbody rb))
-            {
-                if(!hit.GetComponent<ConfigurableJoint>())
-                    rb.AddExplosionForce(_explisionForce, actualExplosionPosition, _explosionRadius, _explosionUpwardModifier);
-            }
-            DamagableEntity damagableEntity = hit.GetComponentInParent<DamagableEntity>();
-            if (damagableEntity != null && damagableEntity != self && !damagableEntitiesAffected.Contains(damagableEntity))
-            {
-                damagableEntitiesAffected.Add(damagableEntity);
-            }
-        }
-
-        gameObject.SetActive(false);
     }
+
+    protected void ApplyExplosionForces(List<Rigidbody> explosionAffectedRBs)
+    {
+        foreach (var rb in explosionAffectedRBs)
+        {
+            rb.AddExplosionForce(_explisionForce, actualExplosionPosition, _explosionRadius, _explosionUpwardModifier);
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         Vector3 actualExplosionPosition = transform.position + _explosionPositionOffset;

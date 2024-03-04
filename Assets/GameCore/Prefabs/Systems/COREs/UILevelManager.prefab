@@ -87,7 +87,6 @@ GameObject:
   - component: {fileID: 7179839515457285728}
   - component: {fileID: 6355952745779986950}
   - component: {fileID: 3588921847327345172}
-  - component: {fileID: 6754503600316578097}
   m_Layer: 5
   m_Name: star4
   m_TagString: Untagged
@@ -152,36 +151,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6754503600316578097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 103238308975328946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 34.3
-  spread: 0
-  useGlobalAngle: 0
-  offsetAngle: 90
-  offsetDistance: 15.7
-  offset: {x: 0.000000935793, y: -15.7}
-  color: {r: 1, g: 0.71440893, b: 0, a: 0.3137255}
-  inset: 0
-  blendMode: 0
-  useCasterAlpha: 1
-  ignoreCasterColor: 0
-  colorBleedMode: 2
-  disableFitCompensation: 0
-  shadowAsSibling: 0
-  cutout: 0
-  baked: 0
-  modifiedFromInspector: 0
-  bakedShadows: []
 --- !u!1 &262799611170085817
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +228,7 @@ GameObject:
   - component: {fileID: 1722649654448709945}
   - component: {fileID: 3260113027558345924}
   m_Layer: 5
-  m_Name: balance_text
+  m_Name: collectedCoins_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1049,7 +1018,6 @@ GameObject:
   - component: {fileID: 7931771336095118346}
   - component: {fileID: 1614172232057041741}
   - component: {fileID: 3956658929668039142}
-  - component: {fileID: 8318233171067837575}
   m_Layer: 5
   m_Name: levelNumInGame_text
   m_TagString: Untagged
@@ -1174,36 +1142,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8318233171067837575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1436470684092233019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 6
-  spread: 0
-  useGlobalAngle: 0
-  offsetAngle: 90
-  offsetDistance: 6
-  offset: {x: 0.00000035762793, y: -6}
-  color: {r: 0, g: 0, b: 0, a: 0.6}
-  inset: 0
-  blendMode: 0
-  useCasterAlpha: 1
-  ignoreCasterColor: 0
-  colorBleedMode: 2
-  disableFitCompensation: 0
-  shadowAsSibling: 0
-  cutout: 0
-  baked: 0
-  modifiedFromInspector: 0
-  bakedShadows: []
 --- !u!1 &1574709836057200482
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,7 +1662,6 @@ GameObject:
   - component: {fileID: 5166802960631237483}
   - component: {fileID: 1203648293325418070}
   - component: {fileID: 4082272280576550574}
-  - component: {fileID: 1839929155582163112}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -1789,36 +1726,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 5
---- !u!114 &1839929155582163112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2161497338249044789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 16
-  spread: 0
-  useGlobalAngle: 0
-  offsetAngle: 90
-  offsetDistance: 0
-  offset: {x: 0, y: -0}
-  color: {r: 0, g: 0, b: 0, a: 0.27058825}
-  inset: 0
-  blendMode: 0
-  useCasterAlpha: 1
-  ignoreCasterColor: 0
-  colorBleedMode: 2
-  disableFitCompensation: 0
-  shadowAsSibling: 0
-  cutout: 0
-  baked: 0
-  modifiedFromInspector: 0
-  bakedShadows: []
 --- !u!1 &2199838792672467080
 GameObject:
   m_ObjectHideFlags: 0
@@ -3088,7 +2995,7 @@ MonoBehaviour:
     m_Right: 30
     m_Top: 20
     m_Bottom: 20
-  m_ChildAlignment: 5
+  m_ChildAlignment: 3
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -3357,7 +3264,6 @@ GameObject:
   - component: {fileID: 3420421364294885410}
   - component: {fileID: 7014396294276773774}
   - component: {fileID: 273781609827955523}
-  - component: {fileID: 5260296846556685520}
   m_Layer: 5
   m_Name: star1
   m_TagString: Untagged
@@ -3422,36 +3328,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5260296846556685520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4351228691458793450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 34.3
-  spread: 0
-  useGlobalAngle: 0
-  offsetAngle: 90
-  offsetDistance: 15.7
-  offset: {x: 0.000000935793, y: -15.7}
-  color: {r: 1, g: 0.71440893, b: 0, a: 0.3137255}
-  inset: 0
-  blendMode: 0
-  useCasterAlpha: 1
-  ignoreCasterColor: 0
-  colorBleedMode: 2
-  disableFitCompensation: 0
-  shadowAsSibling: 0
-  cutout: 0
-  baked: 0
-  modifiedFromInspector: 0
-  bakedShadows: []
 --- !u!1 &4773734452988567149
 GameObject:
   m_ObjectHideFlags: 0
@@ -3793,7 +3669,6 @@ GameObject:
   - component: {fileID: 3925812916669156403}
   - component: {fileID: 1471099500401293462}
   - component: {fileID: 8815625047478281967}
-  - component: {fileID: 8490301062699584154}
   m_Layer: 5
   m_Name: star2
   m_TagString: Untagged
@@ -3858,36 +3733,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8490301062699584154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5166037751823093298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 34.3
-  spread: 0
-  useGlobalAngle: 0
-  offsetAngle: 90
-  offsetDistance: 15.7
-  offset: {x: 0.000000935793, y: -15.7}
-  color: {r: 1, g: 0.71440893, b: 0, a: 0.3137255}
-  inset: 0
-  blendMode: 0
-  useCasterAlpha: 1
-  ignoreCasterColor: 0
-  colorBleedMode: 2
-  disableFitCompensation: 0
-  shadowAsSibling: 0
-  cutout: 0
-  baked: 0
-  modifiedFromInspector: 0
-  bakedShadows: []
 --- !u!1 &5298758506570632926
 GameObject:
   m_ObjectHideFlags: 0
@@ -4701,7 +4546,6 @@ GameObject:
   - component: {fileID: 6255578777244114463}
   - component: {fileID: 3388831652268750032}
   - component: {fileID: 1806651396386914624}
-  - component: {fileID: 988529873403804573}
   m_Layer: 5
   m_Name: star5
   m_TagString: Untagged
@@ -4766,36 +4610,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &988529873403804573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6289382153396572499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 34.3
-  spread: 0
-  useGlobalAngle: 0
-  offsetAngle: 90
-  offsetDistance: 15.7
-  offset: {x: 0.000000935793, y: -15.7}
-  color: {r: 1, g: 0.71440893, b: 0, a: 0.3137255}
-  inset: 0
-  blendMode: 0
-  useCasterAlpha: 1
-  ignoreCasterColor: 0
-  colorBleedMode: 2
-  disableFitCompensation: 0
-  shadowAsSibling: 0
-  cutout: 0
-  baked: 0
-  modifiedFromInspector: 0
-  bakedShadows: []
 --- !u!1 &6319964638621404423
 GameObject:
   m_ObjectHideFlags: 0
@@ -5475,7 +5289,6 @@ GameObject:
   - component: {fileID: 8624433156339428528}
   - component: {fileID: 3092513874648942062}
   - component: {fileID: 2247984056312414696}
-  - component: {fileID: 856731468057908714}
   m_Layer: 5
   m_Name: star3
   m_TagString: Untagged
@@ -5540,36 +5353,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &856731468057908714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7693587366403376730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 34.3
-  spread: 0
-  useGlobalAngle: 0
-  offsetAngle: 90
-  offsetDistance: 15.7
-  offset: {x: 0.000000935793, y: -15.7}
-  color: {r: 1, g: 0.71440893, b: 0, a: 0.3137255}
-  inset: 0
-  blendMode: 0
-  useCasterAlpha: 1
-  ignoreCasterColor: 0
-  colorBleedMode: 2
-  disableFitCompensation: 0
-  shadowAsSibling: 0
-  cutout: 0
-  baked: 0
-  modifiedFromInspector: 0
-  bakedShadows: []
 --- !u!1 &7722703536463089556
 GameObject:
   m_ObjectHideFlags: 0
@@ -6078,6 +5861,8 @@ MonoBehaviour:
   _closeSettingsBtn: {fileID: 7441429876660271765}
   _levelNumInGame: {fileID: 3956658929668039142}
   _levelNumInMenu: {fileID: 6467412621560952954}
+  _coinsCountText: {fileID: 2538170285923693297}
+  _coinsCollectedText: {fileID: 1722649654448709945}
   _levelProgressSlider: {fileID: 6468136158550770580}
 --- !u!114 &5546220899733150414
 MonoBehaviour:
@@ -6110,7 +5895,6 @@ GameObject:
   - component: {fileID: 24166635626858123}
   - component: {fileID: 7484202894179232715}
   - component: {fileID: 4080495206306667908}
-  - component: {fileID: 4689351833940695551}
   m_Layer: 5
   m_Name: icon
   m_TagString: Untagged
@@ -6209,36 +5993,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &4689351833940695551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7951622167844673958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 32
-  spread: 0
-  useGlobalAngle: 0
-  offsetAngle: 90
-  offsetDistance: 12
-  offset: {x: 0.00000071525585, y: -12}
-  color: {r: 1, g: 0.9342736, b: 0, a: 0.6}
-  inset: 0
-  blendMode: 0
-  useCasterAlpha: 1
-  ignoreCasterColor: 0
-  colorBleedMode: 2
-  disableFitCompensation: 0
-  shadowAsSibling: 0
-  cutout: 0
-  baked: 0
-  modifiedFromInspector: 0
-  bakedShadows: []
 --- !u!1 &7954616834621108840
 GameObject:
   m_ObjectHideFlags: 0
@@ -6251,7 +6005,6 @@ GameObject:
   - component: {fileID: 4036945599446369400}
   - component: {fileID: 2538170285923693297}
   - component: {fileID: 6306471738678687790}
-  - component: {fileID: 8181260896150528202}
   m_Layer: 5
   m_Name: balance_text
   m_TagString: Untagged
@@ -6389,43 +6142,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: 300
+  m_MinWidth: 230
   m_MinHeight: -1
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &8181260896150528202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7954616834621108840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 3
-  spread: 0.2
-  useGlobalAngle: 0
-  offsetAngle: 90
-  offsetDistance: 6.05
-  offset: {x: 0.00000036060817, y: -6.05}
-  color: {r: 0, g: 0, b: 0, a: 0.2627451}
-  inset: 0
-  blendMode: 0
-  useCasterAlpha: 1
-  ignoreCasterColor: 0
-  colorBleedMode: 2
-  disableFitCompensation: 0
-  shadowAsSibling: 0
-  cutout: 0
-  baked: 0
-  modifiedFromInspector: 0
-  bakedShadows: []
 --- !u!1 &7966980088942623866
 GameObject:
   m_ObjectHideFlags: 0

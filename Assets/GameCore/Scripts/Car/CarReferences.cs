@@ -13,6 +13,12 @@ public class CarReferences : MonoBehaviour
     [SerializeField] private CarStuck _carStuck;
     public CarStuck CarStuck => _carStuck;
 
+    [SerializeField] private CarAIStuck _carAIStuck;
+    public CarAIStuck CarAIStuck => _carAIStuck;
+
+    [SerializeField] private CarDeath _carDeath;
+    public CarDeath CarDeath => _carDeath;
+
     [SerializeField] private CollisionDetector collisionDetector;
     public CollisionDetector CollisionDetector => collisionDetector;
 }

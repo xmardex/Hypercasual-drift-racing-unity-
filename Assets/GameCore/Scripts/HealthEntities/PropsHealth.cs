@@ -16,7 +16,7 @@ public class PropsHealth : DamagableEntity
     }
     private new void Initialize()
     {
-        base.Initialize();
+        base.ApplyPreset();
         _explode = GetComponent<PropsExplode>();
         _currentHP = MaxHP;
         _collisionDetector.OnCollideWithSomething += PropsHit;

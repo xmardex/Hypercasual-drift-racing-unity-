@@ -32,11 +32,6 @@ public abstract class DamagableEntity : MonoBehaviour, IDamageDealer, IHealth
     public float MinDamageFactorValue => _maxDamageFactorValue;
     public float MaxDamageFactorValue => _maxDamageFactorValue;
 
-    protected virtual void Initialize()
-    {
-        ApplyPreset();
-    }
-
     protected void ApplyPreset()
     {
         if (_healthSO != null)

@@ -6,7 +6,8 @@ using System.Collections;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private Camera _overlayCamera;
+    [SerializeField] private LayerMask _overlaysOffCulling;
+    [SerializeField] private LayerMask _overlaysOnCulling;
 
     [Space(20), Header("Camera fx:")]
     [SerializeField] private float _minDamageToShake = 3;
@@ -35,6 +36,8 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Transform _allCamerasParent;
     private List<CinemachineCameraOffset> _camerasOffsets;
 
+    private Camera _mainCamera;
+
     private CarReferences _playerCarReferences;
     private CarController _playerCarController;
     private CarSplinePointer _playerCarSplinePointer;
@@ -51,24 +54,31 @@ public class CameraManager : MonoBehaviour
     {
         _currentPositionIndex = 0;
         _currentCameraPosition = _cameraLevelPositions[_currentPositionIndex];
+        
         _nextCameraPosition = _cameraLevelPositions[_currentPositionIndex + 1];
+        _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         _playerCarReferences = GameObject.FindGameObjectWithTag(Constants.PLAYER_CAR_TAG).GetComponent<CarReferences>();
         _playerCarController = _playerCarReferences.CarController;
         _playerCarSplinePointer = _playerCarReferences.CarController.CarSplinePointer;
         _playerCarReferences.CarHealth.OnDamage += ShakeCurrentCamera;
-        UpdateFollowAndLook();
+        UpdateFollowAndLookAndDisableAllInactvie();
         InitAllCamerasOffsets();
     }
 
-    private void UpdateFollowAndLook()
+    private void UpdateFollowAndLookAndDisableAllInactvie()
     {
         foreach(CameraLevelPosition cameraLevelPosition in _cameraLevelPositions)
         {
             cameraLevelPosition.virtualCamera.LookAt = _playerCarController.transform;
             cameraLevelPosition.virtualCamera.Follow = _playerCarController.transform;
+            if(cameraLevelPosition !=  _currentCameraPosition)
+            {
+                cameraLevelPosition.virtualCamera.enabled = false;
+            }
         }
         _chasingCamera.LookAt = _playerCarController.transform;
         _chasingCamera.Follow = _playerCarController.transform;
+        _chasingCamera.enabled = false;
     }
 
     private void InitAllCamerasOffsets()
@@ -97,8 +107,10 @@ public class CameraManager : MonoBehaviour
     private void SwitchCameraToNext()
     {
         _currentCameraPosition.virtualCamera.Priority = _disabledCameraPriority;
+        _currentCameraPosition.virtualCamera.enabled = false;
         _nextCameraPosition.virtualCamera.Priority = _nextCameraPosition.overridePriority > 0 ? _nextCameraPosition.overridePriority : _activeCameraPriority;
         _currentCameraPosition = _nextCameraPosition;
+        _currentCameraPosition.virtualCamera.enabled = true;
         _currentPositionIndex++;
         if (_currentPositionIndex + 1 < _cameraLevelPositions.Length)
             _nextCameraPosition = _cameraLevelPositions[_currentPositionIndex+1];
@@ -106,7 +118,10 @@ public class CameraManager : MonoBehaviour
 
     public void EnableOverlays(bool enable)
     {
-        _overlayCamera.enabled = enable;
+        if (enable)
+            _mainCamera.cullingMask = _overlaysOnCulling.value;
+        else
+            _mainCamera.cullingMask = _overlaysOffCulling.value;
     }
 
     private void UpdateCameraHeight()
@@ -157,11 +172,13 @@ public class CameraManager : MonoBehaviour
         {
             //_chasingCamera.LookAt = carAI.transform;
             _chasingCamera.Priority = _chasingCameraPriority;
+            _chasingCamera.enabled = true;
             _isChasingCameraActive = true;
         }
         else
         {
             _chasingCamera.Priority = _disabledCameraPriority;
+            _chasingCamera.enabled = false;
             _isChasingCameraActive = false;
         }
     }

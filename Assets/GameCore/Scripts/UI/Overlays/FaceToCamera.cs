@@ -8,7 +8,7 @@ public class FaceToCamera : MonoBehaviour
 
     private void Awake()
     {
-        _cameraTransform = GameObject.FindWithTag(Constants.OVERLAY_CAMERA_TAG).transform;
+        _cameraTransform = GameObject.FindWithTag("MainCamera").transform;
         if(_cameraTransform == null)
         {
             Debug.LogError("Camera no found", this);

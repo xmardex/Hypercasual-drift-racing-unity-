@@ -5,7 +5,6 @@ using UnityEngine.Splines;
 public class CarController : MonoBehaviour
 {
     [SerializeField] private PlayerCarSO _carSO;
-    [SerializeField] private bool _useMobileInput;
 
     [Header("Spline inputs")]
     [Header("Pointer:")]
@@ -21,8 +20,8 @@ public class CarController : MonoBehaviour
     [SerializeField] private float _steerDumpingSpeed;
 
     [Header("Accelaration:")]
-    [SerializeField] private float _autoSpeed;
-    [SerializeField] private float _breakToThisVelocityMagnitudeOnAutoMove;
+    public float autoSpeed = 750;
+    public float brakeToThisVelocityMagnitudeOnAutoMove = 35;
 
     [Header("Additional:")]
     [SerializeField] private float _maxTierRotationSpeed;
@@ -127,8 +126,8 @@ public class CarController : MonoBehaviour
             _carSplinePointer.SetMaxDistance(_carSO.DistanceToPointer);
             _straightSteerAngleThreshold = _carSO.StraightSteerAngleThreshold;
             _steerDumpingSpeed = _carSO.SteerDumpingSpeed;
-            _autoSpeed = _carSO.AutoSpeed;
-            _breakToThisVelocityMagnitudeOnAutoMove = _carSO.BrakeToThisVelocityMagnitudeOnAutoMove;
+            autoSpeed = _carSO.AutoSpeed;
+            brakeToThisVelocityMagnitudeOnAutoMove = _carSO.BrakeToThisVelocityMagnitudeOnAutoMove;
             turn = _carSO.Turn;
             speed = _carSO.Speed;
             brake = _carSO.Brake;
@@ -150,12 +149,12 @@ public class CarController : MonoBehaviour
                 float turnInput = turn * GetSteerPointerValue() * Time.fixedDeltaTime * 1000;
 
                 float speedInput = speed * _gasValue * Time.fixedDeltaTime * 1000;
-                float autoSpeedInput = _autoSpeed * Time.fixedDeltaTime * 1000;
+                float autoSpeedInput = autoSpeed * Time.fixedDeltaTime * 1000;
                 brakeValue = brake * Time.fixedDeltaTime * 1000;
 
                 //helping veriables
                 autoSpeedValue = autoSpeedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
-                if (!_isAI || _isAI && _useDefaultSpeed)
+                if (!_isAI)
                     speedValue = speedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
 
                 fricValue = friction * frictionCurve.Evaluate(carVelocity.magnitude / 100);
@@ -201,7 +200,7 @@ public class CarController : MonoBehaviour
     {
         if (_carTarget != null && _canMove) 
         {
-            _gasValue = _isAI || !_isAI && (_useMobileInput ? Input.touchCount > 0 : Input.GetKey(KeyCode.W)) ? 1 : 0;
+            _gasValue = _isAI || !_isAI && (Input.touchCount > 0 || Input.GetKey(KeyCode.W)) ? 1 : 0;
             _carSplinePointer.UpdatePointerPosition(carVelocity.magnitude);
 
             TireVisuals();
@@ -265,7 +264,7 @@ public class CarController : MonoBehaviour
         }
         else
         {
-            if (carVelocity.magnitude > _breakToThisVelocityMagnitudeOnAutoMove)
+            if (carVelocity.magnitude > brakeToThisVelocityMagnitudeOnAutoMove)
                 Brake();
             else
                 rb.AddForceAtPosition(transform.forward * autoSpeedValue, groundCheck.position);

@@ -1008,7 +1008,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a32fcbf3c3e756408ddebc56273f424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _overlayCamera: {fileID: 0}
+  _overlaysOffCulling:
+    serializedVersion: 2
+    m_Bits: 130785
+  _overlaysOnCulling:
+    serializedVersion: 2
+    m_Bits: 131041
   _minDamageToShake: 5
   _shakeIntensity: 10
   _shakeDuration: 0.25

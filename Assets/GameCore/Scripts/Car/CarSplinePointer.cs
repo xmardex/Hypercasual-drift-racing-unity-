@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -14,7 +16,6 @@ public class CarSplinePointer : MonoBehaviour
     private SplineContainer _splineContainer;
     public SplineContainer SplineContainer => _splineContainer;
 
-    private float _splineLength;
     private float _distancePercentage = 0f;
     public float DistancePercentage => _distancePercentage;
 
@@ -22,11 +23,15 @@ public class CarSplinePointer : MonoBehaviour
 
     public Action<float> OnLevelDistancePercentageChange;
 
+    private SplineCache _splineCache;
+    private float _splineLength;
+
     public void Initialize(Transform carTransform, SplineContainer roadSpline)
     {
         _splineContainer = roadSpline;
         _carTransform = carTransform;
-        _splineLength = _splineContainer.Spline.GetLength();
+        _splineCache = roadSpline.GetComponent<SplineCache>();
+        _splineLength = roadSpline.Spline.GetLength();
     }
 
     public void UpdatePointerPosition(float carSpeed)
@@ -42,9 +47,8 @@ public class CarSplinePointer : MonoBehaviour
         _distancePercentage += carSpeed * Time.deltaTime / _splineLength;
         _distancePercentage = Mathf.Clamp01(_distancePercentage);
 
-        Vector3 currentPosition = _splineContainer.EvaluatePosition(_distancePercentage);
-
-        transform.position = currentPosition;
+        int index = Mathf.FloorToInt(_distancePercentage * (_splineCache.CachedSplinePositions.Length - 1));
+        transform.position = _splineCache.CachedSplinePositions[index];
 
         OnLevelDistancePercentageChange?.Invoke(_distancePercentage);
     }
@@ -68,6 +72,7 @@ public class CarSplinePointer : MonoBehaviour
         _maxDistance = maxDistance;
     }
 
+#if UNITY_EDITOR
     private void OnGUI()
     {
         if (_showInGUI)
@@ -84,6 +89,6 @@ public class CarSplinePointer : MonoBehaviour
             GUI.Label(new Rect(position2.x, position2.y, 200, 50), "Velocity magnitude: " + _carTransform.GetComponent<CarController>().RB.velocity.magnitude.ToString(), style);
         }
     }
-
+#endif
 }
 

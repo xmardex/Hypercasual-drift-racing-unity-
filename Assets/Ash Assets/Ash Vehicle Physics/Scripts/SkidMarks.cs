@@ -13,7 +13,6 @@ public class SkidMarks : MonoBehaviour
         smoke = GetComponent<ParticleSystem>();
         skidMark = GetComponent<TrailRenderer>();
 	    skidMark.emitting = false;
-	    transform.localPosition = new Vector3(0,-transform.parent.parent.GetComponent<SphereCollider>().radius + 0.03f,0);
         skidMark.startWidth = carController.skidWidth;
     }
     

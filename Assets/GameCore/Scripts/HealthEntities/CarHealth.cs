@@ -76,12 +76,12 @@ public class CarHealth : DamagableEntity
 
     public void EnableHealthSystem(bool enable)
     {
+        base.ApplyPreset();
+
         if (enable)
         {
             _collisionDetecter.OnCollideWithSomething += ProcessCarHit;
             _healthBar.ShowHP();
-
-            base.Initialize();
             Initialize();
         }
         else

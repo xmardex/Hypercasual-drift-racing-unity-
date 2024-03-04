@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 
 /**
  *	Demo Scene Script for WAR FX
@@ -76,7 +77,7 @@ public class WFX_Demo : MonoBehaviour
 					obj.transform.GetChild(i).gameObject.SetActive(active);
 		#endif
 	}
-	
+#if UNITY_EDITOR
 	void OnGUI()
 	{
 		GUILayout.BeginArea(new Rect(5,20,Screen.width-10,60));
@@ -170,7 +171,7 @@ public class WFX_Demo : MonoBehaviour
 			GUILayout.EndArea();
 		}
 	}
-	
+#endif   
 	public GameObject m4, m4fps;
 	private bool rotate_m4 = true;
 	

@@ -63,7 +63,7 @@ namespace ToonyColorsPro
 				RestoreRimColors();
 				UpdateShader();
 			}
-
+#if UNITY_EDITOR
 			void OnGUI()
 			{
 				GUI.skin = GuiSkin;
@@ -223,7 +223,7 @@ namespace ToonyColorsPro
 
 				GUILayout.EndArea();
 			}
-
+#endif
 			//--------------------------------------------------------------------------------------------------
 			// PRIVATE
 

@@ -6,36 +6,27 @@ using UnityEngine.Splines;
 [ExecuteInEditMode]
 public class SplineInfo : MonoBehaviour
 {
-    [SerializeField] private bool _showInfo;
     [SerializeField] private SplineContainer _splineContainer;
 
-    private void Awake()
-    {
-        if (_showInfo)
-        {
-            
-        }
-    }
-
+#if UNITY_EDITOR
     private void OnGUI()
     {
-        if(_showInfo)
-        {
-            if (_splineContainer == null)
-                return;
+        if (_splineContainer == null)
+            return;
 
-            float screenWidth = Screen.width;
-            float screenHeight = Screen.height;
+        float screenWidth = Screen.width;
+        float screenHeight = Screen.height;
 
-            float labelX = 10f;
-            float labelY = screenHeight - 30f;
+        float labelX = 10f;
+        float labelY = screenHeight - 30f;
 
-            float labelWidth = 200f;
-            float labelHeight = 20f;
+        float labelWidth = 200f;
+        float labelHeight = 20f;
 
-            float splineLength = _splineContainer.Spline.GetLength();
+        float splineLength = _splineContainer.Spline.GetLength();
 
-            GUI.Label(new Rect(labelX, labelY, labelWidth, labelHeight), $"spline length: {splineLength}");
-        }
+        GUI.Label(new Rect(labelX, labelY, labelWidth, labelHeight), $"spline length: {splineLength}");
+
     }
+#endif
 }

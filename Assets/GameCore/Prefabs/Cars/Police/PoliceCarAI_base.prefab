@@ -99,14 +99,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _carSO: {fileID: 0}
-  _useMobileInput: 0
   _showInGUIPointerProgress: 0
   _carSplinePointerPrefab: {fileID: 327957079147428300, guid: fd7a8d3229d23644b82551d53d7652b3, type: 3}
   _chaseSpot: {fileID: 6727255069207191869}
   _straightSteerAngleThreshold: 1
   _steerDumpingSpeed: 30
-  _autoSpeed: 750
-  _breakToThisVelocityMagnitudeOnAutoMove: 0
+  autoSpeed: 750
+  brakeToThisVelocityMagnitudeOnAutoMove: 35
   _maxTierRotationSpeed: 80
   _isAI: 1
   _useDefaultSpeed: 0
@@ -391,6 +390,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69b5f1a127ff184888e3aa3fdb29763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speedCurvePlayerDistance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.022128936
+      outSlope: 0.022128936
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.3526836
+    - serializedVersion: 3
+      time: 1
+      value: 0.9
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _detectPlayerMask:
     serializedVersion: 2
     m_Bits: 73344
@@ -409,6 +432,8 @@ MonoBehaviour:
   carHealth: {fileID: 2250412256337323404}
   carController: {fileID: 5582159059191359632}
   _carStuck: {fileID: 0}
+  _carAIStuck: {fileID: 7987627531779733838}
+  _carDeath: {fileID: 4169616207059293390}
   collisionDetector: {fileID: 6556667859136778288}
 --- !u!114 &6556667859136778288
 MonoBehaviour:
@@ -15932,7 +15957,6 @@ GameObject:
   - component: {fileID: 5108366853731655490}
   - component: {fileID: 7134230254028564652}
   - component: {fileID: 7473135050920431367}
-  - component: {fileID: 3696431476584803628}
   - component: {fileID: 368589075120662000}
   m_Layer: 7
   m_Name: Body
@@ -16010,28 +16034,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3696431476584803628
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2569983841371563078}
-  m_Material: {fileID: 13400000, guid: ecced3aacfe9ee449930c039f383b7e6, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2959467708922500008, guid: 184bcdd9f936d2a4596c1e60edbe98b3, type: 3}
 --- !u!54 &368589075120662000
 Rigidbody:
   m_ObjectHideFlags: 0

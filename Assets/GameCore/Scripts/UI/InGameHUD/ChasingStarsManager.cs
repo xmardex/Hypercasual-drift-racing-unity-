@@ -22,13 +22,11 @@ public class ChasingStarsManager : MonoBehaviour
 
     public void AddStar()
     {
-        Debug.Log("ADD STAR");
         _currentStarsCount = _currentStarsCount + 1 >= _maxStars ? _maxStars : _currentStarsCount + 1;
         UpdateStars();
     }
     public void RemoveStar()
     {
-        Debug.Log("REMOVE STAR");
         _currentStarsCount = _currentStarsCount - 1 <= 0 ? 0 : _currentStarsCount - 1;
         UpdateStars();
     }

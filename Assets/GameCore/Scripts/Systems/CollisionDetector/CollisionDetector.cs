@@ -7,6 +7,7 @@ public class CollisionDetector : MonoBehaviour
     [SerializeField] private bool _debugAllCollision;
     [SerializeField] private bool _useTrigger;
     public Action<Collider, float> OnCollideWithSomething;
+    public Action OnTriggerE;
 
 
 
@@ -32,6 +33,7 @@ public class CollisionDetector : MonoBehaviour
         {
             float collisionFactor = 0;
             OnCollideWithSomething?.Invoke(collider, collisionFactor);
+            OnTriggerE?.Invoke();
         }
     }
 

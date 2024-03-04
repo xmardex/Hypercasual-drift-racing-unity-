@@ -15,7 +15,7 @@ MonoBehaviour:
   _carMovementParameters_chase:
     _mass: 1000
     _turn: 2500
-    _speed: 1500
+    _speed: 1550
     _friction: 4500
     _dragAmount: 6
     _distanceToPointer: 9

@@ -19,6 +19,9 @@ public class LevelManager : MonoBehaviour
 
     private CarReferences _playerCarReferences;
 
+    private int _levelCollectedCoinsCount = 0;
+    private int _totalCoinsCount = 0;
+
     private bool _loseGame = false;
     private bool _winGame = false;
 
@@ -49,6 +52,20 @@ public class LevelManager : MonoBehaviour
         _carsStarsManager.Initialize(_carsInitializator.AllAICars);
         _cameraManager.Initialize();
         _stateManager.Initialize();
+        CoinsInitialize();
+    }
+
+    private void CoinsInitialize()
+    {
+        _totalCoinsCount = PlayerPrefs.GetInt(Constants.COINS_PREFS, 0);
+
+        Coin[] coins = FindObjectsByType<Coin>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        foreach (Coin coin in coins)
+        {
+            coin.OnCollectCoin += AddCoin;
+        }
+
+        _uiLevelManager.UpdateCoinsCount(_totalCoinsCount);
     }
 
     private void StartGame()
@@ -82,6 +99,7 @@ public class LevelManager : MonoBehaviour
         _winGame = true;
         StopGame();
         _stateManager.ChangeState(LevelStateType.winGame);
+        _uiLevelManager.UpdateCollectButton(_levelCollectedCoinsCount);
         _uiLevelManager.ActivateCanvas(UICanvasType.win, true);
         OnGameEnd?.Invoke();
     }
@@ -91,16 +109,32 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    private void CollectLevelCoins()
+    {
+        _totalCoinsCount += _levelCollectedCoinsCount;
+        _levelCollectedCoinsCount = 0;
+
+        PlayerPrefs.SetInt(Constants.COINS_PREFS, _totalCoinsCount);
+        _uiLevelManager.UpdateCoinsCount(_totalCoinsCount);
+
+        //TODO: SAVE LEVEL PROGRESS AND SET NEXT LEVEL
+        //TODO: LOAD NEXT LEVEL;
+    }
+
     private void SubscribeToEvents()
     {
         _uiLevelManager.OnPlayBtnClick += StartGame;
         _uiLevelManager.OnRetryBtnClick += RetryLevel;
+        _uiLevelManager.OnCollectBtnClick += CollectLevelCoins;
+
         _uiLevelManager.OnSettingsOpenBtnClick += OpenSettings;
         _uiLevelManager.OnSettingsCloseBtnClick += CloseSettings;
 
         _startTrigger.OnCarTriggerEnter += BeginRace;
         _finishTrigger.OnCarTriggerEnter += FinishRace;
-        _playerCarReferences.CarHealth.OnDead += LoseGame;
+
+        if(_useHP)
+            _playerCarReferences.CarHealth.OnDead += LoseGame;
 
         _playerCarReferences.CarController.CarSplinePointer.OnLevelDistancePercentageChange +=
             _uiLevelManager.UpdateLevelProgerssSlider;
@@ -110,13 +144,16 @@ public class LevelManager : MonoBehaviour
     {
         _uiLevelManager.OnPlayBtnClick -= StartGame;
         _uiLevelManager.OnRetryBtnClick -= RetryLevel;
+        _uiLevelManager.OnCollectBtnClick -= CollectLevelCoins;
 
         _uiLevelManager.OnSettingsOpenBtnClick -= OpenSettings;
         _uiLevelManager.OnSettingsCloseBtnClick -= CloseSettings;
 
         _startTrigger.OnCarTriggerEnter -= BeginRace;
         _finishTrigger.OnCarTriggerEnter -= FinishRace;
-        _playerCarReferences.CarHealth.OnDead -= LoseGame;
+
+        if (_useHP)
+            _playerCarReferences.CarHealth.OnDead -= LoseGame;
 
         _playerCarReferences.CarController.CarSplinePointer.OnLevelDistancePercentageChange -= 
             _uiLevelManager.UpdateLevelProgerssSlider;
@@ -167,6 +204,11 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
+    private void AddCoin(Coin coin)
+    {
+        _levelCollectedCoinsCount++;
+        coin.OnCollectCoin -= AddCoin;
+    }
 
     private void OnDestroy()
     {

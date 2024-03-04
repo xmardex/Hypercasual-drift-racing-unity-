@@ -13,7 +13,7 @@ public class UILevelManager : MonoBehaviour
     [SerializeField] private Button _openSettingsBtn;
     [SerializeField] private Button _closeSettingsBtn;
 
-    [SerializeField] private TMP_Text _levelNumInGame, _levelNumInMenu;
+    [SerializeField] private TMP_Text _levelNumInGame, _levelNumInMenu, _coinsCountText, _coinsCollectedText;
     [SerializeField] private Slider _levelProgressSlider;
 
 
@@ -91,6 +91,17 @@ public class UILevelManager : MonoBehaviour
     public void UpdateLevelProgerssSlider(float newValue)
     {
         _levelProgressSlider.value = newValue;
+    }
+
+    public void UpdateCollectButton(int collectedCoinsCount)
+    {
+        _coinsCollectedText.text = $"COLLECT {collectedCoinsCount}";
+    }
+
+    public void UpdateCoinsCount(int coinsCount)
+    {
+        //TODA: may be add cool tween
+        _coinsCountText.text = coinsCount.ToString();
     }
 
 }

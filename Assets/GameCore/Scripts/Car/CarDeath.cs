@@ -24,15 +24,22 @@ public class CarDeath : MonoBehaviour
     private CarAI _carAI;
 
     private bool _isExploded;
-    private void Start()
+    private bool _useHP;
+    private bool _isAI;
+
+    public void Initialize(bool useHP)
     {
+        _useHP = useHP;
         _isExploded = false;
 
-        TryGetComponent(out _carAI);
+        _isAI = TryGetComponent(out _carAI);
 
         _carCollider = GetComponent<CapsuleCollider>();
-        _carReferences.CarHealth.OnDead += DisableCarMovement;
-        _carReferences.CarHealth.OnDead += ExplodeCar;
+        if (_isAI || _useHP)
+        {
+            _carReferences.CarHealth.OnDead += DisableCarMovement;
+            _carReferences.CarHealth.OnDead += ExplodeCar;
+        }
     }
 
     public void ExplodeCar()
@@ -116,8 +123,11 @@ public class CarDeath : MonoBehaviour
 
     private void OnDestroy()
     {
-        _carReferences.CarHealth.OnDead -= ExplodeCar;
-        _carReferences.CarHealth.OnDead -= DisableCarMovement;
+        if (_isAI || _useHP)
+        {
+            _carReferences.CarHealth.OnDead -= ExplodeCar;
+            _carReferences.CarHealth.OnDead -= DisableCarMovement;
+        }
     }
 
     private void OnDrawGizmosSelected()

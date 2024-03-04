@@ -6,7 +6,7 @@ public class SetWorldCanvasEventCamera : MonoBehaviour
 {
     private void Awake()
     {
-        Camera camera = GameObject.FindWithTag(Constants.OVERLAY_CAMERA_TAG).GetComponent<Camera>();
+        Camera camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         if(TryGetComponent(out Canvas canvas))
         {
             canvas.worldCamera = camera;

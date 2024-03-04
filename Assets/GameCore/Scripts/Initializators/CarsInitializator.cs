@@ -49,8 +49,10 @@ public class CarsInitializator : MonoBehaviour
     {
         CarController playerCar = _spawnPlayer ? _playerCarContainer.SpawnCar() : _prespawnedPlayer;
         playerCar.Initialize();
-        playerCar.GetComponent<CarReferences>().CarHealth.EnableHealthSystem(_useHP);
-        playerCar.GetComponent<CarStuck>().SetResetDistance(_playerResetDistance);
+        CarReferences playerCarReferences = playerCar.GetComponent<CarReferences>();
+        playerCarReferences.CarHealth.EnableHealthSystem(_useHP);
+        playerCarReferences.CarDeath.Initialize(_useHP);
+        playerCarReferences.CarStuck.SetResetDistance(_playerResetDistance);
         _allCars.Add(playerCar);
 
         foreach (PoliceCarContainer car in _policeCarsContainers)
@@ -59,10 +61,12 @@ public class CarsInitializator : MonoBehaviour
                 continue;
             CarAI policeCar = car.SpawnCar();
             policeCar.Initialize(playerCar, car.carAIParametersSO, levelPlayerDetectionDistance, _levelPlayerPointerOffset, car.carAIMovementParametersHolder);
-            policeCar.GetComponent<CarReferences>().CarHealth.EnableHealthSystem(_useHP);
-            policeCar.GetComponent<CarAIStuck>().SetResetDistance(_carAIResetDistance);
+            CarReferences aiCarReferences = policeCar.GetComponent<CarReferences>();
+            aiCarReferences.CarHealth.EnableHealthSystem(_useHP);
+            aiCarReferences.CarDeath.Initialize(_useHP);
+            aiCarReferences.CarAIStuck.SetResetDistance(_carAIResetDistance);
             _allAICars.Add(policeCar);
-            _allCars.Add(policeCar.GetComponent<CarController>());
+            _allCars.Add(aiCarReferences.CarController);
         }
 
         EnableMovementOnCars(canMoveOnStart);
