@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(CarController))]
 public class CarAI : MonoBehaviour
 {
+    [SerializeField] private AnimationCurve _speedChaseEvaluateByDistance;
     [SerializeField] private LayerMask _detectPlayerMask;
     private CarController _playerCar;
 
@@ -160,19 +161,17 @@ public class CarAI : MonoBehaviour
     {
         if (IsPlayerBehind() || !_active)
             return;
-
         if (!_sleepUntilPlayerDetected && _chaseTarget)
         {
-            _newSpeedValue = _playerCar.GetCurrentSpeedValue() + (GetDistanceToPlayer() < _maxDistanceToAddSpeedValue ? 0 : _carSpeedAddedValue);
-            if(_newSpeedValue <= _carController.speed)
-                _carController.ChangeSpeedValue(_newSpeedValue);
+
+            _newSpeedValue = _speedChaseEvaluateByDistance.Evaluate(1 / GetDistanceToPlayer()) * _carController.GetCurrentSpeedValue() + (GetDistanceToPlayer() < _maxDistanceToAddSpeedValue ? 0 : _carSpeedAddedValue);
+            _carController.ChangeSpeedValue(_newSpeedValue <= _carController.speed ? _newSpeedValue : _carController.speed);
         }
     }
 
     private void ChasePlayer() 
     {
         _carController.ChangeMovementParameters(_carAIParametersHolderSO.CarMovementParametersForChase);
-        _carController.UseDefalutSpeed(false);
 
         if (_playerCar.ChaseSpot != null)
             _carController.ChangeTarget(_thisAIchaseSpot);
@@ -183,7 +182,6 @@ public class CarAI : MonoBehaviour
     private void FindPlayer()
     {
         _carController.ChangeMovementParameters(_carAIParametersHolderSO.CarMovementParametersForFind);
-        _carController.UseDefalutSpeed(true);
 
         float playerLastSeenAtSplineDistance = _playerCar.CarSplinePointer.DistancePercentage;
         _carSplinePointer.ChangePointerOnSplineDistance(playerLastSeenAtSplineDistance - _playerPointerOffset);

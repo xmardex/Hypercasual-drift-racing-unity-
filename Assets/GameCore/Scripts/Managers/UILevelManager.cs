@@ -16,7 +16,6 @@ public class UILevelManager : MonoBehaviour
     [SerializeField] private TMP_Text _levelNumInGame, _levelNumInMenu, _coinsCountText, _coinsCollectedText;
     [SerializeField] private Slider _levelProgressSlider;
 
-
     private Dictionary<UICanvasType, UICanvasContainer> _canvases = new Dictionary<UICanvasType, UICanvasContainer>();
 
     public Action OnPlayBtnClick, OnRetryBtnClick, OnCollectBtnClick, OnSettingsOpenBtnClick, OnSettingsCloseBtnClick;

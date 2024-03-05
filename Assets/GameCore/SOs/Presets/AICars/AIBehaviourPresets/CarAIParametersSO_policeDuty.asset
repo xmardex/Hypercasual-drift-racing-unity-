@@ -18,5 +18,5 @@ MonoBehaviour:
   _minChaseSpotOffset: 5.5
   _maxChaseSpotOffset: -5.5
   _lerpSpeedForChaseSpotSpeedLerp: 2
-  _carSpeedAddedValue: 3000
+  _carSpeedAddedValue: 0
   _maxDistanceToAddSpeedValue: 1

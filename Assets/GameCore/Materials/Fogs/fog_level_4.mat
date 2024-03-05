@@ -122,11 +122,11 @@ Material:
     - _FogCat: 1
     - _FogColorDuo: 0.5
     - _FogDistanceEnd: 100
-    - _FogDistanceFalloff: 3
+    - _FogDistanceFalloff: 2.61
     - _FogDistanceStart: 0
-    - _FogHeightEnd: 20
+    - _FogHeightEnd: 30
     - _FogHeightFalloff: 1
-    - _FogHeightStart: 0
+    - _FogHeightStart: -10
     - _FogIntensity: 1
     - _FogLayersMode: 0
     - _GlossMapScale: 0
@@ -167,12 +167,12 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DirectionalColor: {r: 1, g: 1, b: 1, a: 1}
+    - _DirectionalColor: {r: 0.4392157, g: 0.7176471, b: 1, a: 1}
     - _DirectionalDir: {r: 0.3213938, g: 0.76604444, b: -0.5566705, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FogAxisOption: {r: 0, g: 1, b: 0, a: 0}
-    - _FogColorEnd: {r: 0, g: 0.16603768, b: 0.33962262, a: 1}
-    - _FogColorStart: {r: 0.091224626, g: 0.09324392, b: 0.09433961, a: 1}
+    - _FogColorEnd: {r: 0.4392157, g: 0.7176471, b: 1, a: 1}
+    - _FogColorStart: {r: 0.43867922, g: 0.718017, b: 1, a: 1}
     - _NoiseSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

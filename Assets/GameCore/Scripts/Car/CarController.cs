@@ -89,6 +89,8 @@ public class CarController : MonoBehaviour
 
     private bool _canMove;
 
+    public bool IsBraking = false;
+
     private void Awake()
     {
         if(TryGetComponent(out CarHealth carHealth))
@@ -144,6 +146,7 @@ public class CarController : MonoBehaviour
         {
             if (_carTarget != null)
             {
+                IsBraking = false;
                 curveVelocity = Mathf.Abs(carVelocity.magnitude) / 100;
 
                 float turnInput = turn * GetSteerPointerValue() * Time.fixedDeltaTime * 1000;
@@ -154,8 +157,7 @@ public class CarController : MonoBehaviour
 
                 //helping veriables
                 autoSpeedValue = autoSpeedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
-                if (!_isAI)
-                    speedValue = speedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
+                speedValue = speedInput * speedCurve.Evaluate(Mathf.Abs(carVelocity.z) / 100);
 
                 fricValue = friction * frictionCurve.Evaluate(carVelocity.magnitude / 100);
                 turnValue = turnInput * turnCurve.Evaluate(carVelocity.magnitude / 100);
@@ -170,7 +172,7 @@ public class CarController : MonoBehaviour
                     rb.angularDrag = dragAmount * driftCurve.Evaluate(Mathf.Abs(carVelocity.x) / 70);
 
                     //draws green ground checking ray ....ingnore
-                    Debug.DrawLine(groundCheck.position, hit.point, Color.green);
+                    //Debug.DrawLine(groundCheck.position, hit.point, Color.green);
                     grounded = true;
 
                     rb.centerOfMass = Vector3.zero;
@@ -191,6 +193,8 @@ public class CarController : MonoBehaviour
         {
             if(carVelocity.z > 1)
             {
+                IsBraking = true;
+                rb.drag = 0.4f;
                 Brake();
             }
         }
@@ -202,10 +206,9 @@ public class CarController : MonoBehaviour
         {
             _gasValue = _isAI || !_isAI && (Input.touchCount > 0 || Input.GetKey(KeyCode.W)) ? 1 : 0;
             _carSplinePointer.UpdatePointerPosition(carVelocity.magnitude);
-
-            TireVisuals();
-            AudioControl();
         }
+        TireVisuals();
+        AudioControl();
     }
 
     public void AudioControl()
@@ -361,7 +364,7 @@ public class CarController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("car target not set");
+            //Debug.LogError("car target not set");
             return 0f;
         }
     }

@@ -15,14 +15,14 @@ MonoBehaviour:
   _carMovementParameters_chase:
     _mass: 1000
     _turn: 2500
-    _speed: 2000
+    _speed: 1400
     _friction: 5500
     _dragAmount: 4.5
     _distanceToPointer: 9
   _carMovementParameters_find:
     _mass: 1000
     _turn: 2500
-    _speed: 2000
+    _speed: 1500
     _friction: 5500
     _dragAmount: 4.5
     _distanceToPointer: 9

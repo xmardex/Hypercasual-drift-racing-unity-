@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/GameCore/Scenes/Bootstrap.unity
+    guid: 5f07d079b49e1c7479dcf2649dd04dad
+  - enabled: 1
     path: Assets/GameCore/Scenes/Levels/Level - 4.unity
     guid: 10ff3db16e1ad41efab039ce43fa28d1
   m_configObjects: {}

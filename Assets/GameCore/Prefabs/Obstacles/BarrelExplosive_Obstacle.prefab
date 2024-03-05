@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8917253895718210714}
   - component: {fileID: 7599593315658318652}
   - component: {fileID: 7294860723779339285}
+  - component: {fileID: 6484398063595308127}
   m_Layer: 7
   m_Name: BarrelExplosive_Obstacle
   m_TagString: Untagged
@@ -152,6 +153,19 @@ MonoBehaviour:
     m_Bits: 83136
   _debugAllCollision: 0
   _useTrigger: 0
+--- !u!114 &6484398063595308127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419055987402618420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf423a1010df3b42afa2ab6a4284646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity: -50
 --- !u!1 &743449606518992908
 GameObject:
   m_ObjectHideFlags: 0

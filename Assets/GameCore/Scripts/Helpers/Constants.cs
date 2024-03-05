@@ -22,4 +22,5 @@
 
     //PREFS
     public const string COINS_PREFS = "coinsCount";
+    public const string CURRENT_LEVEL_PREFS = "currentLevel";
 }

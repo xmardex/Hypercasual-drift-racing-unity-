@@ -35,7 +35,7 @@ public class SkidMarks : MonoBehaviour
         if (carController.grounded)
         {
 
-            if (Mathf.Abs(velocity.x) > carController.SkidEnable)
+            if (Mathf.Abs(velocity.x) > carController.SkidEnable || carController.IsBraking)
             {
                 skidMark.emitting = true;
             }

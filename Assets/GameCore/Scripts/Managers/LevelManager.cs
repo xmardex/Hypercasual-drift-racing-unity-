@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private CameraManager _cameraManager;
     [SerializeField] private CarsInitializator _carsInitializator;
     [SerializeField] private ChasingStarsManager _carsStarsManager;
+    [SerializeField] private CoinsGainTween _coinsGainTween;
 
     [SerializeField] private RoadTrigger _startTrigger;
     [SerializeField] private RoadTrigger _finishTrigger;
@@ -111,14 +112,21 @@ public class LevelManager : MonoBehaviour
 
     private void CollectLevelCoins()
     {
+        _coinsGainTween.DoCoinTween(_levelCollectedCoinsCount, _totalCoinsCount, LoadNextLevel);
+
         _totalCoinsCount += _levelCollectedCoinsCount;
         _levelCollectedCoinsCount = 0;
+    }
 
+    private void LoadNextLevel()
+    {
+        SaveLevelProgress();
+    }
+
+    private void SaveLevelProgress()
+    {
         PlayerPrefs.SetInt(Constants.COINS_PREFS, _totalCoinsCount);
-        _uiLevelManager.UpdateCoinsCount(_totalCoinsCount);
-
-        //TODO: SAVE LEVEL PROGRESS AND SET NEXT LEVEL
-        //TODO: LOAD NEXT LEVEL;
+        PlayerPrefs.SetInt(Constants.CURRENT_LEVEL_PREFS, _levelSO.LevelNum + 1);
     }
 
     private void SubscribeToEvents()

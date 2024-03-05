@@ -338,6 +338,7 @@ MonoBehaviour:
   UpForce: 1
   SkidEnable: 15
   skidWidth: 0.1
+  IsBraking: 0
 --- !u!114 &7760664925117288057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf423a1010df3b42afa2ab6a4284646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: -35
+  gravity: -50
 --- !u!54 &4717396645522636567
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -390,26 +391,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69b5f1a127ff184888e3aa3fdb29763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedCurvePlayerDistance:
+  _speedChaseEvaluateByDistance:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0.022128936
-      outSlope: 0.022128936
+      value: 0.8
+      inSlope: 1.9015621
+      outSlope: 1.9015621
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.3526836
+      outWeight: 0.19212843
+    - serializedVersion: 3
+      time: 0.2249168
+      value: 1
+      inSlope: -0.026525874
+      outSlope: -0.026525874
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.30852434
     - serializedVersion: 3
       time: 1
-      value: 0.9
-      inSlope: 0
-      outSlope: 0
+      value: 0.5
+      inSlope: -0.15937819
+      outSlope: -0.15937819
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.24071994
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

@@ -21,6 +21,7 @@ public class SplineCache : MonoBehaviour
     public void CacheSpline()
     {
         _splineContainer = GetComponent<SplineContainer>();
+        _splineLength = _splineContainer.Spline.GetLength();
         splineCacheStep = Constants.SPLINE_CACHE_LEGTH_RESOLUTION / _splineLength;
 
         List<Vector3> cachedPositions = new List<Vector3>();
