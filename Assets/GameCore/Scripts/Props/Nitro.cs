@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 public class Nitro : MonoBehaviour
 {
+    [SerializeField] private float _magnetDuration;
     [SerializeField] private ParticleSystem _mainFX;
     [SerializeField] private ParticleSystem _childFX;
 
@@ -18,17 +20,22 @@ public class Nitro : MonoBehaviour
         _collisionDetector.OnTriggerE += ApplyNitro;
     }
 
-    private void ApplyNitro()
+    private void ApplyNitro(Collider triggerEnterCollider)
     {
-        OnApplyNitro?.Invoke(this);
+        Vector3 magnetPosition = triggerEnterCollider.transform.position + triggerEnterCollider.transform.forward * 3f;
+        transform.DOMove(magnetPosition, _magnetDuration).SetEase(Ease.InOutSine).OnComplete(() =>
+        {
+            OnApplyNitro?.Invoke(this);
 
-        _mainFX.transform.SetParent(null);
-        ParticleSystem.MainModule mainModule = _mainFX.main;
-        mainModule.loop = false;
-        ParticleSystem.MainModule childMainModule = _childFX.main;
-        childMainModule.loop = false;
+            _mainFX.transform.SetParent(null);
+            _mainFX.transform.position = magnetPosition;
+            ParticleSystem.MainModule mainModule = _mainFX.main;
+            mainModule.loop = false;
+            ParticleSystem.MainModule childMainModule = _childFX.main;
+            childMainModule.loop = false;
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        });
     }
 
     private void OnDestroy()

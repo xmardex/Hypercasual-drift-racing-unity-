@@ -12,6 +12,9 @@ public class PoliceLights : MonoBehaviour
     [SerializeField] private float _flashInterval = 0.5f;
     [SerializeField] private bool _enableOnAwake = false;
 
+    [SerializeField] private Light _light;
+    [SerializeField] private Color _redLightColor;
+    [SerializeField] private Color _blueLightColor;
 
     private CarAI _carAI;
     private DamagableEntity _damageEntity;
@@ -32,6 +35,7 @@ public class PoliceLights : MonoBehaviour
 
         _redLight.SetActive(false);
         _blueLight.SetActive(false);
+        _light.enabled = false;
 
         if (_enableOnAwake)
             StartLight();
@@ -47,6 +51,7 @@ public class PoliceLights : MonoBehaviour
 
     public void StartLight()
     {
+        _light.enabled = true;
         _falshLightsIE = StartCoroutine(FlashLights());
     }
 
@@ -57,17 +62,19 @@ public class PoliceLights : MonoBehaviour
             StopCoroutine(_falshLightsIE);
             _redLight.SetActive(false);
             _blueLight.SetActive(false);
+            _light.enabled = false;
         }
     }
 
     IEnumerator FlashLights()
     {
+        _light.color = lightsOn ? _blueLightColor : _redLightColor;
         yield return new WaitForSeconds(UnityEngine.Random.Range(0, _flashInterval));
         while (true)
         {
             _redLight.SetActive(!lightsOn);
             _blueLight.SetActive(lightsOn);
-
+            _light.color = lightsOn ? _blueLightColor : _redLightColor; 
             lightsOn = !lightsOn;
 
             yield return new WaitForSeconds(_flashInterval);

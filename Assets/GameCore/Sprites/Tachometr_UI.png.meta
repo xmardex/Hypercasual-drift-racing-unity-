@@ -393,7 +393,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tachometr_UI_13
+      name: backLight
       rect:
         serializedVersion: 2
         x: 8
@@ -426,10 +426,10 @@ TextureImporter:
     nameFileIdTable:
       Tachometr_UI_0: 677922336
       Tachometr_UI_1: 1606843979
-      Tachometr_UI_13: -700146581
       Tachometr_UI_2: -1483594793
       Tachometr_UI_5: -1732512356
       Tachometr_UI_8: 1369601413
+      backLight: -700146581
       tutorial_arrowMask: 1995077122
       tutorial_arrows: -295342086
       tutorial_clickWave: 133012050

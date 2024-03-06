@@ -4,7 +4,7 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Splines;
 
-[ExecuteInEditMode]
+
 public class SplineCache : MonoBehaviour
 {
     private SplineContainer _splineContainer;
@@ -31,7 +31,7 @@ public class SplineCache : MonoBehaviour
             Vector3 position = _splineContainer.EvaluatePosition(t);
             cachedPositions.Add(position);
         }
-
+        Debug.Log("CACHED");
         _cachedSplinePositions = cachedPositions.ToArray();
         _isCached = true;
         Debug.Log("SPLINE CACHED SUCCESS " + _cachedSplinePositions.Length);

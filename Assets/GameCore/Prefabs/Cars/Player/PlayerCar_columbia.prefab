@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 712062800328817049}
   - component: {fileID: 929807182575975168}
   - component: {fileID: 8765934347926882504}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: RearRightWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6689238653944616836}
   - component: {fileID: 891383133942098722}
   - component: {fileID: 2275994465424653541}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: RearLeftWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -848,7 +848,7 @@ GameObject:
   - component: {fileID: 4382809443844868300}
   - component: {fileID: 4669507631469397928}
   - component: {fileID: 9143646362882840408}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: FrontRightWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -931,7 +931,7 @@ GameObject:
   - component: {fileID: 4844814072936712843}
   - component: {fileID: 8870492502635280554}
   - component: {fileID: 9037108540583154158}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1015,7 +1015,7 @@ GameObject:
   - component: {fileID: 2701230162769317295}
   - component: {fileID: 6801007224333067418}
   - component: {fileID: 8994415519022142350}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: FrontLeftWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1110,6 +1110,30 @@ PrefabInstance:
     - target: {fileID: 72910442962451564, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 2.1099925
+      objectReference: {fileID: 0}
+    - target: {fileID: 176593436530985784, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.829
+      objectReference: {fileID: 0}
+    - target: {fileID: 176593436530985784, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.548
+      objectReference: {fileID: 0}
+    - target: {fileID: 176593436530985784, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.810044
+      objectReference: {fileID: 0}
+    - target: {fileID: 467949242325735299, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.804
+      objectReference: {fileID: 0}
+    - target: {fileID: 467949242325735299, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.566
+      objectReference: {fileID: 0}
+    - target: {fileID: 467949242325735299, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.81
       objectReference: {fileID: 0}
     - target: {fileID: 1028777115450721590, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
       propertyPath: _carSO
@@ -1243,6 +1267,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 2.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4934490282747844914, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.461
+      objectReference: {fileID: 0}
     - target: {fileID: 5045572570126047406, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1342,6 +1370,14 @@ PrefabInstance:
     - target: {fileID: 7917502349042438281, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8117293847513135353, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.898
+      objectReference: {fileID: 0}
+    - target: {fileID: 8117293847513135353, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.442
       objectReference: {fileID: 0}
     - target: {fileID: 8220374099774932318, guid: 2ad5a286237e5de4eb1b7b4c9c18866f, type: 3}
       propertyPath: m_LocalPosition.x

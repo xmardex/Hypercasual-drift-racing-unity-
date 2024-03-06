@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pavement_1A_D_ignoreFog
+  m_Name: Material_ignoreFog_night
   m_Shader: {fileID: -6465566751694194690, guid: edd7abf643fa4bc4e8561d4c280c97cf, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -54,7 +54,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 2d1aa4ec5956347b393f7c094ecb4a34, type: 3}
+        m_Texture: {fileID: 2800000, guid: d750df71925ed4cc6832caf52a9594e6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCapMask:
@@ -78,7 +78,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
-        m_Texture: {fileID: 2800000, guid: 23c0577900fcd4d92931334d69ef4519, type: 3}
+        m_Texture: {fileID: 2800000, guid: c94d91f9cc7324608994f9bc6a8c0b17, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ReflectionTex:
@@ -110,7 +110,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample3:
-        m_Texture: {fileID: 2800000, guid: 2d1aa4ec5956347b393f7c094ecb4a34, type: 3}
+        m_Texture: {fileID: 2800000, guid: d750df71925ed4cc6832caf52a9594e6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -208,12 +208,12 @@ Material:
     - _ZWrite: 1
     - __dirty: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.8980392, g: 0.8980392, b: 0.8980392, a: 1}
+    - _BaseColor: {r: 0.735849, g: 0.735849, b: 0.735849, a: 1}
+    - _Color: {r: 0.89705884, g: 0.89705884, b: 0.89705884, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0.089480646, g: 0.09558821, b: 0.089262515, a: 1}
+    - _OutlineColor: {r: 0.17647058, g: 0.17647058, b: 0.17647058, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.5}
     - _SColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

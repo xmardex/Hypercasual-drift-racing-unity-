@@ -7,6 +7,9 @@ using UnityEngine.Splines;
 [RequireComponent(typeof(Rigidbody), typeof(CollisionDetector))]
 public class TrafficCarController : MonoBehaviour
 {
+    [SerializeField] private Transform[] _wheels;
+    [SerializeField] private float _wheelRotationSpeed;
+    [SerializeField] private bool _rotateWheels = true;
     private SplineContainer _road;
     private Rigidbody _rb;
     private CollisionDetector _collisionDetector;
@@ -60,7 +63,10 @@ public class TrafficCarController : MonoBehaviour
 
             MoveAndRotate();
 
-            if(_distancePercentage >= 0.99f)
+            if(_rotateWheels)
+                RotateWheels();
+
+            if (_distancePercentage >= 0.99f)
             {
                 _trafficManager.PlaceCarOnBegin(this, _trafficRoadContainer);
                 _distancePercentage = 0;
@@ -75,6 +81,19 @@ public class TrafficCarController : MonoBehaviour
 
         _rb.rotation = Quaternion.Lerp(_rb.rotation, _targetRotation, Time.deltaTime * _carRotateSpeed);
     }
+
+    void RotateWheels()
+    {
+        // Calculate rotation amount based on speed
+        float rotationAmount = _carSpeed * _wheelRotationSpeed * Time.deltaTime;
+
+        // Apply rotation to each wheel
+        foreach (Transform wheel in _wheels)
+        {
+            wheel.Rotate(Vector3.right, rotationAmount, Space.Self);
+        }
+    }
+
     private void DetectedHit(Collider by, float hitFactor)
     {
         _isHitted = true;

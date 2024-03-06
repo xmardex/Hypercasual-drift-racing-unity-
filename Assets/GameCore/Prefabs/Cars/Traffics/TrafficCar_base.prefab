@@ -248,6 +248,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49ba0d50e146f0498a578abe9c82aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _wheels:
+  - {fileID: 7913526057515723676}
+  - {fileID: 1801980561213830620}
+  - {fileID: 2692163743353112956}
+  - {fileID: 6683303563477573211}
+  _wheelRotationSpeed: 20
 --- !u!114 &2915231854452118297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +269,8 @@ MonoBehaviour:
   _allowedLayers:
     serializedVersion: 2
     m_Bits: 1216
+  _debugAllCollision: 0
+  _useTrigger: 0
 --- !u!65 &5884197712137277760
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -321,6 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthSO: {fileID: 11400000, guid: 0da72ca783187714da7dd95532e2cadd, type: 2}
   _healthBar: {fileID: 0}
+  _healthFXStates: []
 --- !u!114 &8629309389347370157
 MonoBehaviour:
   m_ObjectHideFlags: 0

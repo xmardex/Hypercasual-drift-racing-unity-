@@ -9872,7 +9872,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.3646796
+  m_Radius: 8
   m_Center: {x: 0.00006105555, y: 0, z: 0.34214315}
 --- !u!114 &4645713687710089738
 MonoBehaviour:
@@ -9886,5 +9886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71fd39fc2cf245b4c993b19b2c8536a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _magnetDuration: 0.25
   _mainFX: {fileID: 8505409237212663539}
   _childFX: {fileID: 223488819818920068}

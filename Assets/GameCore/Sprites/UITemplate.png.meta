@@ -519,16 +519,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UITemplate_23
+      name: gray_panel_bg
       rect:
         serializedVersion: 2
         x: 148
         y: 1589
-        width: 104
+        width: 102
         height: 204
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 36, y: 36, z: 36, w: 36}
+      border: {x: 36, y: 36, z: 36, w: 151}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1785,7 +1785,6 @@ TextureImporter:
       UITemplate_2: 1499915045
       UITemplate_20: -1437424231
       UITemplate_22: 95134486
-      UITemplate_23: -618004217
       UITemplate_25: 1315751378
       UITemplate_26: -245330956
       UITemplate_27: -862102704
@@ -1869,6 +1868,7 @@ TextureImporter:
       UITemplate_98: -1873422036
       UITemplate_99: -70569012
       blue_panel_bg: 1847476130
+      gray_panel_bg: -618004217
       panel_arrow: -1332395805
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

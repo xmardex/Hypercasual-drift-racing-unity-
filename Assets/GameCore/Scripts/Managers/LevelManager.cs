@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private bool _useHP;
+    [SerializeField] private bool _useLights;
     [SerializeField] private bool _enableDebug;
     [SerializeField] private LevelSO _levelSO;
     [SerializeField] private SplineColoringManager _splineColoringManager;
@@ -49,7 +50,7 @@ public class LevelManager : MonoBehaviour
         _uiLevelManager.ApplyLevelSO(_levelSO);
         _uiLevelManager.ActivateCanvas(UICanvasType.mainMenu, true);
 
-        _carsInitializator.InitializeCars(_useHP, canMoveOnStart: false);
+        _carsInitializator.InitializeCars(_useHP, _useLights, canMoveOnStart: false);
         _carsStarsManager.Initialize(_carsInitializator.AllAICars);
         _cameraManager.Initialize();
         _stateManager.Initialize();

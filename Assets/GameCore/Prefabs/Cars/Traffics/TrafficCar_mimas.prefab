@@ -496,6 +496,26 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 3798525322114950372, guid: 713c883e4f52e144686ab81b317c6abb, type: 3}
+      propertyPath: _wheels.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798525322114950372, guid: 713c883e4f52e144686ab81b317c6abb, type: 3}
+      propertyPath: _wheels.Array.data[0]
+      value: 
+      objectReference: {fileID: 3885276125149516947}
+    - target: {fileID: 3798525322114950372, guid: 713c883e4f52e144686ab81b317c6abb, type: 3}
+      propertyPath: _wheels.Array.data[1]
+      value: 
+      objectReference: {fileID: 1445578713868554478}
+    - target: {fileID: 3798525322114950372, guid: 713c883e4f52e144686ab81b317c6abb, type: 3}
+      propertyPath: _wheels.Array.data[2]
+      value: 
+      objectReference: {fileID: 6174227802454112635}
+    - target: {fileID: 3798525322114950372, guid: 713c883e4f52e144686ab81b317c6abb, type: 3}
+      propertyPath: _wheels.Array.data[3]
+      value: 
+      objectReference: {fileID: 1419332055210470801}
     - target: {fileID: 5884197712137277760, guid: 713c883e4f52e144686ab81b317c6abb, type: 3}
       propertyPath: m_Size.z
       value: 4.215226

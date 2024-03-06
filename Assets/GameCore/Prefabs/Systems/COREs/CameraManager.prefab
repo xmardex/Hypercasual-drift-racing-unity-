@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 32, y: 27, z: -16}
+  m_FollowOffset: {x: 32, y: 30, z: -16}
   m_XDamping: 0.5
   m_YDamping: 0.5
   m_ZDamping: 0.5
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 50
+    FieldOfView: 70
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -725,7 +725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 35, y: 19.1, z: 35}
+  m_FollowOffset: {x: 35, y: 30, z: 35}
   m_XDamping: 0.5
   m_YDamping: 0.5
   m_ZDamping: 0.5
@@ -832,7 +832,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 50
+    FieldOfView: 70
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -1010,10 +1010,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _overlaysOffCulling:
     serializedVersion: 2
-    m_Bits: 130785
+    m_Bits: 261857
   _overlaysOnCulling:
     serializedVersion: 2
-    m_Bits: 131041
+    m_Bits: 262113
   _minDamageToShake: 5
   _shakeIntensity: 10
   _shakeDuration: 0.25

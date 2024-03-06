@@ -21,4 +21,7 @@ public class CarReferences : MonoBehaviour
 
     [SerializeField] private CollisionDetector collisionDetector;
     public CollisionDetector CollisionDetector => collisionDetector;
+
+    [SerializeField] private CarLights _carLights;
+    public CarLights CarLights => _carLights;
 }
