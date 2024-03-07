@@ -106,7 +106,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
   randomSeed: 0
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.6850692, b: 0, a: 0.69411767}
+      maxColor: {r: 1, g: 0.501811, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -604,7 +604,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 5
+    maxNumParticles: 1
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -4930,14 +4930,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7533055131723752166}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.43518147, z: -0, w: -0.90034276}
-  m_LocalPosition: {x: 818.13, y: 1.547, z: -1249.79}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2842534070773868084}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 308.406, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1705013443398826096
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5023,9 +5023,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _allowedLayers:
     serializedVersion: 2
-    m_Bits: 66560
+    m_Bits: 1024
   _debugAllCollision: 0
   _useTrigger: 1
+  _collisionSound: 0
 --- !u!114 &895305899790057727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5052,8 +5053,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7707bdd6d0c0a84b9694f5d9d3cb8ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _magnetDuration: 0.25
+  _magnetSpeed: 3
   _collectFX: {fileID: 7763885189733145972}
+  _magnetOffset: {x: 0, y: 0, z: 2}
 --- !u!1 &8527518282542233919
 GameObject:
   m_ObjectHideFlags: 0
@@ -5065,7 +5067,7 @@ GameObject:
   - component: {fileID: 2842534070773868084}
   - component: {fileID: 491271758965622059}
   - component: {fileID: 7763885189733145972}
-  - component: {fileID: 8530092590154716030}
+  - component: {fileID: 2357786665040991225}
   m_Layer: 0
   m_Name: fx
   m_TagString: Untagged
@@ -5236,7 +5238,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
   randomSeed: 0
@@ -5317,7 +5319,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.6821606, b: 0, a: 1}
+      maxColor: {r: 1, g: 0.5235949, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9978,7 +9980,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &8530092590154716030
+--- !u!114 &2357786665040991225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9987,42 +9989,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8527518282542233919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9205bc1bbacc90040a998067b5643d16, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fd2e8874f60266498a388d7229a1bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearBehavior: 2
-  cameraShake:
-    enabled: 0
-    useMainCamera: 1
-    cameras: []
-    delay: 0
-    duration: 1
-    shakeSpace: 0
-    shakeStrength: {x: 0.1, y: 0.1, z: 0.1}
-    shakeCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: -1
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: -1
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    shakesDelay: 0
-  animatedLights: []
-  fadeOutReference: {fileID: 0}
+  OnlyDeactivate: 0

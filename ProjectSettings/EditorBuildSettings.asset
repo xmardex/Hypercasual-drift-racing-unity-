@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GameCore/Scenes/Levels/Level - 4_night.unity
     guid: 6315e5bb3ea4e6d49b09458924934370
+  - enabled: 0
+    path: Assets/NiceVibrations/Demos/NiceVibrationsDemo.unity
+    guid: a40d966b5d8df3140955c23cdc4994c8
   m_configObjects: {}

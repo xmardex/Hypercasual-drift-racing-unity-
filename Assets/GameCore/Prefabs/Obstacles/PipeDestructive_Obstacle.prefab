@@ -99,6 +99,7 @@ MonoBehaviour:
     m_Bits: 16448
   _debugAllCollision: 0
   _useTrigger: 0
+  _collisionSound: 0
 --- !u!114 &307229567296552426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,7 +655,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1088
   _debugAllCollision: 0
-  _useTrigger: 0
+  _useTrigger: 1
+  _collisionSound: 7
 --- !u!1 &6363810454456376608
 GameObject:
   m_ObjectHideFlags: 0

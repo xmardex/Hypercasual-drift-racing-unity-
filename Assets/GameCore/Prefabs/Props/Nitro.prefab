@@ -9853,6 +9853,7 @@ MonoBehaviour:
     m_Bits: 66560
   _debugAllCollision: 0
   _useTrigger: 1
+  _collisionSound: 0
 --- !u!135 &652604394760694256
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9886,6 +9887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71fd39fc2cf245b4c993b19b2c8536a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _magnetDuration: 0.25
+  _magnetSpeed: 3
+  _magnetOffset: {x: 0, y: 0, z: 2}
   _mainFX: {fileID: 8505409237212663539}
   _childFX: {fileID: 223488819818920068}

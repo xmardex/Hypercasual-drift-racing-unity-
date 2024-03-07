@@ -12,10 +12,11 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - TCP2_RAMP_CRISP
+  - TCP2_RAMP_BANDS
   - TCP2_REFLECTIONS_FRESNEL
   - TCP2_RIM_LIGHTING_LIGHTMASK
   - TCP2_SHADOW_LIGHT_COLOR
+  - _EMISSION
   - _RECEIVE_SHADOWS_OFF
   m_InvalidKeywords:
   - TCP2_UV_NORMALS_FULL
@@ -136,7 +137,7 @@ Material:
     - _DistortionStrengthScaled: 0.1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _EmissionChannel: 4
+    - _EmissionChannel: 5
     - _EnvironmentReflections: 1
     - _FlipbookBlending: 0
     - _FlipbookMode: 0
@@ -145,7 +146,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _IndirectIntensity: 0.654
+    - _IndirectIntensity: 0.701
     - _IndirectIntensityOutline: 0
     - _MatCapMaskChannel: 0
     - _MatCapType: 0
@@ -165,13 +166,13 @@ Material:
     - _OutlineWidth: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
-    - _RampBands: 12
-    - _RampBandsSmoothing: 0.058
+    - _RampBands: 11
+    - _RampBandsSmoothing: 0
     - _RampOffset: 0
     - _RampScale: 1
-    - _RampSmoothing: 0.451
-    - _RampThreshold: 0.615
-    - _RampType: 1
+    - _RampSmoothing: 0.299
+    - _RampThreshold: 0.507
+    - _RampType: 2
     - _ReceiveShadows: 1
     - _ReceiveShadowsOff: 0
     - _ReflectionMapType: 0
@@ -197,7 +198,7 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _UseAlphaTest: 0
-    - _UseEmission: 0
+    - _UseEmission: 1
     - _UseFresnelReflections: 1
     - _UseMatCap: 0
     - _UseMatCapMask: 0
@@ -217,7 +218,7 @@ Material:
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 0.8759049, b: 0, a: 1}
-    - _EmissionColor: {r: 0.5, g: 0.36662427, b: 0, a: 1}
+    - _EmissionColor: {r: 0.7254902, g: 0.217274, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}

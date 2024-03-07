@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -106,8 +107,9 @@ public class LevelManager : MonoBehaviour
         OnGameEnd?.Invoke();
     }
 
-    private void RetryLevel()
+    private async void RetryLevel()
     {
+        await Task.Delay(200);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

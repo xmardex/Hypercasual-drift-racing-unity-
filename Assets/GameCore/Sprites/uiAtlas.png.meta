@@ -401,7 +401,7 @@ TextureImporter:
         width: 258
         height: 258
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 37, y: 37, z: 37, w: 37}
       outline: []
       physicsShape: []
@@ -409,6 +409,27 @@ TextureImporter:
       bones: []
       spriteID: 469b13668ec7b56409f1ce55854f9fa2
       internalID: -1727855628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_sound
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 870
+        width: 256
+        height: 207
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aec528d140c8a8b41999f6034c0a46d2
+      internalID: -832150409
       vertices: []
       indices: 
       edges: []
@@ -431,6 +452,7 @@ TextureImporter:
       icon_chasingStar: 67934798
       icon_close: 311022404
       icon_music: -1100821116
+      icon_sound: -832150409
       icon_vibro: -1434079252
       level_marker: -1483441335
       panel_gray: 389704392

@@ -79,6 +79,7 @@ public class CarDeath : MonoBehaviour
 
             // add explode force 
             Explode(transform.position);
+            GameSoundAndHapticManager.Instance?.PlaySoundAndHaptic(SoundType.explode);
             _isExploded = true;
         }
 

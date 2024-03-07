@@ -23,4 +23,7 @@
     //PREFS
     public const string COINS_PREFS = "coinsCount";
     public const string CURRENT_LEVEL_PREFS = "currentLevel";
+    public const string MUSIC_PREFS = "music";
+    public const string VOLUME_PREFS = "volume";
+    public const string VIBRO_PREFS = "vibro";
 }

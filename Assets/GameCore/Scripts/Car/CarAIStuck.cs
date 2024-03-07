@@ -82,7 +82,7 @@ public class CarAIStuck : MonoBehaviour
             yield return null;
         }
 
-        if(!_isObjectVisible)
+        if(!_isObjectVisible && _carController.CarVelocityMagnitude < 3)
             StartCoroutine(CarRespawnIE());
         
         _stuckProcessing = false;
@@ -132,10 +132,10 @@ public class CarAIStuck : MonoBehaviour
     {
         float resetOnDistancePercentage = _carAI.PlayerCar.CarSplinePointer.DistancePercentage + _resetSplineDistanceOffsetFromPlayer;
 
-        Vector3 positionToReset = _carAI.CarSplinePointer.SplineContainer.EvaluatePosition(resetOnDistancePercentage);
+        Vector3 positionToReset = _carAI.CarSplinePointer.GetPositionOnSplineByDistance(resetOnDistancePercentage);
 
 
-        Vector3 forwardPosition = _carAI.CarSplinePointer.SplineContainer.EvaluatePosition(resetOnDistancePercentage + 0.005f);
+        Vector3 forwardPosition = _carAI.CarSplinePointer.GetPositionOnSplineByDistance(resetOnDistancePercentage + 0.005f);
         Vector3 direction = forwardPosition - positionToReset;
 
         Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);

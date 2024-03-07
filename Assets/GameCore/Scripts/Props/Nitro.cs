@@ -6,13 +6,16 @@ using UnityEngine;
 
 public class Nitro : MonoBehaviour
 {
-    [SerializeField] private float _magnetDuration;
+    [SerializeField] private float _magnetSpeed;
+    [SerializeField] private Vector3 _magnetOffset;
     [SerializeField] private ParticleSystem _mainFX;
     [SerializeField] private ParticleSystem _childFX;
 
     private CollisionDetector _collisionDetector;
 
     public Action<Nitro> OnApplyNitro;
+
+    private Transform _target;
 
     private void Awake()
     {
@@ -22,20 +25,37 @@ public class Nitro : MonoBehaviour
 
     private void ApplyNitro(Collider triggerEnterCollider)
     {
-        Vector3 magnetPosition = triggerEnterCollider.transform.position + triggerEnterCollider.transform.forward * 3f;
-        transform.DOMove(magnetPosition, _magnetDuration).SetEase(Ease.InOutSine).OnComplete(() =>
+        if (_target == null)
         {
-            OnApplyNitro?.Invoke(this);
+            _target = triggerEnterCollider.transform;
+            StartCoroutine(LerpMagnetIE());
+        }
+    }
 
-            _mainFX.transform.SetParent(null);
-            _mainFX.transform.position = magnetPosition;
-            ParticleSystem.MainModule mainModule = _mainFX.main;
-            mainModule.loop = false;
-            ParticleSystem.MainModule childMainModule = _childFX.main;
-            childMainModule.loop = false;
+    IEnumerator LerpMagnetIE()
+    {
+        ParticleSystem.MainModule mainModule = _mainFX.main;
+        mainModule.loop = false;
+        ParticleSystem.MainModule childMainModule = _childFX.main;
+        childMainModule.loop = false;
 
-            Destroy(gameObject);
-        });
+        Vector3 startPos = transform.position;
+
+        float t = 0;
+        while (t <= 1)
+        {
+            t += Time.deltaTime * _magnetSpeed;
+            transform.localScale = Vector3.Slerp(Vector3.one, Vector3.one / 2, t);
+            transform.position = Vector3.Slerp(startPos, _target.position + _target.transform.InverseTransformDirection(_magnetOffset), t);
+            yield return null;
+        }
+
+        GameSoundAndHapticManager.Instance?.PlaySoundAndHaptic(SoundType.pickUp);
+
+        OnApplyNitro?.Invoke(this);
+
+        gameObject.SetActive(false);
+        _target = null;
     }
 
     private void OnDestroy()

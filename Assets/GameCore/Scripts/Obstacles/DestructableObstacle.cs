@@ -15,18 +15,18 @@ public class DestructableObstacle : MonoBehaviour
     {
         foreach(CollisionDetector collisionDetector in _collisionDetectors) 
         {
-            collisionDetector.OnCollideWithSomething += DestructObstacle;
+            collisionDetector.OnTriggerE += DestructObstacle;
         }
     }
 
-    private void DestructObstacle(Collider hitBy, float withFactor)
+    private void DestructObstacle(Collider hitBy)
     {
         if (!_isDestructed)
         {
             _isDestructed = true;
 
             foreach (CollisionDetector collisionDetector in _collisionDetectors)
-                collisionDetector.OnCollideWithSomething -= DestructObstacle;
+                collisionDetector.OnTriggerE -= DestructObstacle;
 
             foreach(var fx in _destroySupportFXs)
             {

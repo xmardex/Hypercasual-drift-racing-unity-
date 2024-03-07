@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useHP: 1
+  _useLights: 0
   _enableDebug: 0
   _levelSO: {fileID: 0}
   _splineColoringManager: {fileID: 562709660625203468}
@@ -453,6 +454,18 @@ PrefabInstance:
     - target: {fileID: 1465633611636610549, guid: 8181194ebcc136b41b590bc8595ab15d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4916716375531038467, guid: 8181194ebcc136b41b590bc8595ab15d, type: 3}
+      propertyPath: _shakeDuration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4916716375531038467, guid: 8181194ebcc136b41b590bc8595ab15d, type: 3}
+      propertyPath: _shakeIntensity
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4916716375531038467, guid: 8181194ebcc136b41b590bc8595ab15d, type: 3}
+      propertyPath: _minDamageToShake
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8746757478261522602, guid: 8181194ebcc136b41b590bc8595ab15d, type: 3}
       propertyPath: m_Name

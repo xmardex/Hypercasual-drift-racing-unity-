@@ -9,6 +9,9 @@ public class CarHealth : DamagableEntity
 {
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private List<HealthFXStates> _healthFXStates;
+    [SerializeField] private bool _isPlayer;
+    [SerializeField] private float _smallHitFactor;
+    [SerializeField] private float _mediumHitFactor;
 
     private HealthFXStates _currentHealthFXState;
     private CollisionDetector _collisionDetecter;
@@ -47,19 +50,19 @@ public class CarHealth : DamagableEntity
 
     private void ProcessCarHit(Collider hit, float hitFactor)
     {
-        //bool collideWithOtherCar = hit.gameObject.TryGetComponent(out CarHealth otherCarHealth);
-        //bool collideWithProps = hit.gameObject.TryGetComponent(out PropsHealth hittedPropsHealth);
+        if (_isPlayer)
+        {
+            if(hitFactor >= _smallHitFactor && hitFactor < _mediumHitFactor)
+            {
+                GameSoundAndHapticManager.Instance?.PlaySoundAndHaptic(SoundType.smallCarHit);
+            }
+            if(hitFactor >= _mediumHitFactor)
+            {
+                GameSoundAndHapticManager.Instance?.PlaySoundAndHaptic(SoundType.mediumCarHit);
+            }
+        }
 
-        //if (collideWithProps)
-        //    SendDamageTo(hitFactor, hittedPropsHealth);
-        //else
-        //{
-            //Cars and static obstacle
-            ReciveDamageFactor(hitFactor);
-        //}
-
-        //TODO: Add here other collide scenario
-
+        ReciveDamageFactor(hitFactor);
         OnHit?.Invoke();
     }
 

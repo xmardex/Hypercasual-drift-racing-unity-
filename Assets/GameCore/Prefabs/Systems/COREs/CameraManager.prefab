@@ -1010,10 +1010,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _overlaysOffCulling:
     serializedVersion: 2
-    m_Bits: 261857
+    m_Bits: 188065
   _overlaysOnCulling:
     serializedVersion: 2
-    m_Bits: 262113
+    m_Bits: 188321
   _minDamageToShake: 5
   _shakeIntensity: 10
   _shakeDuration: 0.25

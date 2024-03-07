@@ -47,8 +47,7 @@ public class CarSplinePointer : MonoBehaviour
         _distancePercentage += carSpeed * Time.deltaTime / _splineLength;
         _distancePercentage = Mathf.Clamp01(_distancePercentage);
 
-        int index = Mathf.FloorToInt(_distancePercentage * (_splineCache.CachedSplinePositions.Length - 1));
-        transform.position = _splineCache.CachedSplinePositions[index];
+        transform.position = GetPositionOnSplineByDistance(_distancePercentage);
 
         OnLevelDistancePercentageChange?.Invoke(_distancePercentage);
     }
@@ -71,6 +70,13 @@ public class CarSplinePointer : MonoBehaviour
     {
         _maxDistance = maxDistance;
     }
+
+    public Vector3 GetPositionOnSplineByDistance(float distancePercentage)
+    {
+        int index = Mathf.FloorToInt(distancePercentage * (_splineCache.CachedSplinePositions.Length - 1));
+        return _splineCache.CachedSplinePositions[index];
+    }
+
 
 #if UNITY_EDITOR
     private void OnGUI()

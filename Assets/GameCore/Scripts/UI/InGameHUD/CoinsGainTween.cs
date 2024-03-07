@@ -29,6 +29,8 @@ public class CoinsGainTween : MonoBehaviour
 
         if (!_coinsGained)
         {
+            GameSoundAndHapticManager.Instance?.PlaySoundAndHaptic(SoundType.coinsCollect);
+
             int iterNums = collectCoinsCount >= _coins.Length ? _coins.Length : collectCoinsCount;
             Debug.Log(iterNums);
             float maxTextLerpDuration = delayMin * iterNums + durationMin;

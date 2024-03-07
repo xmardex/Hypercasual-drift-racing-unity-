@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using MoreMountains.NiceVibrations;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -73,15 +74,11 @@ public class CarController : MonoBehaviour
     [Header("Other Settings")]
     public AudioSource[] engineSounds;
     public bool airDrag;
-    public float UpForce;
     public float SkidEnable = 20f;
     public float skidWidth = 0.12f;
     private float frictionAngle;
 
     private int _gasValue;
-
-    private CarHealth _carHealth;
-
     public CarSplinePointer CarSplinePointer => _carSplinePointer;
     public Transform ChaseSpot => _chaseSpot;
 
@@ -91,17 +88,7 @@ public class CarController : MonoBehaviour
 
     public bool IsBraking = false;
 
-    private void Awake()
-    {
-        if(TryGetComponent(out CarHealth carHealth))
-        {
-            _carHealth = carHealth;
-        }
-        else
-        {
-            Debug.LogError("Car should have carHealth");
-        }
-    }
+    private bool _hapticGas = false;
 
     public void Initialize()
     {
@@ -144,6 +131,8 @@ public class CarController : MonoBehaviour
         carVelocity = transform.InverseTransformDirection(rb.velocity); //local velocity of car
         if (_canMove)
         {
+            EngineSoundEnable(true);
+
             if (_carTarget != null)
             {
                 IsBraking = false;
@@ -191,7 +180,9 @@ public class CarController : MonoBehaviour
         }
         else
         {
-            if(carVelocity.z > 1)
+            EngineSoundEnable(false);
+
+            if (carVelocity.z > 1)
             {
                 IsBraking = true;
                 rb.drag = 0.4f;
@@ -204,11 +195,33 @@ public class CarController : MonoBehaviour
     {
         if (_carTarget != null && _canMove) 
         {
-            _gasValue = _isAI || !_isAI && (Input.touchCount > 0 || Input.GetKey(KeyCode.W)) ? 1 : 0;
+            bool isPlayerGas = !_isAI && (Input.touchCount > 0 || Input.GetKey(KeyCode.W));
+            _gasValue = _isAI || isPlayerGas ? 1 : 0;
+
+            if (isPlayerGas && !_hapticGas)
+            {
+                MMVibrationManager.TransientHaptic(0.3f, 0.3f, true, this);
+                _hapticGas = true;
+            }
+
+            if (!isPlayerGas)
+                _hapticGas = false;
+
             _carSplinePointer.UpdatePointerPosition(carVelocity.magnitude);
+
+            
         }
         TireVisuals();
-        AudioControl();
+        if (_canMove)
+        {
+            AudioControl();
+        }
+    }
+
+    private void EngineSoundEnable(bool isOn)
+    {
+        engineSounds[0].mute = !isOn;
+        engineSounds[2].mute = !isOn;
     }
 
     public void AudioControl()
@@ -219,8 +232,13 @@ public class CarController : MonoBehaviour
             if (Mathf.Abs(carVelocity.x) > SkidEnable - 0.1f)
             {
                 engineSounds[1].mute = false;
+                MMVibrationManager.TransientHaptic(0.3f, 0.3f, true, this);
             }
-            else { engineSounds[1].mute = true; }
+            else { 
+                
+                engineSounds[1].mute = true;
+                MMVibrationManager.StopAllHaptics();
+            }
         }
         else
         {

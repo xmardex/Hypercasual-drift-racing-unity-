@@ -6,10 +6,18 @@ public class CollisionDetector : MonoBehaviour
     [SerializeField] private LayerMask _allowedLayers;
     [SerializeField] private bool _debugAllCollision;
     [SerializeField] private bool _useTrigger;
+
+    [SerializeField] private SoundType _collisionSound;
+
     public Action<Collider, float> OnCollideWithSomething;
     public Action<Collider> OnTriggerE;
 
 
+    private void Awake()
+    {
+        OnCollideWithSomething += PlayCollisionSound;
+        OnTriggerE += PlayTiggerSound;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -31,8 +39,6 @@ public class CollisionDetector : MonoBehaviour
 
         if (IsCollisionAllowed(collider))
         {
-            float collisionFactor = 0;
-            OnCollideWithSomething?.Invoke(collider, collisionFactor);
             OnTriggerE?.Invoke(collider);
         }
     }
@@ -43,5 +49,26 @@ public class CollisionDetector : MonoBehaviour
     {
         float collisionForce = collision.relativeVelocity.magnitude;
         return collisionForce;
+    }
+
+    private void PlayCollisionSound(Collider collider, float hitHactor)
+    {
+        if (_collisionSound != SoundType.none)
+            GameSoundAndHapticManager.Instance?.PlaySoundAndHaptic(_collisionSound);
+    }
+
+    private void PlayTiggerSound(Collider collider)
+    {
+        if (_collisionSound != SoundType.none)
+            GameSoundAndHapticManager.Instance?.PlaySoundAndHaptic(_collisionSound);
+    }
+
+    private void OnDestroy()
+    {
+        if (_collisionSound != SoundType.none)
+        {
+            OnCollideWithSomething -= PlayCollisionSound;
+            OnTriggerE -= PlayTiggerSound;
+        }
     }
 }

@@ -36755,6 +36755,9 @@ MonoBehaviour:
   - minProportion: 0
     maxProportion: 0.25
     fx: {fileID: 5542456506120226854}
+  _isPlayer: 1
+  _smallHitFactor: 10
+  _mediumHitFactor: 20
 --- !u!114 &1028777115450721590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36787,7 +36790,7 @@ MonoBehaviour:
   friction: 1600
   dragAmount: 4.5
   TurnAngle: 36
-  maxRayLength: 1.5
+  maxRayLength: 2
   grounded: 0
   TireMeshes:
   - {fileID: 7820170979457623126}
@@ -37004,7 +37007,6 @@ MonoBehaviour:
   - {fileID: 7728761830323193345}
   - {fileID: 4779742729593713556}
   airDrag: 0
-  UpForce: 0
   SkidEnable: 8
   skidWidth: 0.1
   IsBraking: 0
@@ -37088,6 +37090,7 @@ MonoBehaviour:
     m_Bits: 24768
   _debugAllCollision: 0
   _useTrigger: 0
+  _collisionSound: 0
 --- !u!114 &2047393568466727466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42195,15 +42198,15 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 055de6cccad442f4582b393344a88e5f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 0.84324795
+  m_Volume: 0.3
+  m_Pitch: 1.1093345
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 30
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -42291,7 +42294,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f1e0c39f69e0db24283c50a6985114df, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 1
@@ -42299,7 +42302,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 30
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -42387,15 +42390,15 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2c3d914dbaa4b7d4a90dedb7e6ea952a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
-  m_Pitch: 0.84324795
+  m_Volume: 0.35
+  m_Pitch: 1.1093345
   Loop: 1
   Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 30
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
