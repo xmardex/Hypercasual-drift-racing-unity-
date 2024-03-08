@@ -1,6 +1,4 @@
-﻿using MoreMountains.NiceVibrations;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Splines;
 
 public class CarController : MonoBehaviour
@@ -200,7 +198,7 @@ public class CarController : MonoBehaviour
 
             if (isPlayerGas && !_hapticGas)
             {
-                MMVibrationManager.TransientHaptic(0.3f, 0.3f, true, this);
+                //TODO: VIBRO ON START GAS
                 _hapticGas = true;
             }
 
@@ -232,12 +230,12 @@ public class CarController : MonoBehaviour
             if (Mathf.Abs(carVelocity.x) > SkidEnable - 0.1f)
             {
                 engineSounds[1].mute = false;
-                MMVibrationManager.TransientHaptic(0.3f, 0.3f, true, this);
+                //TODO: VIBRO ON DRIFT
             }
             else { 
                 
                 engineSounds[1].mute = true;
-                MMVibrationManager.StopAllHaptics();
+                //TODO: OFF VIBRO
             }
         }
         else

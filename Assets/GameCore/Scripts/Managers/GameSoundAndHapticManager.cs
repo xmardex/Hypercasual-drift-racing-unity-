@@ -1,6 +1,4 @@
-using MoreMountains.NiceVibrations;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,7 +36,7 @@ public class GameSoundAndHapticManager : MonoBehaviour
         {
             _sounds.Add(sound.soundType, sound);
         }
-        MMNViOSCoreHaptics.CreateEngine();
+        
     }
 
     private void Start()
@@ -66,7 +64,7 @@ public class GameSoundAndHapticManager : MonoBehaviour
 
     public void VibroEnable(bool enable)
     {
-        MMVibrationManager.SetHapticsActive(enable);
+       
     }
 
     public void PlaySoundAndHaptic(SoundType uISoundType)
@@ -77,7 +75,7 @@ public class GameSoundAndHapticManager : MonoBehaviour
         uiSoundSource.volume = uISound.volume;
         uiSoundSource.Play();
 
-        MMVibrationManager.Haptic(uISound.hapticType, false, true, this);
+       
     }
 
     private AudioSource GetFreeSource()
@@ -110,6 +108,4 @@ public class SoundPreset
     public SoundType soundType;
     public AudioClip audioClip;
     public float volume = 1;
-    [Header("Haptics")]
-    public HapticTypes hapticType;
 }
