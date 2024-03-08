@@ -16,6 +16,7 @@ TagManager:
   - policeCar
   - FxTemporaire
   - playerCarElement
+  - policeCarElement
   layers:
   - Default
   - TransparentFX

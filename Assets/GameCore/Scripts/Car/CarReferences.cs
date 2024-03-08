@@ -24,4 +24,7 @@ public class CarReferences : MonoBehaviour
 
     [SerializeField] private CarLights _carLights;
     public CarLights CarLights => _carLights;
+
+    [SerializeField] private CarAI _carAI;
+    public CarAI CarAI => _carAI;
 }

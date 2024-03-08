@@ -16,6 +16,8 @@ public class CarHealth : DamagableEntity
     private HealthFXStates _currentHealthFXState;
     private CollisionDetector _collisionDetecter;
 
+    public bool IsPlayer => _isPlayer;
+
     public Action OnHit;
 
     private void Awake()

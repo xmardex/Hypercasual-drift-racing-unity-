@@ -10,6 +10,8 @@ public class ChasingStarsManager : MonoBehaviour
 
     private List<CarAI> _allAICars;
 
+    private bool _firstChase;
+
     public void Initialize(List<CarAI> allAICars)
     {
         _maxStars = _stars.Length;
@@ -22,6 +24,12 @@ public class ChasingStarsManager : MonoBehaviour
 
     public void AddStar()
     {
+        if (!_firstChase)
+        {
+            GameSoundAndHapticManager.Instance.PlaySoundAndHaptic(SoundType.firstChase, false);
+            _firstChase = true;
+        }
+
         _currentStarsCount = _currentStarsCount + 1 >= _maxStars ? _maxStars : _currentStarsCount + 1;
         UpdateStars();
     }

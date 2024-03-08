@@ -1,4 +1,6 @@
+using Lofelt.NiceVibrations;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,7 +38,6 @@ public class GameSoundAndHapticManager : MonoBehaviour
         {
             _sounds.Add(sound.soundType, sound);
         }
-        
     }
 
     private void Start()
@@ -64,10 +65,10 @@ public class GameSoundAndHapticManager : MonoBehaviour
 
     public void VibroEnable(bool enable)
     {
-       
+        HapticController.hapticsEnabled = enable;
     }
 
-    public void PlaySoundAndHaptic(SoundType uISoundType)
+    public void PlaySoundAndHaptic(SoundType uISoundType, bool PlayerVibro = true, float duration = 0)
     {
         SoundPreset uISound = _sounds[uISoundType];
         AudioSource uiSoundSource = GetFreeSource();
@@ -75,7 +76,11 @@ public class GameSoundAndHapticManager : MonoBehaviour
         uiSoundSource.volume = uISound.volume;
         uiSoundSource.Play();
 
-       
+        if(duration != 0)
+            StartCoroutine(WaitSoundIE(uiSoundSource, duration));
+
+        if(PlayerVibro)
+            HapticPatterns.PlayPreset(uISound.presetType);
     }
 
     private AudioSource GetFreeSource()
@@ -86,6 +91,12 @@ public class GameSoundAndHapticManager : MonoBehaviour
         AudioSource newSource = Instantiate(_uiSources[0], _uiSources[0].gameObject.transform.parent);
         newSource.Stop();
         return newSource;
+    }
+
+    IEnumerator WaitSoundIE(AudioSource source, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        source.Stop();
     }
 }
 
@@ -100,6 +111,8 @@ public enum SoundType
     explode = 6,
     metalHit = 7,
     plasticHit = 8,
+    firstChase = 9,
+    nitro = 10,
 }
 
 [Serializable]
@@ -108,4 +121,6 @@ public class SoundPreset
     public SoundType soundType;
     public AudioClip audioClip;
     public float volume = 1;
+    [Header("HAPTIC")]
+    public HapticPatterns.PresetType presetType;
 }

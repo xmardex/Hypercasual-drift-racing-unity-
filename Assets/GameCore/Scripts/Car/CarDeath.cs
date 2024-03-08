@@ -79,7 +79,12 @@ public class CarDeath : MonoBehaviour
 
             // add explode force 
             Explode(transform.position);
-            GameSoundAndHapticManager.Instance?.PlaySoundAndHaptic(SoundType.explode);
+
+            //other fxs
+            _carReferences.CarLights.EnableLights(false);
+            bool playVibro = _carReferences.CarHealth.IsPlayer || _carReferences.CarAI.IsChasing;
+            GameSoundAndHapticManager.Instance?.PlaySoundAndHaptic(SoundType.explode, playVibro);
+            
             _isExploded = true;
         }
 

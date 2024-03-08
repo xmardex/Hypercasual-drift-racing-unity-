@@ -5,6 +5,7 @@
     public const string PLAYER_CAR_TAG = "playerCar";
     public const string PLAYER_CAR_ELEMENTS_TAG = "playerCarElement";
     public const string POLICE_CAR_TAG = "policeCar";
+    public const string POLICE_CAR_ELEMENTS_TAG = "policeCarElement";
     public const string OVERLAY_CAMERA_TAG = "overlayCamera";
     public const string PLAYER_SPLINE_POINTER = "playerSplinePointer";
 

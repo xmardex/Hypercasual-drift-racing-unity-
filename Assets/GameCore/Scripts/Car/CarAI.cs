@@ -53,6 +53,8 @@ public class CarAI : MonoBehaviour
     public bool IsFinding => _findTarget;
     public CarController PlayerCar => _playerCar;
 
+    private AudioSource _audioSource;
+
     public void Initialize(CarController playerCar, CarAIParametersSO carAIParametersSO, float levelPlayerDetectionDistance, float levelPlayerPointerOffset, CarAIMovementParametersHolderSO carAIParametersHolderSO)
     {
         _carAIParametersHolderSO = carAIParametersHolderSO;
@@ -82,6 +84,8 @@ public class CarAI : MonoBehaviour
         {
             _carController.ChangeTarget(_splinePointerTarget);
         }
+
+        _audioSource = GetComponent<AudioSource>();
         _active = true;
     }
 
@@ -142,6 +146,7 @@ public class CarAI : MonoBehaviour
         {
             if(distanceToPlayer < _distanceForDetectPlayer && isPlayerReachable)
             {
+                _audioSource.Play();
                 _sleepUntilPlayerDetected = false;
             }
         }
@@ -217,6 +222,7 @@ public class CarAI : MonoBehaviour
 
     public void DeactivateAI()
     {
+        _audioSource.Stop();
         _active = false;
         _chaseTarget = false;
         _findTarget = false;

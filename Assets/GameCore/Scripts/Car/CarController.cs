@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Lofelt.NiceVibrations;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.Splines;
 
 public class CarController : MonoBehaviour
@@ -31,7 +33,7 @@ public class CarController : MonoBehaviour
 
 
 
-    [Space(20)] [Header("Original")]
+    [Space(20)][Header("Original")]
     public Transform groundCheck;
     public Transform fricAt;
     public Transform CentreOfMass;
@@ -65,7 +67,7 @@ public class CarController : MonoBehaviour
     private float speedValue, autoSpeedValue, fricValue, turnValue, curveVelocity, brakeValue;
     [HideInInspector]
     public Vector3 carVelocity;
-    
+
     [HideInInspector]
     public RaycastHit hit;
 
@@ -88,6 +90,8 @@ public class CarController : MonoBehaviour
 
     private bool _hapticGas = false;
 
+    //private Coroutine _driftHapticIE;
+
     public void Initialize()
     {
         _roadSplineContainer = GameObject.FindGameObjectWithTag(Constants.ROAD_SPLINE_CONTAINER_TAG).GetComponent<SplineContainer>();
@@ -96,7 +100,7 @@ public class CarController : MonoBehaviour
         InitCarStats();
 
         _carSplinePointer.ShowInGUIProgress(_showInGUIPointerProgress);
-        _carSplinePointer.Initialize(transform,_roadSplineContainer);
+        _carSplinePointer.Initialize(transform, _roadSplineContainer);
         _carTarget = _carSplinePointer.transform;
 
         rb = GetComponent<Rigidbody>();
@@ -108,7 +112,7 @@ public class CarController : MonoBehaviour
 
     private void InitCarStats()
     {
-        if(_carSO != null)
+        if (_carSO != null)
         {
             _carSplinePointer.SetMaxDistance(_carSO.DistanceToPointer);
             _straightSteerAngleThreshold = _carSO.StraightSteerAngleThreshold;
@@ -191,7 +195,7 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        if (_carTarget != null && _canMove) 
+        if (_carTarget != null && _canMove)
         {
             bool isPlayerGas = !_isAI && (Input.touchCount > 0 || Input.GetKey(KeyCode.W));
             _gasValue = _isAI || isPlayerGas ? 1 : 0;
@@ -199,6 +203,7 @@ public class CarController : MonoBehaviour
             if (isPlayerGas && !_hapticGas)
             {
                 //TODO: VIBRO ON START GAS
+                HapticPatterns.PlayPreset(HapticPatterns.PresetType.RigidImpact);
                 _hapticGas = true;
             }
 
@@ -207,7 +212,7 @@ public class CarController : MonoBehaviour
 
             _carSplinePointer.UpdatePointerPosition(carVelocity.magnitude);
 
-            
+
         }
         TireVisuals();
         if (_canMove)
@@ -231,11 +236,18 @@ public class CarController : MonoBehaviour
             {
                 engineSounds[1].mute = false;
                 //TODO: VIBRO ON DRIFT
+                //if(_driftHapticIE == null)
+                //{
+                //    _driftHapticIE = StartCoroutine(PlayDriftHapticIE());
+                //}
             }
-            else { 
-                
+            else {
+                //if(_driftHapticIE != null)
+                //{
+                //    StopCoroutine(_driftHapticIE);
+                //    _driftHapticIE = null;
+                //}
                 engineSounds[1].mute = true;
-                //TODO: OFF VIBRO
             }
         }
         else
@@ -250,11 +262,20 @@ public class CarController : MonoBehaviour
         {
             return;
         }
-        else 
+        else
         {
-            engineSounds[2].pitch = 2 * engineCurve.Evaluate(curveVelocity); 
+            engineSounds[2].pitch = 2 * engineCurve.Evaluate(curveVelocity);
         }
     }
+
+    //IEnumerator PlayDriftHapticIE()
+    //{
+    //    while (true)
+    //    {
+    //        HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact);
+    //        yield return new WaitForSeconds(0.1f);
+    //    }
+    //}
 
     public void TireVisuals()
     {

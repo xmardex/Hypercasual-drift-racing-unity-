@@ -36701,6 +36701,8 @@ GameObject:
   - component: {fileID: 2581321821444477288}
   - component: {fileID: 3177580392279709604}
   - component: {fileID: 2015907452735221435}
+  - component: {fileID: 581676759042342942}
+  - component: {fileID: 1604185895267629224}
   m_Layer: 10
   m_Name: PlayerCar_base
   m_TagString: playerCar
@@ -37110,6 +37112,7 @@ MonoBehaviour:
   _carDeath: {fileID: 2581321821444477288}
   collisionDetector: {fileID: 6042870897005700895}
   _carLights: {fileID: 2015907452735221435}
+  _carAI: {fileID: 0}
 --- !u!114 &5125483215568397561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37215,6 +37218,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _light: {fileID: 4242826046557508843}
+--- !u!81 &581676759042342942
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603360156841295877}
+  m_Enabled: 1
+--- !u!114 &1604185895267629224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603360156841295877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4867914d9e31443bfce91a8c5933c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collisionDurationMin: 2
 --- !u!1 &8080934573713991179
 GameObject:
   m_ObjectHideFlags: 0
@@ -42199,9 +42223,9 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 055de6cccad442f4582b393344a88e5f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
-  m_Pitch: 1.1093345
+  m_Pitch: 1.0847739
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -42391,7 +42415,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 2c3d914dbaa4b7d4a90dedb7e6ea952a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.35
-  m_Pitch: 1.1093345
+  m_Pitch: 1.0847739
   Loop: 1
   Mute: 1
   Spatialize: 0

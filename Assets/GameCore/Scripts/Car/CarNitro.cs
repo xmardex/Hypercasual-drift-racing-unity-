@@ -56,6 +56,8 @@ public class CarNitro : MonoBehaviour
 
     IEnumerator NitroIE()
     {
+        GameSoundAndHapticManager.Instance.PlaySoundAndHaptic(SoundType.nitro, false, _duration);
+
         _carController.speed = _nitroSpeedUpValue;
         _carController.friction = _frictionOnNitro;
         _carController.autoSpeed = _nitroSpeedUpValue;

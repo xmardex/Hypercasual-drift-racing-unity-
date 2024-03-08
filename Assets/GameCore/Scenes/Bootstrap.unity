@@ -329,35 +329,43 @@ MonoBehaviour:
   - soundType: 1
     audioClip: {fileID: 8300000, guid: 0da7ed66c5147eb4d904c29bd91cfb35, type: 3}
     volume: 1
-    hapticType: 1
+    presetType: 4
   - soundType: 2
     audioClip: {fileID: 8300000, guid: 6343a4cfcd7a51f43a77a068eb5e79aa, type: 3}
     volume: 1
-    hapticType: 1
+    presetType: -1
   - soundType: 3
     audioClip: {fileID: 8300000, guid: 53f79acd8f019854195d62d72de7e0ed, type: 3}
     volume: 0.7
-    hapticType: 1
+    presetType: 0
   - soundType: 4
     audioClip: {fileID: 8300000, guid: 53f79acd8f019854195d62d72de7e0ed, type: 3}
     volume: 0.3
-    hapticType: 2
+    presetType: 4
   - soundType: 5
     audioClip: {fileID: 8300000, guid: 4836494679d91a744923281a321c0eb1, type: 3}
     volume: 0.5
-    hapticType: 2
+    presetType: 5
   - soundType: 6
     audioClip: {fileID: 8300000, guid: 793a13d05afbeba458ae394c521c0648, type: 3}
     volume: 1
-    hapticType: 3
+    presetType: 3
   - soundType: 7
     audioClip: {fileID: 8300000, guid: 8d4bb19fde0b2d5429c280c5a994d456, type: 3}
     volume: 0.5
-    hapticType: 2
+    presetType: 4
   - soundType: 8
     audioClip: {fileID: 8300000, guid: e50ffaecb70001445a4517edbdb99ce1, type: 3}
     volume: 1
-    hapticType: 8
+    presetType: -1
+  - soundType: 9
+    audioClip: {fileID: 8300000, guid: c38ec75efb7fac04eadf6a8ff3caf81d, type: 3}
+    volume: 0.7
+    presetType: -1
+  - soundType: 10
+    audioClip: {fileID: 8300000, guid: 19dc7cb31d170944ca7c65d7603125b7, type: 3}
+    volume: 0.4
+    presetType: -1
 --- !u!1 &102962526
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,7 +580,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9b474e9e4253dde48b30a70181b37291, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.1332
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -7,19 +7,22 @@ public class PropsExplode : ExplodeBase
     [SerializeField] private float _damageNearValue;
     private DamagableEntity _damagableEntity;
 
+    private DamagableEntity _playerDE;
+
     private bool _isVisible;
 
-    private void Awake()
+    private void Start()
     {
         _damagableEntity = GetComponent<DamagableEntity>();
+        _playerDE = GameObject.FindWithTag(Constants.PLAYER_CAR_TAG).GetComponent<DamagableEntity>();
     }
 
     public void Explode()
     {
         base.Explode(_damagableEntity, out List<DamagableEntity> affectedEntities, out List<Rigidbody> explosionAffectedRBs);
 
-        if(_isVisible)
-            GameSoundAndHapticManager.Instance?.PlaySoundAndHaptic(SoundType.explode);
+        if (_isVisible)
+            GameSoundAndHapticManager.Instance?.PlaySoundAndHaptic(SoundType.explode, affectedEntities.Contains(_playerDE));
 
         foreach (var entity in affectedEntities)
             entity.Damage(_damageNearValue);

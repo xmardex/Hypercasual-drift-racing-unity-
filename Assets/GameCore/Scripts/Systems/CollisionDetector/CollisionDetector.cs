@@ -10,6 +10,7 @@ public class CollisionDetector : MonoBehaviour
     [SerializeField] private SoundType _collisionSound;
 
     public Action<Collider, float> OnCollideWithSomething;
+    public Action<Collider> OnCollideEndWithSomething;
     public Action<Collider> OnTriggerE;
 
 
@@ -29,6 +30,17 @@ public class CollisionDetector : MonoBehaviour
                 Debug.Log($" {collision.gameObject.name} COLLIDE WITH {gameObject.name}");
 
             OnCollideWithSomething?.Invoke(collision.collider, collisionFactor);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (IsCollisionAllowed(collision.collider))
+        {
+            if (_debugAllCollision)
+                Debug.Log($" {collision.gameObject.name} COLLIDE END WITH {gameObject.name}");
+
+            OnCollideEndWithSomething?.Invoke(collision.collider);
         }
     }
 

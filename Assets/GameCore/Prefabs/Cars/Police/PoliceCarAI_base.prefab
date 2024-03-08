@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 7987627531779733838}
   - component: {fileID: 4379510602152671663}
   - component: {fileID: 8864619721008231621}
+  - component: {fileID: 5853786595865637816}
   m_Layer: 6
   m_Name: PoliceCarAI_base
   m_TagString: policeCar
@@ -668,6 +669,7 @@ MonoBehaviour:
   _carDeath: {fileID: 4169616207059293390}
   collisionDetector: {fileID: 6556667859136778288}
   _carLights: {fileID: 4379510602152671663}
+  _carAI: {fileID: 6395737827811951200}
 --- !u!114 &6556667859136778288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,6 +806,102 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!82 &5853786595865637816
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328257203560105399}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c8c31e28810cb3b4a804408b8df89297, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 15
+  MaxDistance: 60
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -2.230616
+      outSlope: -2.230616
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.053097345
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.20166232
+      outSlope: -0.20166232
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09026551
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &486856648928779434
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +952,7 @@ GameObject:
   - component: {fileID: 8417388364478822058}
   m_Layer: 14
   m_Name: FR rb
-  m_TagString: Untagged
+  m_TagString: policeCarElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5893,7 +5991,7 @@ GameObject:
   - component: {fileID: 3233709341698732539}
   m_Layer: 14
   m_Name: RR rb
-  m_TagString: Untagged
+  m_TagString: policeCarElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21691,7 +21789,7 @@ GameObject:
   - component: {fileID: 1603333926299407410}
   m_Layer: 14
   m_Name: FL rb
-  m_TagString: Untagged
+  m_TagString: policeCarElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22687,7 +22785,7 @@ GameObject:
   - component: {fileID: 199479859917241110}
   m_Layer: 14
   m_Name: RL rb
-  m_TagString: Untagged
+  m_TagString: policeCarElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
