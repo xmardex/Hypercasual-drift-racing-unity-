@@ -9,6 +9,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Slider _slider;
     [SerializeField] private GameObject _hpPanel;
 
+    public Slider HPSlider => _slider;
+
     private Coroutine _lerpSliderIE;
 
     public void SetHpMinMaxValue(float min, float max)

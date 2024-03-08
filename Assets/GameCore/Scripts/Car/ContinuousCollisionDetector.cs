@@ -1,74 +1,80 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(CollisionDetector))]
+//[RequireComponent(typeof(CollisionDetector))]
 public class ContinuousCollisionDetector : MonoBehaviour
 {
     [SerializeField] private float _collisionDurationMin;
-    private CollisionDetector _collisionDetector;
-    private bool _collide = false;
-
-    public Action<Collider> OnLongTermCollision;
-    public Action<Collider> OnCollisionEnd;
+    public Action OnLongTermCollision;
+    public Action OnCollisionEnd;
 
     private bool _longTermCollisionStart = false;
 
     private Coroutine _collisionWaitIE;
 
-    private List<Collider> _contactColliders = null;
+    private List<Collider> _contactColliders = new List<Collider>();
 
-
-    private void Awake()
+    private void OnTriggerEnter(Collider other)
     {
-        _contactColliders ??= new List<Collider>();
-        _collisionDetector = GetComponent<CollisionDetector>();
-        _collisionDetector.OnCollideWithSomething += OnCollideWithPlayerStart;
-        _collisionDetector.OnCollideEndWithSomething += OnCollideWithPlayerEnd;
+        OnCollideWithPlayerStart(other);
     }
 
-    private void OnCollideWithPlayerStart(Collider with, float force)
+    private void OnTriggerExit(Collider other)
     {
-        bool isAI = with.gameObject.CompareTag(Constants.POLICE_CAR_TAG) || with.gameObject.CompareTag(Constants.POLICE_CAR_ELEMENTS_TAG);
+        OnCollideWithPlayerEnd(other);
+    }
+
+    private void OnCollideWithPlayerStart(Collider with)
+    {
+        bool isAI = with.gameObject.CompareTag(Constants.POLICE_CAR_TAG);
         if (isAI)
         {
-            _collide = true;
-            if(_collisionWaitIE != null)
-                StopCoroutine(_collisionWaitIE);
-            _collisionWaitIE = StartCoroutine(WaitDurationIE(with));
+            CarHealth policeHealth = with.GetComponent<CarHealth>();
+            policeHealth.OnDead += RemoveDeadCarsFromList;
+
+            if (_collisionWaitIE == null && !_longTermCollisionStart)
+                StartCoroutine(WaitDurationIE(with));
         }
     }
 
     private void OnCollideWithPlayerEnd(Collider with)
     {
-        bool isAI = with.gameObject.CompareTag(Constants.POLICE_CAR_TAG) || with.gameObject.CompareTag(Constants.POLICE_CAR_ELEMENTS_TAG);
+        bool isAI = with.gameObject.CompareTag(Constants.POLICE_CAR_TAG);
         if (isAI)
         {
-            _collide = false;
-            if (_collisionWaitIE != null)
-                StopCoroutine(_collisionWaitIE);
-            if (_longTermCollisionStart)
+            CarHealth policeHealth = with.GetComponent<CarHealth>();
+            _contactColliders.Remove(with);
+            policeHealth.OnDead -= RemoveDeadCarsFromList;
+
+            if (_longTermCollisionStart && _contactColliders.Count == 0)
             {
-                OnCollisionEnd?.Invoke(with);
+                OnCollisionEnd?.Invoke();
                 _longTermCollisionStart = false;
             }
         }
     }
 
-    private void OnDestroy()
+    private void RemoveDeadCarsFromList()
     {
-        _collisionDetector.OnCollideWithSomething -= OnCollideWithPlayerStart;
-        _collisionDetector.OnCollideEndWithSomething -= OnCollideWithPlayerEnd;
+        foreach(Collider collider in _contactColliders.ToArray())
+        {
+            if (collider.GetComponent<CarHealth>().IsDead)
+                _contactColliders.Remove(collider);
+        }
+        if(_contactColliders.Count == 0)
+        {
+            OnCollisionEnd?.Invoke();
+            _longTermCollisionStart = false;
+        }
     }
 
     IEnumerator WaitDurationIE(Collider with)
     {
         yield return new WaitForSeconds(_collisionDurationMin);
-        if (_collide)
-        {
-            OnLongTermCollision?.Invoke(with);
-            _longTermCollisionStart = true;
-        }
+        OnLongTermCollision?.Invoke();
+        _contactColliders.Add(with);
+        _longTermCollisionStart = true;
     }
 }

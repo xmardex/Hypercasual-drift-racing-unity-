@@ -17,6 +17,7 @@ public class CarHealth : DamagableEntity
     private CollisionDetector _collisionDetecter;
 
     public bool IsPlayer => _isPlayer;
+    public HealthBar HealthBar => _healthBar;
 
     public Action OnHit;
 
