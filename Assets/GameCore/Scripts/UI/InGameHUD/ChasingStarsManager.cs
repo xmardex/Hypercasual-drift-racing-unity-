@@ -5,6 +5,7 @@ using UnityEngine;
 public class ChasingStarsManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] _stars;
+    [SerializeField] private GameObject _escapeChasingText;
     private int _maxStars;
     private int _currentStarsCount;
 
@@ -26,7 +27,7 @@ public class ChasingStarsManager : MonoBehaviour
     {
         if (!_firstChase)
         {
-            GameSoundAndHapticManager.Instance.PlaySoundAndHaptic(SoundType.firstChase, false);
+            GameSoundAndHapticManager.Instance?.PlaySoundAndHaptic(SoundType.firstChase, false);
             _firstChase = true;
         }
 
@@ -71,6 +72,16 @@ public class ChasingStarsManager : MonoBehaviour
                 ai.OnAIDeactivated -= RemoveStar;
             }
         }
+    }
+
+    public void EnableEscapeChasingText()
+    {
+        _escapeChasingText.SetActive(true);
+    }
+
+    public void DisableEscapeChasingText()
+    {
+        _escapeChasingText.SetActive(false);
     }
 
     private void OnDestroy()

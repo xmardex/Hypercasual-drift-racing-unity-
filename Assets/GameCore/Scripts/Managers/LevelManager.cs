@@ -110,6 +110,7 @@ public class LevelManager : MonoBehaviour
     private async void RetryLevel()
     {
         await Task.Delay(200);
+        GameSoundAndHapticManager.Instance?.StopAllExtraSounds();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -123,6 +124,7 @@ public class LevelManager : MonoBehaviour
 
     private void LoadNextLevel()
     {
+        GameSoundAndHapticManager.Instance.StopAllExtraSounds();
         SaveLevelProgress();
     }
 
@@ -144,7 +146,10 @@ public class LevelManager : MonoBehaviour
         _startTrigger.OnCarTriggerEnter += BeginRace;
         _finishTrigger.OnCarTriggerEnter += FinishRace;
 
-        if(_useHP)
+        _playerCarReferences.CarHealthDrain.OnHPDrainStart += _carsStarsManager.EnableEscapeChasingText;
+        _playerCarReferences.CarHealthDrain.OnHPDrainEnd += _carsStarsManager.DisableEscapeChasingText;
+
+        if (_useHP)
             _playerCarReferences.CarHealth.OnDead += LoseGame;
 
         _playerCarReferences.CarController.CarSplinePointer.OnLevelDistancePercentageChange +=
@@ -162,6 +167,9 @@ public class LevelManager : MonoBehaviour
 
         _startTrigger.OnCarTriggerEnter -= BeginRace;
         _finishTrigger.OnCarTriggerEnter -= FinishRace;
+
+        _playerCarReferences.CarHealthDrain.OnHPDrainStart -= _carsStarsManager.EnableEscapeChasingText;
+        _playerCarReferences.CarHealthDrain.OnHPDrainEnd -= _carsStarsManager.DisableEscapeChasingText;
 
         if (_useHP)
             _playerCarReferences.CarHealth.OnDead -= LoseGame;

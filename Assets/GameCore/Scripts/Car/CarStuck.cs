@@ -15,7 +15,8 @@ public class CarStuck : MonoBehaviour
     [SerializeField] private float _policeCarsDetectDistance;
     [SerializeField] private int[] _ignoringOnBlinkLayers;
     [SerializeField] private Vector3 _limitPointerDistanceToReset;
-    [SerializeField] private MeshRenderer[] _meshRenderers;
+    [SerializeField] private Renderer[] _meshRenderers;
+    [SerializeField] private Renderer[] _meshRenderersLight;
     [SerializeField] private CarReferences _carReferences;
     [SerializeField] private Rigidbody[] _wheels;
 
@@ -179,12 +180,20 @@ public class CarStuck : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(_blinkDuration);
 
-            foreach (MeshRenderer renderer in _meshRenderers)
+            foreach (Renderer renderer in _meshRenderers)
                 renderer.enabled = !renderer.enabled;
+
+            if (_carReferences.CarLights.IsLightsOn)
+                foreach (Renderer renderer in _meshRenderersLight)
+                    renderer.enabled = !renderer.enabled;
         }
 
-        foreach (MeshRenderer renderer in _meshRenderers)
+        foreach (Renderer renderer in _meshRenderers)
             renderer.enabled = true;
+
+        if (_carReferences.CarLights.IsLightsOn)
+            foreach (Renderer renderer in _meshRenderersLight)
+                renderer.enabled = true;
 
         foreach (int layer in _ignoringOnBlinkLayers)
             Physics.IgnoreLayerCollision(_playerCarLayer, layer, false);
@@ -192,8 +201,12 @@ public class CarStuck : MonoBehaviour
 
     public void ForcedEnableMeshes()
     {
-        foreach (MeshRenderer renderer in _meshRenderers)
+        foreach (Renderer renderer in _meshRenderers)
             renderer.enabled = true;
+
+        if (_carReferences.CarLights.IsLightsOn)
+            foreach (Renderer renderer in _meshRenderersLight)
+                renderer.enabled = true;
     }
 
     private void ResetCarOnSpline()

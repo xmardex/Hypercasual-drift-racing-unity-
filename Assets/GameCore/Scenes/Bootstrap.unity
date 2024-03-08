@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _musicSource: {fileID: 320208840}
-  _uiSources:
+  _soundSources:
   - {fileID: 1599966462}
   - {fileID: 646329609}
   - {fileID: 1396381660}

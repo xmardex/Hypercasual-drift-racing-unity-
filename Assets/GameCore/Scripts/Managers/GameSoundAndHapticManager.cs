@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameSoundAndHapticManager : MonoBehaviour
 {
     [SerializeField] private AudioSource _musicSource;
-    [SerializeField] private AudioSource[] _uiSources;
+    [SerializeField] private AudioSource[] _soundSources;
     
     [SerializeField] private AudioClip _defaultMusic;
     [SerializeField] private List<SoundPreset> _soundsPresets;
@@ -68,6 +68,13 @@ public class GameSoundAndHapticManager : MonoBehaviour
         HapticController.hapticsEnabled = enable;
     }
 
+    public void StopAllExtraSounds()
+    {
+        foreach(var sound in _soundSources)
+        {
+            sound.Stop();
+        }
+    }
     public void PlaySoundAndHaptic(SoundType uISoundType, bool PlayerVibro = true, float duration = 0)
     {
         SoundPreset uISound = _sounds[uISoundType];
@@ -85,10 +92,10 @@ public class GameSoundAndHapticManager : MonoBehaviour
 
     private AudioSource GetFreeSource()
     {
-        foreach (var source in _uiSources)
+        foreach (var source in _soundSources)
             if(!source.isPlaying)
                 return source;
-        AudioSource newSource = Instantiate(_uiSources[0], _uiSources[0].gameObject.transform.parent);
+        AudioSource newSource = Instantiate(_soundSources[0], _soundSources[0].gameObject.transform.parent);
         newSource.Stop();
         return newSource;
     }

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,13 @@ public class CarHealthDrain : MonoBehaviour
 {
     [SerializeField] private float _damgePerHalfSecond;
     [SerializeField] private Vector3 _tweenScale;
+    [SerializeField] private float _beforeDamageDelay;
 
     private ContinuousCollisionDetector _detector;
     private CarHealth _health;
+
+    public Action OnHPDrainStart;
+    public Action OnHPDrainEnd;
 
     private Coroutine _tweenHPBarAndDamageIE;
 
@@ -24,18 +29,24 @@ public class CarHealthDrain : MonoBehaviour
 
     private void StartDrain()
     {
-        Debug.Log("START DRAIN");
+        Debug.Log("Start");
         if (_tweenHPBarAndDamageIE == null)
             _tweenHPBarAndDamageIE = StartCoroutine(TweenHPBarAndDamageIE());
     }
 
     private void StopDrain()
     {
-        Debug.Log("STOP DRAIN");
+        Debug.Log("Stop");
         if (_tweenHPBarAndDamageIE != null)
+        {
             StopCoroutine(_tweenHPBarAndDamageIE);
+            _tweenHPBarAndDamageIE = null;
+        }
 
-        _health.HealthBar.HPSlider.transform.DOScale(Vector3.one, 0.24f).SetEase(Ease.Linear);
+        _health.HealthBar.HPSlider.transform.DOScale(Vector3.one, 0.24f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            OnHPDrainEnd?.Invoke();
+        });
     }
 
     IEnumerator TweenHPBarAndDamageIE()
@@ -43,7 +54,8 @@ public class CarHealthDrain : MonoBehaviour
         float t = 0;
         float interval = 0.5f;
         Transform hpBarTransform = _health.HealthBar.HPSlider.transform;
-
+        yield return new WaitForSeconds(_beforeDamageDelay);
+        OnHPDrainStart?.Invoke();
         while (true)
         {
             t += Time.deltaTime;

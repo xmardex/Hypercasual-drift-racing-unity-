@@ -10,10 +10,6 @@ public class ContinuousCollisionDetector : MonoBehaviour
     public Action OnLongTermCollision;
     public Action OnCollisionEnd;
 
-    private bool _longTermCollisionStart = false;
-
-    private Coroutine _collisionWaitIE;
-
     private List<Collider> _contactColliders = new List<Collider>();
 
     private void OnTriggerEnter(Collider other)
@@ -34,8 +30,9 @@ public class ContinuousCollisionDetector : MonoBehaviour
             CarHealth policeHealth = with.GetComponent<CarHealth>();
             policeHealth.OnDead += RemoveDeadCarsFromList;
 
-            if (_collisionWaitIE == null && !_longTermCollisionStart)
-                StartCoroutine(WaitDurationIE(with));
+            _contactColliders.Add(with);
+            Debug.Log("INVOKE");
+            OnLongTermCollision?.Invoke();
         }
     }
 
@@ -45,14 +42,12 @@ public class ContinuousCollisionDetector : MonoBehaviour
         if (isAI)
         {
             CarHealth policeHealth = with.GetComponent<CarHealth>();
-            _contactColliders.Remove(with);
             policeHealth.OnDead -= RemoveDeadCarsFromList;
 
-            if (_longTermCollisionStart && _contactColliders.Count == 0)
-            {
+            _contactColliders.Remove(with);
+
+            if(_contactColliders.Count == 0)
                 OnCollisionEnd?.Invoke();
-                _longTermCollisionStart = false;
-            }
         }
     }
 
@@ -66,15 +61,6 @@ public class ContinuousCollisionDetector : MonoBehaviour
         if(_contactColliders.Count == 0)
         {
             OnCollisionEnd?.Invoke();
-            _longTermCollisionStart = false;
         }
-    }
-
-    IEnumerator WaitDurationIE(Collider with)
-    {
-        yield return new WaitForSeconds(_collisionDurationMin);
-        OnLongTermCollision?.Invoke();
-        _contactColliders.Add(with);
-        _longTermCollisionStart = true;
     }
 }
