@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: LevelSO_4
   m_EditorClassIdentifier: 
   _sceneName: Level - 4
-  _levelNum: 4
+  _levelNum: 2
   _setups: {fileID: 0}

@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private bool _useLights;
     [SerializeField] private bool _enableDebug;
     [SerializeField] private LevelSO _levelSO;
+    [SerializeField] private LevelHolderSO _levelHolderSO;
     [SerializeField] private SplineColoringManager _splineColoringManager;
     [SerializeField] private LevelStateManager _stateManager;
     [SerializeField] private UILevelManager _uiLevelManager;
@@ -117,13 +118,14 @@ public class LevelManager : MonoBehaviour
     private void CollectLevelCoins()
     {
         _coinsGainTween.DoCoinTween(_levelCollectedCoinsCount, _totalCoinsCount, LoadNextLevel);
-
+        Debug.Log("CoinsCollect");
         _totalCoinsCount += _levelCollectedCoinsCount;
         _levelCollectedCoinsCount = 0;
     }
 
     private void LoadNextLevel()
     {
+        Debug.Log("Save pogress");
         GameSoundAndHapticManager.Instance.StopAllExtraSounds();
         SaveLevelProgress();
     }
@@ -131,7 +133,22 @@ public class LevelManager : MonoBehaviour
     private void SaveLevelProgress()
     {
         PlayerPrefs.SetInt(Constants.COINS_PREFS, _totalCoinsCount);
-        PlayerPrefs.SetInt(Constants.CURRENT_LEVEL_PREFS, _levelSO.LevelNum + 1);
+        int nextLevelNum = _levelSO.LevelNum + 1;
+        bool nextLevelExist = _levelHolderSO.TryGetLevelByNum(nextLevelNum, out LevelSO levelSo);
+        if (nextLevelExist)
+        {
+            PlayerPrefs.SetInt(Constants.CURRENT_LEVEL_PREFS, nextLevelNum);
+            SceneManager.LoadScene(levelSo.LevelNum);
+            Debug.Log("load next :" + nextLevelNum);
+        }
+        else
+        {
+            nextLevelNum = 1;
+            PlayerPrefs.SetInt(Constants.CURRENT_LEVEL_PREFS, nextLevelNum);
+            _levelHolderSO.TryGetLevelByNum(nextLevelNum, out levelSo);
+            SceneManager.LoadScene(levelSo.LevelNum);
+            Debug.Log("load first :" + nextLevelNum);
+        }
     }
 
     private void SubscribeToEvents()

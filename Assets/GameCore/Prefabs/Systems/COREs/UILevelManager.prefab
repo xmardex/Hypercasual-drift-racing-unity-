@@ -9293,6 +9293,7 @@ MonoBehaviour:
   _closeSettingsBtn: {fileID: 7441429876660271765}
   _levelNumInGame: {fileID: 3956658929668039142}
   _levelNumInMenu: {fileID: 6467412621560952954}
+  _levelNumInComplete: {fileID: 3352988446064303956}
   _coinsCountText: {fileID: 2538170285923693297}
   _coinsCollectedText: {fileID: 1722649654448709945}
   _levelProgressSlider: {fileID: 6468136158550770580}

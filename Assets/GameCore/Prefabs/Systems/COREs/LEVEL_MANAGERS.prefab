@@ -53,8 +53,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useHP: 1
   _useLights: 0
-  _enableDebug: 0
+  _enableDebug: 1
   _levelSO: {fileID: 0}
+  _levelHolderSO: {fileID: 0}
   _splineColoringManager: {fileID: 562709660625203468}
   _stateManager: {fileID: 6031558484565307879}
   _uiLevelManager: {fileID: 4347058611614637022}

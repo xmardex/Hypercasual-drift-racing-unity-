@@ -13,7 +13,7 @@ public class UILevelManager : MonoBehaviour
     [SerializeField] private Button _openSettingsBtn;
     [SerializeField] private Button _closeSettingsBtn;
 
-    [SerializeField] private TMP_Text _levelNumInGame, _levelNumInMenu, _coinsCountText, _coinsCollectedText;
+    [SerializeField] private TMP_Text _levelNumInGame, _levelNumInMenu, _levelNumInComplete , _coinsCountText, _coinsCollectedText;
     [SerializeField] private Slider _levelProgressSlider;
 
     private Dictionary<UICanvasType, UICanvasContainer> _canvases = new Dictionary<UICanvasType, UICanvasContainer>();
@@ -84,6 +84,7 @@ public class UILevelManager : MonoBehaviour
     {
         string levelNumStr = levelSO.LevelNum.ToString();
         _levelNumInMenu.text = $"Level: {levelNumStr}";
+        _levelNumInComplete.text = $"Level - {levelNumStr}";
         _levelNumInGame.text = levelNumStr;
     }
 

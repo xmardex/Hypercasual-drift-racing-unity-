@@ -14,7 +14,7 @@ public class LoadPlayerLevel : MonoBehaviour
 
     private void Start() 
     {
-        int savedLevel = PlayerPrefs.GetInt(Constants.CURRENT_LEVEL_PREFS, 0);
+        int savedLevel = PlayerPrefs.GetInt(Constants.CURRENT_LEVEL_PREFS, 1);
 
         if (_levelHolderSO.TryGetLevelByNum(savedLevel, out LevelSO levelSO))
         {
