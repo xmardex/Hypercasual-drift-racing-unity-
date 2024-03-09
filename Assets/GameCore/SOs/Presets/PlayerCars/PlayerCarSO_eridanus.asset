@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _straightSteerAngleThreshold: 4
   _steerDumpingSpeed: 30
-  _autoSpeed: 750
-  _breakToThisVelocityMagnitudeOnAutoMove: 35
+  _autoSpeed: 700
+  _brakeToThisVelocityMagnitudeOnAutoMove: 35
   _turn: 2500
-  _speed: 1800
-  _break: 2000
+  _speed: 2000
+  _brake: 1600
   _turnAngle: 36
   _distanceToPointer: 13
-  _friction: 1600
-  _dragAmount: 4.5
+  _friction: 1000
+  _dragAmount: 5
