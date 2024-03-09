@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fceb47cfb02902144aa12339f6891884, type: 3}
   m_Name: LevelSO_4
   m_EditorClassIdentifier: 
-  _sceneName: Level - 4_night
+  _sceneName: Level - 4
   _levelNum: 4
   _setups: {fileID: 0}

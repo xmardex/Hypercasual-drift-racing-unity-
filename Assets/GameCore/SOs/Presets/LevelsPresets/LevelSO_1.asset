@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07629c5130fc7a3488c691291e79954b, type: 3}
-  m_Name: LevelHolderSO
+  m_Script: {fileID: 11500000, guid: fceb47cfb02902144aa12339f6891884, type: 3}
+  m_Name: LevelSO_1
   m_EditorClassIdentifier: 
-  levelSOs:
-  - {fileID: 11400000, guid: 9917fee3e956c4241a555d27a1a8ecaf, type: 2}
-  - {fileID: 11400000, guid: a488830956d20b640be2c53219b9243f, type: 2}
+  _sceneName: Level - 1.1
+  _levelNum: 1
+  _setups: {fileID: 0}
